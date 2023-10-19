@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/19 12:36:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/19 14:02:48 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,12 @@
 //lui-même.
 //Exemple : $$, $?.
 
-# define COM			8
-//Les commentaires sont des annotations pour le développeur ou l'utilisateur et
-//ne sont pas traités par le shell.
-//Exemple : # Ceci est un commentaire.
-
-# define DIR			9
+# define DIR			8
 //Les noms de fichiers et de répertoires sont utilisés dans les commandes pour
 //spécifier les chemins.
 //Exemples : /chemin/vers/fichier, dossier1/dossier2/fichier.txt.
 
-# define SPC_CHAR		10
+# define SPC_CHAR		9
 //Les caractères spéciaux peuvent être utilisés pour la recherche de fichiers
 //(globbing).
 //Exemples : *, ?, [, ].
