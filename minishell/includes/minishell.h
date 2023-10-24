@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/24 14:06:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/24 14:24:04 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_pars		*t_pars_add_back(t_pars *pars, char c);
 /*utils_1.c*/
 size_t		ft_strlen(char *str);
 t_bool		ft_is_whitespace(char c);
+t_bool		ft_is_alpha(char c);
 
 #endif

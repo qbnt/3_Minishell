@@ -6,11 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/24 14:06:17 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/24 14:56:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	pick_token(t_pars *pars, t_token current_token);
 
 /*----------------------------------------------------------------------------*/
 
@@ -37,18 +39,19 @@ void	set_token_in_t_pars(t_pars *pars)
 {
 	t_token	current_token;
 
+	current_token = NO_TOKEN;
 	while (ft_is_whitespace(pars->c))
 		pars = pars->next;
 	while (pars)
 	{
-		pick_token(pars, &current_token);
+		pick_token(pars, current_token);
 		pars->token = current_token;
 		pars = pars->next;
 	}
 }
 
 // Fonction de set_token_in_t_pars, détermine le token attenant a un caractère.
-static void	pick_token(t_pars *pars, t_token *current_token)
+static void	pick_token(t_pars *pars, t_token current_token)
 {
 	
 }
