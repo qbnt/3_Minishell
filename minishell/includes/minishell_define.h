@@ -6,14 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/19 14:02:48 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/24 13:33:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_DEFINE_H
 # define MINISHELL_DEFINE_H
 
-/*Args types*/
+/*---------Args types---------*/
 
 # define CMD			0
 //Les commandes sont les programmes ou les exécutables à exécuter.
@@ -60,5 +60,8 @@
 //Les caractères spéciaux peuvent être utilisés pour la recherche de fichiers
 //(globbing).
 //Exemples : *, ?, [, ].
+
+# define NO_TOKEN		10
+//Valeur par defaut avant creation des tokens
 
 #endif
