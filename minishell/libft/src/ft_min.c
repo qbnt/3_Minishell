@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/08/09 12:21:04 by qbanet            #+#    #+#             */
+/*   Updated: 2023/08/13 16:42:53 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include "libft.h"
 
-/*---------Args types---------*/
+int	ft_min(int *tab, unsigned int len)
+{
+	unsigned int	i;
+	int				min;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	if (len == 0)
+		return (0);
+	i = 1;
+	min = *tab;
+	while (i != len)
+	{
+		if (min > *(tab + i))
+			min = *(tab + i);
+		i++;
+	}
+	return (min);
+}

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/02/06 11:39:06 by qbanet            #+#    #+#             */
+/*   Updated: 2023/06/19 20:09:09 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include "libft.h"
 
-/*---------Args types---------*/
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*res;
+	int		i;
+	int		len;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	i = 0;
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	res = (char *)ft_calloc(len, sizeof(char));
+	if (!res)
+		return (NULL);
+	while (*s1)
+		res[i++] = *s1++;
+	while (*s2)
+		res[i++] = *s2++;
+	return (res);
+}

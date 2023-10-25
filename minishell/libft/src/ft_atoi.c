@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/02/05 09:41:48 by qbanet            #+#    #+#             */
+/*   Updated: 2023/08/10 15:36:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include "libft.h"
 
-/*---------Args types---------*/
+int	ft_atoi(const char *str)
+{
+	int	nbr;
+	int	sign;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	sign = 1;
+	nbr = 0;
+	while ((*str >= '\a' && *str <= '\r') || *str == ' ')
+		str++;
+	if (*str == '-')
+	{
+		sign *= -1;
+		str++;
+	}
+	else if (*str == '+')
+		str ++;
+	while (*str >= '0' && *str <= '9')
+		nbr = (((int)*str++ - 48) + nbr * 10);
+	return (nbr * sign);
+}

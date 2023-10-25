@@ -6,49 +6,67 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/10/23 16:30:58 by qbanet           ###   ########.fr        #
+#    Updated: 2023/10/25 14:37:23 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Déclaration des variables
+NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -lreadline -ltermcap -lm -lpthread
-LDFLAGS = -Iincludes
+CFLAGS = -Wall -Wextra -Werror -g
+
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
+INCLUDES = -I includes -I $(LIBFT_DIR)/includes
+
 SRC_DIR = srcs
+SRC_FILES = main.c\
+			utils/utils_1.c\
+			utils/utils_parsing.c\
+			utils/utils_t_pars.c
+
+SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+
 OBJ_DIR = obj
+OBJ_FILES = $(SRC_FILES:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
 
-# Liste de fichiers sources
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+# Couleurs
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+RESET = \033[0m
 
-# Compilation de l'exécutable minishell
-all: minishell
+# Emojis
+CHECK = ✔️
+ROCKET = 🚀︎
 
-minishell: $(OBJS)
-	@echo "\033[32mLinking $@...\033[0m"
-	@$(CC) -o $@ $^ $(LDFLAGS)
-	@echo "\033[32mCompilation réussie.\033[0m"
+all: $(NAME)
 
-# Compilation des fichiers objets
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@echo "\033[33mCompiling $<...\033[0m"
-	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ -c $<
+$(NAME): $(OBJ)
+	@$(MAKE) -C $(LIBFT_DIR)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@echo "$(GREEN)$(ROCKET) Compilation terminée avec succès ! $(ROCKET)$(RESET)"
 
-$(OBJ_DIR):
-	@echo "\033[34mCreating $(OBJ_DIR) directory...\033[0m"
-	@mkdir -p $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "$(YELLOW)$(CHECK) $(notdir $@) compilé$(RESET)"
 
-# Nettoyage des fichiers objets et de l'exécutable
 clean:
-	@echo "\033[31mCleaning...\033[0m"
+	@$(MAKE) -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
+	@echo "$(GREEN)$(CHECK) Nettoyage des fichiers objets terminé$(RESET)"
 
 fclean: clean
-	@echo "\033[31mFull Cleaning...\033[0m"
-	@rm -f minishell
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
+	@echo "$(GREEN)$(CHECK) Nettoyage complet terminé$(RESET)"
 
-# Règle pour recompiler tout
+save: fclean
+	git add .
+	git commit -m "make save"
+	git push
+
 re: fclean all
 
-# Règles pour ne pas traiter les fichiers suivants
 .PHONY: all clean fclean re

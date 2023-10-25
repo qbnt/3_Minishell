@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qbanet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/02/01 15:38:34 by qbanet            #+#    #+#             */
+/*   Updated: 2023/02/08 15:32:56 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include"libft.h"
 
-/*---------Args types---------*/
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*ptr;
+	int		i;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	ptr = (char *)s;
+	i = 0;
+	while (n-- > 0)
+		ptr[i++] = c;
+	return (s);
+}

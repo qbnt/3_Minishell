@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/02/05 10:46:19 by qbanet            #+#    #+#             */
+/*   Updated: 2023/08/09 09:39:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include "libft.h"
 
-/*---------Args types---------*/
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ret;
+	size_t	test;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	if (size != 0 && nmemb != 0)
+	{
+		test = size * nmemb;
+		if ((test / nmemb != size) || (test / size != nmemb))
+			return (NULL);
+	}
+	ret = (void *)malloc(size * nmemb);
+	if (!ret)
+		return (NULL);
+	ft_bzero(ret, size * nmemb);
+	return (ret);
+}

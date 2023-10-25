@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_count_wrd_sep.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/05/22 19:53:01 by qbanet            #+#    #+#             */
+/*   Updated: 2023/08/17 16:20:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include "libft.h"
 
-/*---------Args types---------*/
+int	ft_count_wrd_sep(char const *s, char c)
+{
+	int	count;
+	int	sep;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	sep = 0;
+	count = 0;
+	while (*s)
+	{
+		if (sep == 1 && *s == c)
+			sep = 0;
+		if (sep == 0 && *s != c)
+		{
+			sep = 1;
+			count ++;
+		}
+		s++;
+	}
+	if (sep == 0 && *s == 0)
+		count ++;
+	return (count);
+}

@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   ft_verif_ext.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:39:56 by qbanet           ###   ########.fr       */
+/*   Created: 2023/06/27 14:02:14 by qbanet            #+#    #+#             */
+/*   Updated: 2023/06/27 14:02:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include"libft.h"
 
-/*---------Args types---------*/
+t_bool	ft_verif_ext(const char *s, const char *ext)
+{
+	size_t	ext_len;
 
-# define LTR			0
-# define PIPE			1
-# define SQUOTE			2
-# define DQUOTE			3
-# define SUP			4
-# define INF			5
-# define DOL			6
-#endif
+	ext_len = ft_strlen(ext);
+	if (ft_strncmp(ext, ft_strrchr(s, '.'), ext_len)
+		|| ft_strlen(ft_strrchr(s, '.')) == ext_len)
+		return (1);
+	return (0);
+}
