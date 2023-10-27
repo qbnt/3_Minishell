@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/25 11:45:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/26 10:03:29 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # include "minishell_define.h"
 # include "minishell_struct.h"
+# include "libft.h"
+
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -60,7 +62,6 @@ t_pars		*t_pars_first(t_pars *first, char c);
 t_pars		*t_pars_add_back(t_pars *pars, char c);
 
 /*utils_1.c*/
-size_t		ft_strlen(char *str);
 t_bool		ft_is_whitespace(char c);
 t_bool		ft_is_alpha(char c);
 

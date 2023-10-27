@@ -6,27 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/24 14:22:56 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/27 14:03:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*----------------------------------------------------------------------------*/
-
-// Prend une chaine de caractères et retourne sa taille en size_t.
-size_t	ft_strlen(char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str)
-	{
-		len ++;
-		str ++;
-	}
-	return (len);
-}
 
 // Prend un char et renvoit un t_bool indiquant si le char est un whitespace ou
 //pas.

@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/10/25 14:37:23 by qbanet           ###   ########.fr        #
+#    Updated: 2023/10/27 11:54:44 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,58 +14,64 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
+LIBFT = libft/libft.a
 LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
-INCLUDES = -I includes -I $(LIBFT_DIR)/includes
-
+LIBFT_INC = -I$(LIBFT_DIR)/includes
+INC_DIR = includes
 SRC_DIR = srcs
-SRC_FILES = main.c\
-			utils/utils_1.c\
-			utils/utils_parsing.c\
+OBJ_DIR = obj
+
+INCLUDES = -I$(INC_DIR) $(LIBFT_INC)
+
+SRC_FILES = main.c \
+			utils/utils_1.c \
+			utils/utils_parsing.c \
 			utils/utils_t_pars.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-OBJ_DIR = obj
-OBJ_FILES = $(SRC_FILES:.c=.o)
-OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
-
-# Couleurs
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
+# Colors
 RESET = \033[0m
-
-# Emojis
-CHECK = ✔️
-ROCKET = 🚀︎
+GREEN = \033[32m
+YELLOW = \033[33m
+RED = \033[31m
+BLUE = \033[34m
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C $(LIBFT_DIR)
+$(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	@echo "$(GREEN)$(ROCKET) Compilation terminée avec succès ! $(ROCKET)$(RESET)"
+	@echo "$(GREEN)Compilation successful!$(RESET)"
+	@echo ""
+	@echo "$(RED) ████▒░▒████▒░██▒░███▒░  █▒░██▒░ ████▒░ ██▒░░▒██▒░██████▒░██▒░    ██▒░"
+	@echo " ██▒██▒██▒██▒░██▒░█▒██▒░ █▒░██▒░█▒░ ██▒░██▒░░▒██▒░██▒░    ██▒░    ██▒░"
+	@echo " ██▒░███▒░██▒░██▒░█▒░██▒░█▒░██▒░  ██▒░  ████████▒░████▒░  ██▒░    ██▒░"
+	@echo " ██▒░░█▒░ ██▒░██▒░█▒░ ██▒█▒░██▒░██▒░ █▒░██▒░░▒██▒░██▒░    ██▒░    ██▒░"
+	@echo " ██▒░░░   ██▒░██▒░█▒░  ███▒░██▒░ ████▒░ ██▒░░▒██▒░██████▒░██████▒░██████▒░"
+	@echo " ▓▓▒░░     ▓░▒▓▓▒░    ░▒▓▓▒░▓▒░ ░▒▓▓▒░   ▓▒░░▒▓▒░░▒▓▓▒░░░░░░▒▓▓▒░░░▒▓▓▒░"
+	@echo " ▓▒░░       ░▒▓▒░     ░▒▓▒░      ░▒▓     ▒░   ▒░  ░▒▓▒░   ░░▒▓▒░  ░░▒▓▒░"
+	@echo " ▒░░          ▒░        ▒░        ░░     ░    ░    ░▒░     ░▒▒░    ░▒▒░"
+	@echo " ░░           ░         ░          ░                ░       ░░      ░░"
+	@echo " ░                                                           ░       ░ $(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(YELLOW)$(CHECK) $(notdir $@) compilé$(RESET)"
+	@echo "$(BLUE)Compiling: $<$(RESET)"
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
-	@echo "$(GREEN)$(CHECK) Nettoyage des fichiers objets terminé$(RESET)"
+	@echo "$(YELLOW)Cleaning object files...$(RESET)"
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
-	@echo "$(GREEN)$(CHECK) Nettoyage complet terminé$(RESET)"
-
-save: fclean
-	git add .
-	git commit -m "make save"
-	git push
+	@echo "$(RED)Full clean completed!$(RESET)"
 
 re: fclean all
 

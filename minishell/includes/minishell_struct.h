@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/24 10:29:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/27 13:43:00 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef int	t_bool;
 typedef struct s_pars
 {
 	char			c;
+	int				id;
 	t_token			token;
 	struct s_pars	*next;
 	struct s_pars	*prev;

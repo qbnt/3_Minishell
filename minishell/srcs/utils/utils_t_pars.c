@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:44:22 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/24 13:44:50 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/27 13:43:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_pars	*t_pars_first(t_pars *first, char c)
 		first->prev = NULL;
 		first->next = NULL;
 		first->c = c;
+		first->id = 0;
 		first->token = NO_TOKEN;
 		return (first);
 	}
@@ -41,6 +42,7 @@ t_pars	*t_pars_add_back(t_pars *pars, char c)
 	pars->next = next;
 	next->prev = pars;
 	next->c = c;
+	next->id = pars->id ++;
 	next->token = NO_TOKEN;
 	return (next);
 }
