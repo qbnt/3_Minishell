@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_t_l_args.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/28 15:55:46 by qbanet           ###   ########.fr       */
+/*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
+/*   Updated: 2023/10/28 15:48:01 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 /*----------------------------------------------------------------------------*/
 
-int	main(int argc, char **argv, char **envp)
+void	t_l_args_first(t_l_args *first)
 {
-	t_pars		*test;
-//	t_l_args	*test2;
+	if (!first)
+	{
+		first = malloc(sizeof(t_l_args));
+		first->prev = NULL;
+		first->next = NULL;
+		first->token = NO_TOKEN;
+		first->content = NULL;
+	}
+}
 
-	argv += 0;
-	envp += 0;
-	test = set_str_to_t_pars(argv[1]);
-	ft_print_t_pars(&test);
-//	test2 = set_pars_to_l_args(test);
-//	test2 += 0;
-	return (argc);
+void	t_l_args_add_next(t_pars *pars, t_l_args *full_cmd)
+{
+	size_t	len;
+
+	len = ft_ltrlen(&pars);
+	full_cmd->content = malloc((sizeof(char) * len) + 1);
+	
 }
