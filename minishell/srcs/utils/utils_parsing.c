@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/28 15:50:02 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/30 14:52:46 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_token	pick_token(char c)
 	else
 		return (ERR);
 }
-/*
+
 // Prends le premier maillon d'un t_pars * avec tokens et reforme les arguments
 //dans un t_l_args qu'il retourne.
 t_l_args	*set_pars_to_l_args(t_pars *pars)
@@ -72,17 +72,10 @@ t_l_args	*set_pars_to_l_args(t_pars *pars)
 	full_cmd = NULL;
 	t_l_args_first(full_cmd);
 	first_node = full_cmd;
-	while (pars->token == NO_TOKEN)
-	{
-		pars = pars->next;
-		free(pars->prev);
-		pars->prev = NULL;
-	}
 	while (pars)
 	{
 		t_l_args_add_next(pars, full_cmd);
-		free_t_pars_prev(pars);
+		free_t_pars_prev(&pars);
 	}
 	return (first_node);
 }
-*/

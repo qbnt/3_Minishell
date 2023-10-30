@@ -6,12 +6,17 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/27 13:59:07 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/30 14:51:02 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_DEFINE_H
 # define MINISHELL_DEFINE_H
+
+/*----------debug define----------*/
+
+# define TEST1			printf("_______________TEST_1_____________")
+# define TEST2			printf("_______________TEST_2_____________")
 
 /*---------t_pars tokents---------*/
 
