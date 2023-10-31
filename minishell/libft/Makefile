@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 12:04:16 by qbanet            #+#    #+#              #
-#    Updated: 2023/08/09 12:22:13 by qbanet           ###   ########.fr        #
+#    Updated: 2023/10/31 11:51:52 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,15 +56,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME) : $(OBJ)
 	@$(AR) $(ARFLAGS) $@ $^
-	@echo "$(GREEN)libft.a created!$(RESET)"
+	@echo -e "$(GREEN)libft.a created!$(RESET)"
 
 clean :
 	@$(RM) $(RMFLAG) $(OBJ_DIR)
-	@echo "$(YELLOW)Object files removed!$(RESET)"
+	@echo -e "$(YELLOW)Object files removed!$(RESET)"
 
 fclean : clean
 	@$(RM) $(RMFLAG) $(NAME)
-	@echo "$(YELLOW)libft.a removed!$(RESET)"
+	@echo -e "$(YELLOW)libft.a removed!$(RESET)"
 
 re : fclean all
 

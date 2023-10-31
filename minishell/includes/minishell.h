@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/30 14:44:56 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/31 11:25:40 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include "minishell_struct.h"
 # include "libft.h"
 
-# include <readline/readline.h>
-# include <readline/history.h>
-
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # include <fcntl.h>
 # include <sys/types.h>

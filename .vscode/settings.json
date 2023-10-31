@@ -2,5 +2,6 @@
 	"files.associations": {
 		"type_traits": "c",
 		"random": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "enabled"
 }
