@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/30 14:42:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/01 12:28:53 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ t_bool	ft_is_alpha(char c)
 size_t	ft_ltrlen(t_pars **oui)
 {
 	size_t	len;
+	t_pars	*tmp;
 
 	len = 0;
-	while ((*oui)->token != NO_TOKEN)
+	tmp = *oui;
+	while (tmp && tmp->token != NO_TOKEN)
 	{
 		len ++;
-		(*oui) = (*oui)->next;
+		tmp = tmp->next;
 	}
 	return (len);
 }
@@ -67,7 +69,7 @@ void	ft_print_t_l_args(t_l_args **oui)
 	printf("________________t_l_args________________\n");
 	while (tmp != NULL)
 	{
-		printf("|	%s	->	token = %d	|\n", tmp->content, tmp->token);
+		printf("|	%s	->	token = %d	|\n", tmp->str, tmp->token);
 		tmp = tmp->next;
 	}
 	printf("-----------------------------------------\n");

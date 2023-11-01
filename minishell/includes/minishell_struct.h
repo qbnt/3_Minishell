@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/27 13:43:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/01 11:44:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_pars
 
 typedef struct s_l_args
 {
-	char			*content;
+	char			*str;
 	t_token			token;
 	struct s_l_args	*next;
 	struct s_l_args	*prev;

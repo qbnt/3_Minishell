@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/30 14:52:46 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/01 12:31:00 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ t_l_args	*set_pars_to_l_args(t_pars *pars)
 	t_l_args	*full_cmd;
 	t_l_args	*first_node;
 
-	full_cmd = NULL;
-	t_l_args_first(full_cmd);
+	full_cmd = t_l_args_first(&pars);
 	first_node = full_cmd;
 	while (pars)
 	{
-		t_l_args_add_next(pars, full_cmd);
-		free_t_pars_prev(&pars);
+		t_l_args_add_next(&pars, full_cmd);
+//		free_t_pars_prev(&pars);
 	}
+	full_cmd->next = NULL;
 	return (first_node);
 }

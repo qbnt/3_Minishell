@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/10/31 11:54:49 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/01 10:35:24 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,23 +43,25 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	@echo -e "$(GREEN)Compilation successful!$(RESET)"
-	@echo -e ""
-	@echo -e "$(RED) ████▒░▒████▒░██▒░███▒░  █▒░██▒░   ██▒░░▒██▒░██████▒░██▒░    ██▒░"
-	@echo -e " ██▒██▒██▒██▒░██▒░█▒██▒░ █▒░██▒░   ██▒░░▒██▒░██▒░    ██▒░    ██▒░"
-	@echo -e " ██▒░███▒░██▒░██▒░█▒░██▒░█▒░██▒░ S ████████▒░████▒░  ██▒░    ██▒░"
-	@echo -e " ██▒░░█▒░ ██▒░██▒░█▒░ ██▒█▒░██▒░   ██▒░░▒██▒░██▒░    ██▒░    ██▒░"
-	@echo -e " ██▒░░░   ██▒░██▒░█▒░  ███▒░██▒░   ██▒░░▒██▒░██████▒░██████▒░██████▒░"
-	@echo -e " ▓▓▒░░     ▓░▒▓▓▒░    ░▒▓▓▒░▓▒░     ▓▒░░▒▓▒░░▒▓▓▒░░░░░░▒▓▓▒░░░▒▓▓▒░"
-	@echo -e " ▓▒░░       ░▒▓▒░     ░▒▓▒░         ▒░   ▒░  ░▒▓▒░   ░░▒▓▒░  ░░▒▓▒░"
-	@echo -e " ▒░░          ▒░        ▒░          ░    ░    ░▒░     ░▒▒░    ░▒▒░"
-	@echo -e " ░░           ░         ░                      ░       ░░      ░░"
-	@echo -e " ░                                                      ░       ░ $(RESET)"
+	@echo "$(GREEN)Compilation successful!$(RESET)"
+	@sleep 0
+	@clear
+	@echo "$(RED) ████▒░▒████▒░██▒░███▒░  █▒░██▒░   ██▒░░▒██▒░██████▒░██▒░    ██▒░"
+	@echo " ██▒██▒██▒██▒░██▒░█▒██▒░ █▒░██▒░   ██▒░░▒██▒░██▒░    ██▒░    ██▒░"
+	@echo " ██▒░███▒░██▒░██▒░█▒░██▒░█▒░██▒░ S ████████▒░████▒░  ██▒░    ██▒░"
+	@echo " ██▒░░█▒░ ██▒░██▒░█▒░ ██▒█▒░██▒░   ██▒░░▒██▒░██▒░    ██▒░    ██▒░"
+	@echo " ██▒░░░   ██▒░██▒░█▒░  ███▒░██▒░   ██▒░░▒██▒░██████▒░██████▒░██████▒░"
+	@echo " ▓▓▒░░     ▓░▒▓▓▒░    ░▒▓▓▒░▓▒░     ▓▒░░▒▓▒░░▒▓▓▒░░░░░░▒▓▓▒░░░▒▓▓▒░"
+	@echo " ▓▒░░       ░▒▓▒░     ░▒▓▒░         ▒░   ▒░  ░▒▓▒░   ░░▒▓▒░  ░░▒▓▒░"
+	@echo " ▒░░          ▒░        ▒░          ░    ░    ░▒░     ░▒▒░    ░▒▒░"
+	@echo " ░░           ░         ░                      ░       ░░      ░░"
+	@echo " ░                                                      ░       ░ $(RESET)"
+	@echo ""
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@echo -e "$(BLUE)Compiling: $<$(RESET)"
+	@echo "$(BLUE)Compiling: $<$(RESET)"
 
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
@@ -67,12 +69,14 @@ $(LIBFT):
 clean:
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
-	@echo -e "$(YELLOW)Cleaning object files...$(RESET)"
+	@echo "$(YELLOW)Cleaning object files...$(RESET)"
 
-fclean: clean
+fclean:
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@rm -rf $(OBJ_DIR)
+	@echo "$(YELLOW)Cleaning object files...$(RESET)"
 	@rm -f $(NAME)
-	@echo -e "$(RED)Full clean completed!$(RESET)"
+	@echo "$(RED)Full clean completed!$(RESET)"
 
 re: fclean all
 
