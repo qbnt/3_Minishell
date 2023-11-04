@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/01 10:36:15 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/02 10:42:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define REDIR			13
 # define RE_IN			14
 # define RE_OUT			15
-# define APPEND			16
+# define ALIAS			16
 # define HEREDOC		17
 
 

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/01 11:44:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/04 14:40:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct s_pars
 {
 	char			c;
 	int				id;
-	t_token			token;
 	struct s_pars	*next;
 	struct s_pars	*prev;
 }	t_pars;
@@ -35,6 +34,7 @@ typedef struct s_l_args
 
 typedef struct s_mini
 {
+	char		**splited_in;
 	t_l_args	args;
 }	t_mini;
 

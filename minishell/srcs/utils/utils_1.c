@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/01 12:28:53 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/04 14:42:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ size_t	ft_ltrlen(t_pars **oui)
 
 	len = 0;
 	tmp = *oui;
-	while (tmp && tmp->token != NO_TOKEN)
+	while (tmp && !ft_is_whitespace(tmp->c))
 	{
 		len ++;
 		tmp = tmp->next;
@@ -55,7 +55,7 @@ void	ft_print_t_pars(t_pars **oui)
 	printf("_________________t_pars_________________\n");
 	while (tmp != NULL)
 	{
-		printf("|	%c	->	token = %d	|\n", tmp->c, tmp->token);
+		printf("|	%c	->	id = %d	|\n", tmp->c, tmp->id);
 		tmp = tmp->next;
 	}
 	printf("-----------------------------------------\n");

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/02 13:16:08 by qbanet           ###   ########.fr       */
+/*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
+/*   Updated: 2023/11/04 14:31:26 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*----------------------------------------------------------------------------*/
-
-int	main(int argc, char **argv, char **envp)
+/*
+char	**pars_in(char *in)
 {
-	t_pars		*test;
-	t_l_args	*test2;
+	char	**res;
 
-	argv += 0;
-	envp += 0;
-	test = set_str_to_t_pars(argv[1]);
-	test2 = set_pars_to_l_args(test);
-	ft_print_t_l_args(&test2);
-	test2 += 0;
-	return (argc);
+	res = ft_split(in, ' ');
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/01 12:28:59 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/04 15:29:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_l_args	*set_pars_to_l_args(t_pars *pars);
 /*utils_t_pars.c*/
 t_pars		*t_pars_first(t_pars *first, char c);
 t_pars		*t_pars_add_back(t_pars *pars, char c);
-void		free_t_pars_prev(t_pars **pars);
+void		free_t_pars(t_pars *pars);
 
 /*utils_t_l_args.c*/
 t_l_args	*t_l_args_first(t_pars **pars);

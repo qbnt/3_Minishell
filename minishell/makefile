@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/01 10:35:24 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/02 13:50:13 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ OBJ_DIR = obj
 INCLUDES = -I$(INC_DIR) $(LIBFT_INC)
 
 SRC_FILES = main.c \
+			parsing/parsing.c\
 			utils/utils_1.c \
 			utils/utils_parsing.c \
 			utils/utils_t_pars.c\
