@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/04 15:31:27 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/07 11:25:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ t_l_args	*set_pars_to_l_args(t_pars *pars)
 		t_l_args_add_next(&pars, full_cmd);
 		full_cmd = full_cmd->next;
 	}
+	while (full_cmd)
+	{
+		full_cmd->token = t_l_args_pick_token(&pars, full_cmd);
+		full_cmd = full_cmd->prev;
+	}
 	free_t_pars(first_pars);
-	full_cmd->next = NULL;
 	return (first_node);
 }

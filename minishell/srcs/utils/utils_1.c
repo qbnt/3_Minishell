@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/04 14:42:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/08 14:27:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,23 @@ size_t	ft_ltrlen(t_pars **oui)
 	tmp = *oui;
 	while (tmp && !ft_is_whitespace(tmp->c))
 	{
-		len ++;
-		tmp = tmp->next;
+		if (tmp->c == 34)
+		{
+			len ++;
+			tmp = tmp->next;
+			while (tmp)
+			{
+				if (tmp->c == 34)
+					return (len + 1);
+				len ++;
+				tmp = tmp->next;
+			}
+		}
+		else
+		{
+			len ++;
+			tmp = tmp->next;
+		}
 	}
 	return (len);
 }
@@ -52,10 +67,10 @@ void	ft_print_t_pars(t_pars **oui)
 	t_pars	*tmp;
 
 	tmp = *oui;
-	printf("_________________t_pars_________________\n");
+	printf("_________________t_pars__________________\n");
 	while (tmp != NULL)
 	{
-		printf("|	%c	->	id = %d	|\n", tmp->c, tmp->id);
+		printf("|	%c	->	id = %d		|\n", tmp->c, tmp->id);
 		tmp = tmp->next;
 	}
 	printf("-----------------------------------------\n");
@@ -66,7 +81,7 @@ void	ft_print_t_l_args(t_l_args **oui)
 	t_l_args	*tmp;
 
 	tmp = *oui;
-	printf("________________t_l_args________________\n");
+	printf("________________t_l_args_________________\n");
 	while (tmp != NULL)
 	{
 		printf("|	%s	->	token = %d	|\n", tmp->str, tmp->token);

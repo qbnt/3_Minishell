@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:44:22 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/04 15:29:43 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/08 13:52:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_pars	*t_pars_first(t_pars *first, char c)
 		first = malloc(sizeof(t_pars));
 		first->prev = NULL;
 		first->next = NULL;
+		first->first = first;
 		first->c = c;
 		first->id = 0;
 		return (first);
@@ -42,7 +43,8 @@ t_pars	*t_pars_add_back(t_pars *pars, char c)
 	next->prev = pars;
 	next->next = NULL;
 	next->c = c;
-	next->id = pars->id ++;
+	next->first = pars->first;
+	next->id = next->prev->id + 1;
 	return (next);
 }
 

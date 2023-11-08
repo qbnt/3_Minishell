@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/02 13:16:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/08 14:57:32 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ int	main(int argc, char **argv, char **envp)
 	test = set_str_to_t_pars(argv[1]);
 	test2 = set_pars_to_l_args(test);
 	ft_print_t_l_args(&test2);
-	test2 += 0;
 	return (argc);
 }
