@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/09 12:50:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/09 15:04:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static char	*t_l_args_make_str(t_pars **pars)
 	while ((*pars) && ft_is_whitespace((*pars)->c))
 		(*pars) = (*pars)->next;
 	len = ft_ltrlen(pars);
-	printf("len = %ld\n", len);
 	cmd = malloc((sizeof(char) * len) + 1);
 	i = -1;
 	while ((*pars) && !ft_is_whitespace((*pars)->c))
@@ -61,13 +60,11 @@ static char	*t_l_args_make_str(t_pars **pars)
 		{
 			cmd[++i] = (*pars)->c;
 			(*pars) = (*pars)->next;
-			while ((len--) - 2)
+			while (len - 1 - i)
 			{
 				cmd[++i] = (*pars)->c;
 				(*pars) = (*pars)->next;
 			}
-			cmd[++i] = (*pars)->c;
-			(*pars) = (*pars)->next;
 		}
 		else
 		{
@@ -80,20 +77,17 @@ static char	*t_l_args_make_str(t_pars **pars)
 	return (cmd[++i] = 0, printf("cmd = %s\n\n", cmd), cmd);
 }
 
-int	t_l_args_pick_token(t_pars **pars, t_l_args *arg)
+int	t_l_args_pick_token(t_l_args *arg)
 {
-	t_pars	*test;
-
-	test = *pars;
-	test += 0;
 	if (ft_isalpha(arg->str[0])
 		&& (arg->prev == NULL || arg->prev->str[0] == '|'))
 		return (CMD);
 	else if (arg->str[0] == 34 || arg->str[0] == 39)
 		return (STR);
-	if (arg->str[0] == '-' && arg->str[1] != 0)
+	if ((arg->str[0] == '-' && arg->str[1] != 0)
+		&& (t_l_args_pick_token(arg->prev) != STR))
 		return (ARGS);
-	else if (arg->str[0] == '|')
+	else if (arg->str[0] == '|' || arg->str[0] == '>' || arg->str[0] == '<')
 		return (OPP);
 	else
 		return (STR);

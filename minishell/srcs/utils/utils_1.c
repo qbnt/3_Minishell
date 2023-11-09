@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/09 12:26:12 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/09 14:53:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ size_t	ft_ltrlen(t_pars **oui)
 			tmp = tmp->next;
 			while (tmp)
 			{
-				if (tmp->c == 34)
+				if (tmp->c == 34 && tmp->next->c != 34)
 					return (len + 1);
+				else if (tmp->c == 34)
+				{
+					len += 2;
+					tmp = tmp->next->next;
+				}
 				len ++;
 				tmp = tmp->next;
 			}
