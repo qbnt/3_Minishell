@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/07 11:17:51 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:20:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@
 # define ALIAS			16
 # define OPP			17
 
+/*---------arg define fnct---------*/
 
+# define ID				1
+# define CHAR			2
 #endif

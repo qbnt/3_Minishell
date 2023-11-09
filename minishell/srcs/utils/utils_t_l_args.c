@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/08 15:03:05 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:50:19 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ static char	*t_l_args_make_str(t_pars **pars)
 	size_t	len;
 	int		i;
 
-	while (ft_is_whitespace((*pars)->c))
+	while ((*pars) && ft_is_whitespace((*pars)->c))
 		(*pars) = (*pars)->next;
 	len = ft_ltrlen(pars);
+	printf("len = %ld\n", len);
 	cmd = malloc((sizeof(char) * len) + 1);
 	i = -1;
 	while ((*pars) && !ft_is_whitespace((*pars)->c))
@@ -74,8 +75,9 @@ static char	*t_l_args_make_str(t_pars **pars)
 			(*pars) = (*pars)->next;
 		}
 	}
-	cmd[++i] = 0;
-	return (cmd);
+	if ((*pars))
+		(*pars) = (*pars)->next;
+	return (cmd[++i] = 0, printf("cmd = %s\n\n", cmd), cmd);
 }
 
 int	t_l_args_pick_token(t_pars **pars, t_l_args *arg)
@@ -89,11 +91,11 @@ int	t_l_args_pick_token(t_pars **pars, t_l_args *arg)
 		return (CMD);
 	else if (arg->str[0] == 34 || arg->str[0] == 39)
 		return (STR);
-	if (arg->str[0] == '-')
+	if (arg->str[0] == '-' && arg->str[1] != 0)
 		return (ARGS);
 	else if (arg->str[0] == '|')
 		return (OPP);
-	else if (arg->str[0] == 39)
+	else
 		return (STR);
 	return (ERR);
 }
