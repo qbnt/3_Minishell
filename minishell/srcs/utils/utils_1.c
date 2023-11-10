@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 12:10:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/10 15:20:21 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	is_dcote(size_t *len, t_pars **tmp);
 //pas.
 t_bool	ft_is_whitespace(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == 'v' || c == 'f' || c == 'r')
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
 		return (1);
 	return (0);
 }
@@ -54,18 +55,22 @@ static int	is_dcote(size_t *len, t_pars **tmp)
 	*len += 1;
 	while (*tmp)
 	{
-		if ((*tmp)->c == 34 && (*tmp)->next->c != 34)
+		if (ft_isprint((*tmp)->c))
 		{
 			*len += 1;
-			return (1);
+			(*tmp) = (*tmp)->next;
 		}
 		else if ((*tmp)->c == 34)
 		{
-			*len += 2;
-			(*tmp) = (*tmp)->next->next;
+			if (!(*tmp)->next || ((*tmp)->next
+					&& ft_is_whitespace((*tmp)->next->c)))
+				return (1);
+			else
+			{
+				*len += 2;
+				(*tmp) = (*tmp)->next->next;
+			}
 		}
-		*len += 1;
-		(*tmp) = (*tmp)->next;
 	}
 	return (0);
 }

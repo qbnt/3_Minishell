@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 12:17:33 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/10 14:59:02 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static char	*t_l_args_make_str(t_pars **pars)
 	while ((*pars) && ft_is_whitespace((*pars)->c))
 		(*pars) = (*pars)->next;
 	len = ft_ltrlen(pars);
+	printf("len = %ld\n", len);
 	cmd = malloc((sizeof(char) * len) + 1);
 	i = -1;
 	while ((*pars) && !ft_is_whitespace((*pars)->c))
@@ -72,6 +73,7 @@ static void	create_cmd(char *cmd, int *i, size_t *len, t_pars **pars)
 		(*pars) = (*pars)->next;
 		while (*len - 1 - *i)
 		{
+			printf("pars c = %c\n", (*pars)->c);
 			cmd[++(*i)] = (*pars)->c;
 			(*pars) = (*pars)->next;
 		}
