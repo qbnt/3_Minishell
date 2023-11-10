@@ -6,13 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/09 15:04:28 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/10 12:17:33 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*t_l_args_make_str(t_pars **pars);
+static void	create_cmd(char *cmd, int *i, size_t *len, t_pars **pars);
 
 /*----------------------------------------------------------------------------*/
 
@@ -56,25 +57,30 @@ static char	*t_l_args_make_str(t_pars **pars)
 	i = -1;
 	while ((*pars) && !ft_is_whitespace((*pars)->c))
 	{
-		if ((*pars)->c == 34)
-		{
-			cmd[++i] = (*pars)->c;
-			(*pars) = (*pars)->next;
-			while (len - 1 - i)
-			{
-				cmd[++i] = (*pars)->c;
-				(*pars) = (*pars)->next;
-			}
-		}
-		else
-		{
-			cmd[++i] = (*pars)->c;
-			(*pars) = (*pars)->next;
-		}
+		create_cmd(cmd, &i, &len, pars);
 	}
 	if ((*pars))
 		(*pars) = (*pars)->next;
-	return (cmd[++i] = 0, printf("cmd = %s\n\n", cmd), cmd);
+	return (cmd[++i] = 0, cmd);
+}
+
+static void	create_cmd(char *cmd, int *i, size_t *len, t_pars **pars)
+{
+	if ((*pars)->c == 34)
+	{
+		cmd[++(*i)] = (*pars)->c;
+		(*pars) = (*pars)->next;
+		while (*len - 1 - *i)
+		{
+			cmd[++(*i)] = (*pars)->c;
+			(*pars) = (*pars)->next;
+		}
+	}
+	else
+	{
+		cmd[++(*i)] = (*pars)->c;
+		(*pars) = (*pars)->next;
+	}
 }
 
 int	t_l_args_pick_token(t_l_args *arg)

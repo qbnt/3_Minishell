@@ -6,11 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/09 14:53:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/10 12:10:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_dcote(size_t *len, t_pars **tmp);
 
 /*----------------------------------------------------------------------------*/
 
@@ -19,15 +21,6 @@
 t_bool	ft_is_whitespace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == 'v' || c == 'f' || c == 'r')
-		return (1);
-	return (0);
-}
-
-// Prend un char et renvoie un t_bol indiquant si le char est un caractère
-//alphabétique
-t_bool	ft_is_alpha(char c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	return (0);
 }
@@ -43,20 +36,8 @@ size_t	ft_ltrlen(t_pars **oui)
 	{
 		if (tmp->c == 34)
 		{
-			len ++;
-			tmp = tmp->next;
-			while (tmp)
-			{
-				if (tmp->c == 34 && tmp->next->c != 34)
-					return (len + 1);
-				else if (tmp->c == 34)
-				{
-					len += 2;
-					tmp = tmp->next->next;
-				}
-				len ++;
-				tmp = tmp->next;
-			}
+			if (is_dcote(&len, &tmp))
+				return (len + 1);
 		}
 		else
 		{
@@ -65,6 +46,28 @@ size_t	ft_ltrlen(t_pars **oui)
 		}
 	}
 	return (len);
+}
+
+static int	is_dcote(size_t *len, t_pars **tmp)
+{
+	(*tmp) = (*tmp)->next;
+	*len += 1;
+	while (*tmp)
+	{
+		if ((*tmp)->c == 34 && (*tmp)->next->c != 34)
+		{
+			*len += 1;
+			return (1);
+		}
+		else if ((*tmp)->c == 34)
+		{
+			*len += 2;
+			(*tmp) = (*tmp)->next->next;
+		}
+		*len += 1;
+		(*tmp) = (*tmp)->next;
+	}
+	return (0);
 }
 
 void	ft_print_t_pars(t_pars **oui, int arg)
@@ -84,13 +87,13 @@ void	ft_print_t_pars(t_pars **oui, int arg)
 	}
 	else if (arg == CHAR)
 	{
-		printf("|\\");
+		printf("\n|\\");
 		while (tmp != NULL)
 		{
 			printf("%c", tmp->c);
 			tmp = tmp->next;
 		}
-		printf("/|\n");
+		printf("/|\n\n");
 	}
 }
 

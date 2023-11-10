@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/08 12:36:34 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/10 11:37:58 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_l_args
 
 typedef struct s_mini
 {
-	char		**splited_in;
 	t_l_args	args;
 }	t_mini;
 
