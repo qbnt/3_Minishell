@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 11:37:58 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/11 19:02:52 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 typedef int	t_token;
 typedef int	t_bool;
 
-typedef struct s_pars
-{
+typedef struct s_pars{
 	char			c;
 	int				id;
 	struct s_pars	*next;
@@ -25,8 +24,12 @@ typedef struct s_pars
 	struct s_pars	*first;
 }	t_pars;
 
-typedef struct s_l_args
-{
+typedef struct s_elem_pars{
+	int				nb_dcote;
+	int				nb_pipe;
+	int				nb_cmd;
+}	t_elem_pars;
+typedef struct s_l_args{
 	char			*str;
 	t_token			token;
 	struct s_l_args	*next;
@@ -34,9 +37,9 @@ typedef struct s_l_args
 	struct s_l_args	*first;
 }	t_l_args;
 
-typedef struct s_mini
-{
+typedef struct s_mini{
 	t_l_args	args;
+	t_elem_pars	elem_pars;
 }	t_mini;
 
 #endif
