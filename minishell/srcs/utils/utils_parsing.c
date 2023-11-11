@@ -6,13 +6,16 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 11:55:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/11 18:58:08 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	clean_cmd(t_l_args *cmd);
+
+// Ajouter une fonction qui check si " est % 2. Si oui line ok, sinon return
+//erreur
 
 /*----------------------------------------------------------------------------*/
 
