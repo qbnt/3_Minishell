@@ -6,13 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 11:29:55 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 15:47:57 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	is_dcote(size_t *len, t_in **tmp);
+static int	find_end_dcote(size_t *len, t_in **tmp);
 
 /*----------------------------------------------------------------------------*/
 
@@ -33,13 +34,18 @@ size_t	ft_nodelen(t_in **oui)
 
 	len = 0;
 	tmp = *oui;
-	while (tmp && !ft_is_whitespace(tmp->c))
+	while (tmp && (!ft_is_whitespace(tmp->c)))
 	{
 		if (tmp->c == 34)
 		{
 			if (is_dcote(&len, &tmp))
-				return (len + 1);
+				return (len);
 		}
+		else if (tmp->c == '|')
+			if (ft_is_whitespace(tmp->prev->c))
+				return (1);
+			else
+				return (len);
 		else
 		{
 			len ++;
@@ -55,63 +61,37 @@ static int	is_dcote(size_t *len, t_in **tmp)
 	(*tmp) = (*tmp)->next;
 	while (*tmp)
 	{
-		if (ft_isprint((*tmp)->c))
+		if ((*tmp)->c == 34)
+		{
+			return (find_end_dcote(len, tmp));
+		}
+		else
 		{
 			*len += 1;
 			(*tmp) = (*tmp)->next;
-		}
-		else if ((*tmp)->c == 34)
-		{
-			if (!(*tmp)->next || ((*tmp)->next
-					&& ft_is_whitespace((*tmp)->next->c)))
-				return (1);
-			else
-			{
-				*len += 2;
-				(*tmp) = (*tmp)->next->next;
-			}
 		}
 	}
 	return (0);
 }
 
-void	ft_print_t_in(t_in **oui, int arg)
+static int	find_end_dcote(size_t *len, t_in **tmp)
 {
-	t_in	*tmp;
-
-	tmp = *oui;
-	if (arg == ID)
+	if (!(*tmp)->next || ((*tmp)->next
+			&& (ft_is_whitespace((*tmp)->next->c))))
+		return (*len += 1, 1);
+	else if ((*tmp)->next->c == 34)
 	{
-		printf("_________________t_pars__________________\n");
-		while (tmp != NULL)
+		*len += 2;
+		(*tmp) = (*tmp)->next->next;
+	}
+	else
+	{
+		while ((*tmp) && !ft_is_whitespace((*tmp)->c))
 		{
-			printf("|	%c	->	id = %d		|\n", tmp->c, tmp->id);
-			tmp = tmp->next;
+			*len += 1;
+			(*tmp) = (*tmp)->next;
 		}
-		printf("-----------------------------------------\n");
+		return (1);
 	}
-	else if (arg == CHAR)
-	{
-		printf("\n|\\");
-		while (tmp != NULL)
-		{
-			printf("%c", tmp->c);
-			tmp = tmp->next;
-		}
-		printf("/|\n\n");
-	}
-}
-
-void	ft_print_t_pars(t_pars **oui)
-{
-	t_pars	*tmp;
-
-	tmp = *oui;
-	printf("________________t_l_args_________________\n");
-	while (tmp != NULL)
-	{
-		printf("|	%s	->	token = %d	|\n", tmp->str, tmp->token);
-		tmp = tmp->next;
-	}
-	printf("-----------------------------------------\n");
+	return (0);
 }

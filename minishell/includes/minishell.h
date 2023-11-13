@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 11:46:17 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 15:35:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int			t_pars_pick_token(t_pars *arg);
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
 size_t		ft_nodelen(t_in **in);
+
+/*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
 void		ft_print_t_pars(t_pars **oui);
 

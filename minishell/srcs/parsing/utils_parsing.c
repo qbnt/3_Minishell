@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 11:41:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 16:09:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ t_pars	*set_in_to_t_pars(t_in *in)
 	first_cmd = full_cmd->first;
 	while (in)
 	{
+		TEST1 ;
 		t_pars_add_next(&in, full_cmd);
 		full_cmd = full_cmd->next;
+		sleep(2);
 	}
 	while (full_cmd)
 	{

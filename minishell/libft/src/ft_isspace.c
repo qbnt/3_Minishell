@@ -6,11 +6,11 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:27:54 by qbanet            #+#    #+#             */
-/*   Updated: 2023/06/26 17:32:45 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 13:54:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 int	ft_isspace(int c)
 {

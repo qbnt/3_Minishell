@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/13 11:49:27 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/13 15:34:58 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ INCLUDES = -I$(INC_DIR) $(LIBFT_INC)
 
 SRC_FILES = main.c \
 			parsing/parsing.c\
-			utils/utils_1.c \
-			utils/utils_parsing.c \
-			utils/utils_t_pars.c\
-			utils/utils_t_in.c
+			parsing/utils_parsing.c \
+			parsing/utils_t_pars.c \
+			utils/utils_t_in.c \
+			utils/utils_print.c \
+			utils/utils_1.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

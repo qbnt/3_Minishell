@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 15:14:08 by qbanet            #+#    #+#             */
-/*   Updated: 2023/02/08 16:00:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 14:01:55 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,4 @@ int	ft_strncmp(char const *s1, char const *s2, size_t n)
 	if ((unsigned char)*s1 == (unsigned char)*s2)
 		return (0);
 	return ((unsigned char)*s1 - (unsigned char)*s2);
-}	
+}

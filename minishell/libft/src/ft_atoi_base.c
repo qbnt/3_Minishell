@@ -6,11 +6,11 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:12:43 by qbanet            #+#    #+#             */
-/*   Updated: 2023/08/03 13:35:53 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 13:59:15 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 int	get_base_length(char *base)
 {
@@ -85,8 +85,8 @@ int	ft_atoi_base(char *str, char *base)
 	if (!(base_length) || !check_errors(str, base))
 		return (0);
 	s = 0;
-	while (str[s] != '\0' && (str[s] == ' ' || str[s] == '\t' || str[s] == '\r'
-			|| str[s] == '\n' || str[s] == '\v' || str[s] == '\f'))
+	while (str[s] != '\0' && (str[s] == ' ' || str[s] == 9 || str[s] == 13
+			|| str[s] == 10 || str[s] == 11 || str[s] == '\f'))
 		s++;
 	i = s - 1;
 	res = 0;
