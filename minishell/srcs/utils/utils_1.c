@@ -6,13 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 15:20:21 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:29:55 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_dcote(size_t *len, t_pars **tmp);
+static int	is_dcote(size_t *len, t_in **tmp);
 
 /*----------------------------------------------------------------------------*/
 
@@ -26,10 +26,10 @@ t_bool	ft_is_whitespace(char c)
 	return (0);
 }
 
-size_t	ft_ltrlen(t_pars **oui)
+size_t	ft_nodelen(t_in **oui)
 {
 	size_t	len;
-	t_pars	*tmp;
+	t_in	*tmp;
 
 	len = 0;
 	tmp = *oui;
@@ -49,10 +49,10 @@ size_t	ft_ltrlen(t_pars **oui)
 	return (len);
 }
 
-static int	is_dcote(size_t *len, t_pars **tmp)
+static int	is_dcote(size_t *len, t_in **tmp)
 {
-	(*tmp) = (*tmp)->next;
 	*len += 1;
+	(*tmp) = (*tmp)->next;
 	while (*tmp)
 	{
 		if (ft_isprint((*tmp)->c))
@@ -75,9 +75,9 @@ static int	is_dcote(size_t *len, t_pars **tmp)
 	return (0);
 }
 
-void	ft_print_t_pars(t_pars **oui, int arg)
+void	ft_print_t_in(t_in **oui, int arg)
 {
-	t_pars	*tmp;
+	t_in	*tmp;
 
 	tmp = *oui;
 	if (arg == ID)
@@ -102,9 +102,9 @@ void	ft_print_t_pars(t_pars **oui, int arg)
 	}
 }
 
-void	ft_print_t_l_args(t_l_args **oui)
+void	ft_print_t_pars(t_pars **oui)
 {
-	t_l_args	*tmp;
+	t_pars	*tmp;
 
 	tmp = *oui;
 	printf("________________t_l_args_________________\n");

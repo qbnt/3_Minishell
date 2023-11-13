@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 12:02:40 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:46:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,23 @@
 /********utils********/
 
 /*utils_parsing.c*/
-t_pars		*set_str_to_t_pars(char *str);
-t_l_args	*set_pars_to_l_args(t_pars *pars);
+t_in		*set_str_to_t_in(char *str);
+t_pars		*set_in_to_t_pars(t_in *in);
+
+/*utils_t_in.c*/
+t_in		*t_in_first(t_in *first, char c);
+t_in		*t_in_add_back(t_in *in, char c);
+void		free_t_in(t_in *in);
 
 /*utils_t_pars.c*/
-t_pars		*t_pars_first(t_pars *first, char c);
-t_pars		*t_pars_add_back(t_pars *pars, char c);
-void		free_t_pars(t_pars *pars);
-
-/*utils_t_l_args.c*/
-t_l_args	*t_l_args_first(t_pars **pars);
-void		t_l_args_add_next(t_pars **pars, t_l_args *full_cmd);
-int			t_l_args_pick_token(t_l_args *arg);
+t_pars		*t_pars_first(t_in **in);
+void		t_pars_add_next(t_in **in, t_pars *full_cmd);
+int			t_pars_pick_token(t_pars *arg);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
-size_t		ft_ltrlen(t_pars **oui);
-void		ft_print_t_pars(t_pars **oui, int arg);
-void		ft_print_t_l_args(t_l_args **oui);
+size_t		ft_nodelen(t_in **in);
+void		ft_print_t_in(t_in **oui, int arg);
+void		ft_print_t_pars(t_pars **oui);
 
 #endif

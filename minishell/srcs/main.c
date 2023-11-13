@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/10 14:36:29 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:41:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ static t_bool	stop_input(char *input);
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_pars		*test;
-	t_l_args	*test2;
+	t_in		*in;
+	t_mini		*ms;
 	char		*input;
 
 	argv += 0;
 	envp += 0;
+	ms = malloc(sizeof(t_mini));
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
@@ -34,10 +35,10 @@ int	main(int argc, char **argv, char **envp)
 		if (stop_input(input))
 			exit(EXIT_SUCCESS);
 		add_history(input);
-		test = set_str_to_t_pars(input);
-		ft_print_t_pars(&test, CHAR);
-		test2 = set_pars_to_l_args(test);
-		ft_print_t_l_args(&test2);
+		in = set_str_to_t_in(input);
+		ft_print_t_in(&in, CHAR);
+		ms->args = set_in_to_t_pars(in);
+		ft_print_t_pars(&ms->args);
 	}
 	return (argc);
 }
