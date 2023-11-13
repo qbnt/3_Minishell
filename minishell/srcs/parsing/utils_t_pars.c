@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 16:10:48 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 19:59:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ static char	*make_str_in_t_pars(t_in **in)
 		cmd[i++] = (*in)->c;
 		(*in) = (*in)->next;
 	}
-	if (*in)
-		(*in) = (*in)->next;
-	return (cmd[i] = 0, printf("cmd = %s\n", cmd), cmd);
+
+	return (cmd[i] = 0, printf("cmd = %s\n\n", cmd), cmd);
 }
 
 int	t_pars_pick_token(t_pars *arg)
