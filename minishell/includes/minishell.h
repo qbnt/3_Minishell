@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 15:35:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/14 10:50:21 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 /*----------------------------------Fonction----------------------------------*/
 
 /********parsing********/
+t_pars		*parsing(char *input);
+t_elem_pars	*check_input(char *input);
 
 /********builtins********/
 
@@ -69,6 +71,9 @@ int			t_pars_pick_token(t_pars *arg);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
+t_bool		ft_is_opp(char c);
+
+/*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
 
 /*utils_print.c*/

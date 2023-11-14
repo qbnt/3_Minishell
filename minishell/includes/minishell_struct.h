@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 11:28:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/14 14:07:32 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ typedef struct s_in{
 
 typedef struct s_elem_pars{
 	int				nb_dcote;
+	int				nb_scote;
 	int				nb_pipe;
+	int				nb_redir;
+	int				nb_redir_in;
+	int				nb_redir_out;
 	int				nb_cmd;
 }	t_elem_pars;
 
@@ -40,7 +44,7 @@ typedef struct s_pars{
 
 typedef struct s_mini{
 	t_pars		*args;
-	t_elem_pars	elem_pars;
+	t_elem_pars	*elem_pars;
 }	t_mini;
 
 #endif

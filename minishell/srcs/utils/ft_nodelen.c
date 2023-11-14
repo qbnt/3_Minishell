@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:04:32 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 20:05:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/13 20:24:29 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ size_t	ft_nodelen(t_in **oui)
 		}
 		else
 		{
-			if (tmp->next && tmp->next->c == '|')
+			if (tmp->next && ft_is_opp(tmp->next->c))
 				return (++len);
-			else if (tmp->c == '|')
+			else if (ft_is_opp(tmp->c))
 				return (1);
 			len ++;
 			tmp = tmp->next;
@@ -77,9 +77,9 @@ static int	is_end_dcote(size_t *len, t_in **tmp)
 	{
 		while ((*tmp) && !ft_is_whitespace((*tmp)->c))
 		{
-			if ((*tmp)->next && (*tmp)->next->c == '|')
+			if ((*tmp)->next && ft_is_opp((*tmp)->next->c))
 				return (++(*len));
-			else if ((*tmp)->c == '|')
+			else if (ft_is_opp((*tmp)->c))
 				return (1);
 			*len += 1;
 			(*tmp) = (*tmp)->next;

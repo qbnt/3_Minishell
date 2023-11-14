@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 20:17:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/14 21:57:46 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static char	*make_str_in_t_pars(t_in **in)
 		cmd[i++] = (*in)->c;
 		(*in) = (*in)->next;
 	}
-
 	return (cmd[i] = 0, cmd);
 }
 
@@ -69,13 +68,22 @@ int	t_pars_pick_token(t_pars *arg)
 	if (ft_isalpha(arg->str[0])
 		&& (arg->prev == NULL || arg->prev->str[0] == '|'))
 		return (CMD);
-	else if (arg->str[0] == 34 || arg->str[0] == 39)
+	else if (arg->str[0] == 34)
 		return (STR);
-	if ((arg->str[0] == '-' && arg->str[1] != 0)
+	else if (arg->str[0] == 39)
+		return (LIT_STR);
+	else if ((arg->str[0] == '-' && arg->str[1] != 0)
 		&& (t_pars_pick_token(arg->prev) != STR))
 		return (ARGS);
-	else if (arg->str[0] == '|' || arg->str[0] == '>' || arg->str[0] == '<')
+	else if (arg->str[0] == '|')
 		return (OPP);
+	else if ((arg->str[0] == '<' || arg->str[0] == '>')
+		&& ft_strlen(arg->str) == 1)
+		return (REDIR);
+	else if (ft_strncmp(arg->str, ">>", 2) && ft_strlen(arg->str) == 2)
+		return (RE_IN);
+	else if (ft_strncmp(arg->str, "<<", 2) && ft_strlen(arg->str) == 2)
+		return (RE_OUT);
 	else
 		return (STR);
 }

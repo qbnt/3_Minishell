@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 20:05:18 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:57:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ t_bool	ft_is_whitespace(char c)
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
 		|| c == '\r')
 		return (1);
-	return (0);
+	else
+		return (0);
 }
 
+t_bool	ft_is_opp(char c)
+{
+	if (c == '|')
+		return (1);
+	else
+		return (0);
+}
