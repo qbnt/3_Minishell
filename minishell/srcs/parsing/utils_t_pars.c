@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 21:57:46 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:14:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ int	t_pars_pick_token(t_pars *arg)
 	else if ((arg->str[0] == '<' || arg->str[0] == '>')
 		&& ft_strlen(arg->str) == 1)
 		return (REDIR);
-	else if (ft_strncmp(arg->str, ">>", 2) && ft_strlen(arg->str) == 2)
+	else if (!ft_strncmp(arg->str, ">>", 2) && ft_strlen(arg->str) == 2)
 		return (RE_IN);
-	else if (ft_strncmp(arg->str, "<<", 2) && ft_strlen(arg->str) == 2)
+	else if (!ft_strncmp(arg->str, "<<", 2) && ft_strlen(arg->str) == 2)
 		return (RE_OUT);
+	else if (!ft_strncmp(arg->str, "&&", 2) && ft_strlen(arg->str) == 2)
+		return (AND);
 	else
 		return (STR);
 }

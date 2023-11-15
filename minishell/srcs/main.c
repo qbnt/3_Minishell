@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 21:57:27 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/15 14:52:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static t_bool	space_input(char *input);
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini		*ms;
+	t_pars		*pars;
 	char		*input;
 
 	argv += 0;
@@ -34,8 +35,11 @@ int	main(int argc, char **argv, char **envp)
 		ms->elem_pars = check_input(input);
 		if (ms->elem_pars == NULL)
 			continue ;
-		ms->args = parsing(input);
-		ft_print_t_pars(&ms->args);
+		pars = parsing(input);
+		ms->cmds = make_clear_cmds(ms->elem_pars, pars->first);
+		for (int i = 0; i < ms->elem_pars->nb_cmd; i ++){
+			ft_print_t_pars(&ms->cmds[i]);
+		}
 	}
 	return (argc);
 }

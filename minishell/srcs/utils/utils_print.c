@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 15:34:30 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/14 22:39:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_print_t_in(t_in **oui, int arg)
 	tmp = *oui;
 	if (arg == ID)
 	{
-		printf("_________________t_pars__________________\n");
+		printf("__________________t_in___________________\n");
 		while (tmp != NULL)
 		{
 			printf("|	%c	->	id = %d		|\n", tmp->c, tmp->id);
@@ -46,7 +46,7 @@ void	ft_print_t_pars(t_pars **oui)
 	t_pars	*tmp;
 
 	tmp = *oui;
-	printf("________________t_l_args_________________\n");
+	printf("_________________t_pars__________________\n");
 	while (tmp != NULL)
 	{
 		printf("|	%s	->	token = %d	|\n", tmp->str, tmp->token);

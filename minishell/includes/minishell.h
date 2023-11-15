@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 10:50:21 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/14 23:11:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@
 /*----------------------------------Fonction----------------------------------*/
 
 /********parsing********/
+/*parsing.c*/
 t_pars		*parsing(char *input);
 t_elem_pars	*check_input(char *input);
 
+/*make_clear_cmds.c*/
+t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars);
 /********builtins********/
 
 /********signals********/

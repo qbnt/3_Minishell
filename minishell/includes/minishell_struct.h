@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 14:07:32 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:19:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,20 @@ typedef struct s_elem_pars{
 	int				nb_redir_in;
 	int				nb_redir_out;
 	int				nb_cmd;
+	int				nb_and_char;
 }	t_elem_pars;
 
 typedef struct s_pars{
 	char			*str;
 	t_token			token;
+	t_bool			pipe;
 	struct s_pars	*next;
 	struct s_pars	*prev;
 	struct s_pars	*first;
 }	t_pars;
 
 typedef struct s_mini{
-	t_pars		*args;
+	t_pars		**cmds;
 	t_elem_pars	*elem_pars;
 }	t_mini;
 

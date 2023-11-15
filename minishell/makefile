@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/14 12:02:51 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/14 22:17:15 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ INCLUDES = -I$(INC_DIR) $(LIBFT_INC)
 
 SRC_FILES = main.c \
 			parsing/parsing.c\
+			parsing/make_clear_cmds.c \
 			parsing/utils_parsing.c \
 			parsing/utils_t_pars.c \
 			utils/utils_t_in.c \

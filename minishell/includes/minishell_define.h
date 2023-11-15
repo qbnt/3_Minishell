@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 13:49:32 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:13:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define ALIAS			16
 # define OPP			17
 # define LIT_STR		18
+# define AND			19
+# define OR				20
 # define NO_TOKEN		99
 
 /*---------arg define fnct---------*/

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 21:58:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:20:04 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_bool	stop_input(char *input);
 static t_bool	check_elems(t_elem_pars *oui);
-static void		elem_count(t_elem_pars *oui, char *input);
+static void		elem_count(t_elem_pars *oui, char **input);
 
 /*----------------------------------------------------------------------------*/
 
@@ -25,7 +25,6 @@ t_pars	*parsing(char *input)
 	if (stop_input(input))
 		exit(EXIT_SUCCESS);
 	in = set_str_to_t_in(input);
-	ft_print_t_in(&in, CHAR);
 	return (set_in_to_t_pars(in));
 }
 
@@ -48,11 +47,11 @@ t_elem_pars	*check_input(char *input)
 	oui->nb_cmd = 1;
 	while (*input)
 	{
-		elem_count(oui, input);
+		elem_count(oui, &input);
 		input ++;
 	}
-	printf("dcote = %d, scote = %d, pipe = %d cmd = %d\n", oui->nb_dcote,
-		oui->nb_scote, oui->nb_pipe, oui->nb_cmd);
+	printf("dcote = %d | scote = %d | pipe = %d | cmd = %d\n",
+		oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd);
 	if (!check_elems(oui))
 	{
 		printf("oups\n");
@@ -61,20 +60,25 @@ t_elem_pars	*check_input(char *input)
 	return (oui);
 }
 
-static void	elem_count(t_elem_pars *oui, char *input)
+static void	elem_count(t_elem_pars *oui, char **input)
 {
-	if (*input == 34)
+	if (**input == 34 && oui->nb_scote % 2 == 0)
 		oui->nb_dcote ++;
-	else if (*input == 39 && oui->nb_dcote % 2 == 0)
+	else if (**input == 39 && oui->nb_dcote % 2 == 0)
 		oui->nb_scote ++;
-	else if (*input == '|')
+	else if (**input == '|'
+		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
 	{
-		oui->nb_cmd ++;
 		oui->nb_pipe ++;
+		(*input)++;
+		while (**input && ft_is_whitespace(**input))
+			(*input)++;
+		if (*(*input + 1))
+			oui->nb_cmd ++;
 	}
-	else if ((*input == '<' || *input == '<')
-		&& ft_is_whitespace(*(input - 1)) && ft_is_whitespace(*(input + 1)))
-		oui->nb_redir ++;
+	else if (**input == '&'
+		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
+		oui->nb_and_char ++;
 }
 
 static t_bool	check_elems(t_elem_pars *oui)
@@ -82,6 +86,10 @@ static t_bool	check_elems(t_elem_pars *oui)
 	if (oui->nb_dcote % 2 != 0)
 		return (0);
 	else if (oui->nb_scote % 2 != 0)
+		return (0);
+	else if (oui->nb_pipe != oui->nb_cmd - 1)
+		return (0);
+	else if (oui->nb_and_char % 2 != 0)
 		return (0);
 	return (1);
 }
