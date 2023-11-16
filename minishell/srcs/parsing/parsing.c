@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/16 15:04:20 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 15:21:45 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ static t_bool	check_elems(t_elem_pars *oui)
 
 	total_op = oui->nb_and_op + oui->nb_pipe;
 	if (oui->nb_dcote % 2 != 0)
-		return (printf("1\n"), 0);
+		return (0);
 	else if (oui->nb_scote % 2 != 0)
-		return (printf("2\n"), 0);
+		return (0);
 	else if (oui->nb_parenth % 2 != 0)
-		return (printf("3\n"), 0);
+		return (0);
 	else if (oui->nb_and_char != 0)
-		return (printf("4\n"), 0);
+		return (0);
 	else if (total_op != oui->nb_cmd - 1)
-		return (printf("5\n"), 0);
+		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/16 13:55:59 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 15:28:26 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars)
 		while (pars && pars->token == OPP)
 			pars = pars->next;
 		ft_print_t_pars(res[i]->first);
-		printf("pipe = %d, and = %d, or = %d\n", res[i]->pipe_op, res[i]->and_op,
-			res[i]->or_op);
+		printf("pipe = %d, and = %d, or = %d\n\n", res[i]->pipe_op,
+			res[i]->and_op, res[i]->or_op);
 	}
 	return (res);
 }
@@ -50,7 +50,6 @@ static t_pars	*cpy_cmd(t_pars *pars)
 	{
 		cmd->str = ft_strdup(pars->str);
 		cmd->token = pars->token;
-		cmd->pipe_op = FALSE;
 		pars = pars->next;
 		cmd->next = ft_calloc(sizeof(t_pars), 1);
 		cmd->next->prev = cmd;
@@ -70,11 +69,11 @@ static void	select_opp(t_pars	*pars, t_pars **cmd)
 {
 	if (pars && pars->token == OPP && !ft_strncmp(pars->str, "|", 1)
 		&& ft_strlen(pars->str) == 1)
-		(*cmd)->prev->pipe_op = TRUE;
+		(*cmd)->first->pipe_op = TRUE;
 	else if (pars && pars->token == OPP && !ft_strncmp(pars->str, "||", 2)
 		&& ft_strlen(pars->str) == 2)
-		(*cmd)->prev->or_op = TRUE;
+		(*cmd)->first->or_op = TRUE;
 	else if (pars && pars->token == OPP && !ft_strncmp(pars->str, "&&", 2)
 		&& ft_strlen(pars->str) == 2)
-		(*cmd)->prev->and_op = TRUE;
+		(*cmd)->first->and_op = TRUE;
 }
