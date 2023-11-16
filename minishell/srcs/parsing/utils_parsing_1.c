@@ -6,16 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 19:41:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 12:17:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	clean_cmd(t_pars *cmd);
-
-// Ajouter une fonction qui check si " est % 2. Si oui line ok, sinon return
-//erreur
+static void	parenth_cote(t_bool *in_cote, char c);
 
 /*----------------------------------------------------------------------------*/
 
@@ -24,15 +22,38 @@ static void	clean_cmd(t_pars *cmd);
 t_in	*set_str_to_t_in(char *str)
 {
 	t_in	*oui;
+	t_bool	in_cote;
 
-	oui = NULL;
-	oui = t_in_first(oui, *str);
-	while (*(str + 1))
-	{
+	while (str && (*str == '(' || *str == ')'))
 		str ++;
-		oui = t_in_add_back(oui, *str);
+	in_cote = FALSE;
+	oui = NULL;
+	if (*str)
+	{
+		if (*str == 34 || *str == 39)
+			in_cote = TRUE;
+		oui = t_in_first(oui, *str);
+		while (*str && *(str + 1))
+		{
+			str ++;
+			parenth_cote(&in_cote, *str);
+			if ((*str == '(' || *str == ')') && in_cote == FALSE)
+				continue ;
+			else
+				oui = t_in_add_back(oui, *str);
+		}
+		return (oui->first);
 	}
-	return (oui->first);
+	else
+		return (NULL);
+}
+
+static void	parenth_cote(t_bool *in_cote, char c)
+{
+	if ((c == 34 || c == 39) && *in_cote == FALSE)
+		*in_cote = TRUE;
+	else if (*in_cote == TRUE && (c == 34 || c == 39))
+		*in_cote = FALSE;
 }
 
 // Prends le premier maillon d'un t_in * avec tokens et reforme les arguments

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/15 14:52:06 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 14:52:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
-		input = readline("minishell v1.0 > ");
+		input = readline("minishell v1.5 > ");
 		if (space_input(input))
 			continue ;
 		add_history(input);
@@ -36,10 +36,9 @@ int	main(int argc, char **argv, char **envp)
 		if (ms->elem_pars == NULL)
 			continue ;
 		pars = parsing(input);
+		if (!pars)
+			continue ;
 		ms->cmds = make_clear_cmds(ms->elem_pars, pars->first);
-		for (int i = 0; i < ms->elem_pars->nb_cmd; i ++){
-			ft_print_t_pars(&ms->cmds[i]);
-		}
 	}
 	return (argc);
 }

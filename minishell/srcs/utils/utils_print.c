@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/14 22:39:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 13:31:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	ft_print_t_in(t_in **oui, int arg)
 	}
 }
 
-void	ft_print_t_pars(t_pars **oui)
+void	ft_print_t_pars(t_pars *oui)
 {
 	t_pars	*tmp;
 
-	tmp = *oui;
+	tmp = oui;
 	printf("_________________t_pars__________________\n");
 	while (tmp != NULL)
 	{

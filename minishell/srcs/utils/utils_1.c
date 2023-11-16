@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/15 15:10:48 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 14:01:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,18 @@ t_bool	ft_is_opp(char c)
 		return (1);
 	else
 		return (0);
+}
+
+t_bool	ft_strcmp(const char *s1, const char *s2)
+{
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (FALSE);
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (FALSE);
+		s1 ++;
+		s2 ++;
+	}
+	return (TRUE);
 }

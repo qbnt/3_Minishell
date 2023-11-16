@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/15 15:14:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 15:06:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static char	*make_str_in_t_pars(t_in **in)
 int	t_pars_pick_token(t_pars *arg)
 {
 	if (ft_isalpha(arg->str[0])
-		&& (arg->prev == NULL || arg->prev->str[0] == '|'))
+		&& (arg->prev == NULL || (arg->prev->str[0] == '|')
+			|| arg->prev->str[0] == '&'))
 		return (CMD);
 	else if (arg->str[0] == 34)
 		return (STR);
@@ -75,7 +76,8 @@ int	t_pars_pick_token(t_pars *arg)
 	else if ((arg->str[0] == '-' && arg->str[1] != 0)
 		&& (t_pars_pick_token(arg->prev) != STR))
 		return (ARGS);
-	else if (arg->str[0] == '|')
+	else if (arg->str[0] == '|' || !ft_strncmp(arg->str, "&&", 2)
+		|| !ft_strncmp(arg->str, "||", 2))
 		return (OPP);
 	else if ((arg->str[0] == '<' || arg->str[0] == '>')
 		&& ft_strlen(arg->str) == 1)

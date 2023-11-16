@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/15 15:20:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/16 15:04:20 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_pars	*parsing(char *input)
 	if (stop_input(input))
 		exit(EXIT_SUCCESS);
 	in = set_str_to_t_in(input);
+	if (!in)
+		return (perror("Pars error\n"), NULL);
 	return (set_in_to_t_pars(in));
 }
 
@@ -50,8 +52,7 @@ t_elem_pars	*check_input(char *input)
 		elem_count(oui, &input);
 		input ++;
 	}
-	printf("dcote = %d | scote = %d | pipe = %d | cmd = %d\n",
-		oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd);
+	printf("dcote = %d | scote = %d | pipe = %d | cmd = %d\nand_op = %d | and char = %d\n\n", oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd, oui->nb_and_op, oui->nb_and_char);
 	if (!check_elems(oui))
 	{
 		printf("oups\n");
@@ -68,28 +69,29 @@ static void	elem_count(t_elem_pars *oui, char **input)
 		oui->nb_scote ++;
 	else if (**input == '|'
 		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
-	{
-		oui->nb_pipe ++;
-		(*input)++;
-		while (**input && ft_is_whitespace(**input))
-			(*input)++;
-		if (*(*input + 1))
-			oui->nb_cmd ++;
-	}
+		pars_is_pipe(input, &oui);
 	else if (**input == '&'
 		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
-		oui->nb_and_char ++;
+		pars_is_and_op(input, &oui);
+	else if ((**input == '(' || **input == ')')
+		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
+		oui->nb_parenth ++;
 }
 
 static t_bool	check_elems(t_elem_pars *oui)
 {
+	int	total_op;
+
+	total_op = oui->nb_and_op + oui->nb_pipe;
 	if (oui->nb_dcote % 2 != 0)
-		return (0);
+		return (printf("1\n"), 0);
 	else if (oui->nb_scote % 2 != 0)
-		return (0);
-	else if (oui->nb_pipe != oui->nb_cmd - 1)
-		return (0);
-	else if (oui->nb_and_char % 2 != 0)
-		return (0);
+		return (printf("2\n"), 0);
+	else if (oui->nb_parenth % 2 != 0)
+		return (printf("3\n"), 0);
+	else if (oui->nb_and_char != 0)
+		return (printf("4\n"), 0);
+	else if (total_op != oui->nb_cmd - 1)
+		return (printf("5\n"), 0);
 	return (1);
 }
