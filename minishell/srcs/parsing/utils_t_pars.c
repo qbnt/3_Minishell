@@ -6,14 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 13:14:58 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 13:41:53 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*make_str_in_t_pars(t_in **in);
-//static void	create_cmd(char *cmd, int *i, size_t *len, t_in **in);
 
 /*----------------------------------------------------------------------------*/
 
@@ -90,4 +89,19 @@ int	t_pars_pick_token(t_pars *arg)
 		return (AND);
 	else
 		return (STR);
+}
+
+void	free_t_pars(t_pars *pars)
+{
+	t_pars	*node;
+
+	node = pars;
+	printf("start t_pars free\n");
+	while (pars)
+	{
+		node = node->next;
+		free (pars->str);
+		free (pars);
+		pars = node;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/17 13:15:39 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 13:45:57 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_pars{
 }	t_pars;
 
 typedef struct s_mini{
+	char		**env;
 	t_pars		**cmds;
 	t_elem_pars	*elem_pars;
 }	t_mini;

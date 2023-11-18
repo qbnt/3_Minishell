@@ -6,39 +6,25 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/17 13:33:37 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 13:54:14 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	stop_input(char *input);
 static t_bool	check_elems(t_elem_pars *oui);
 static void		elem_count(t_elem_pars *oui, char **input);
 
-/*----------------------------------------------------------------------------*/
+/*============================================================================*/
 
 t_pars	*parsing(char *input)
 {
 	t_in	*in;
 
-	if (stop_input(input))
-		exit(EXIT_SUCCESS);
 	in = set_str_to_t_in(input);
 	if (!in)
 		return (perror("Pars error\n"), NULL);
 	return (set_in_to_t_pars(in));
-}
-
-static t_bool	stop_input(char *input)
-{
-	if (ft_strncmp(input, "exit", 5))
-		return (FALSE);
-	else
-	{
-		free(input);
-		return (TRUE);
-	}
 }
 
 t_elem_pars	*check_input(char *input)

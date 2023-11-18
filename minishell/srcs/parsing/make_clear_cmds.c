@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/17 16:49:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 13:40:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars)
 		printf("pipe = %d, and = %d, or = %d\n\n", res[i]->pipe_op,
 			res[i]->and_op, res[i]->or_op);
 	}
+	free_t_pars(pars);
 	return (res);
 }
 
