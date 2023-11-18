@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/16 15:28:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:20:35 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ t_bool	ft_strcmp(const char *s1, const char *s2)
 		s2 ++;
 	}
 	return (TRUE);
+}
+
+size_t	ft_tablen(char **dtab)
+{
+	size_t	len;
+
+	len = 0;
+	while (dtab[len])
+		len ++;
+	return (len);
 }

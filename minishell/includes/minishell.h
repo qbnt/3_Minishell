@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 13:53:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:42:12 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars);
 /*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
 
+/*__________________________________Readline__________________________________*/
+
+/*readline_loop.c*/
+void		readline_loop(t_mini *ms);
+
 /*__________________________________Builtins__________________________________*/
 
 
@@ -90,9 +95,11 @@ char		**ft_envcpy(char **system_env);
 t_bool		ft_is_whitespace(char c);
 t_bool		ft_is_opp(char c);
 t_bool		ft_strcmp(const char *s1, const char *s2);
+size_t		ft_tablen(char **dtab);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
 void		ft_print_t_pars(t_pars *oui);
+void		ft_print_dtab(char **dtab);
 
 #endif

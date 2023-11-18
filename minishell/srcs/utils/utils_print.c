@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/16 13:31:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:32:08 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,17 @@ void	ft_print_t_pars(t_pars *oui)
 		tmp = tmp->next;
 	}
 	printf("-----------------------------------------\n");
+}
+
+void	ft_print_dtab(char **dtab)
+{
+	int	i;
+
+	i = 0;
+	while (dtab[i])
+	{
+		printf("%s\n", dtab[i]);
+		i ++;
+	}
+	printf("\n\n");
 }
