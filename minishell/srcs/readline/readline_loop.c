@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 20:42:11 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:57:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static t_bool	space_input(char *input);
 static t_bool	stop_input(char *input);
+static t_bool	env_input(char *input);		//fonction provisoire
 
 /*============================================================================*/
 
@@ -30,6 +31,11 @@ void	readline_loop(t_mini *ms)
 			continue ;
 		if (stop_input(input))
 			break ;
+		if (env_input(input))
+		{
+			ft_print_dtab(ms->env);
+			continue ;
+		}
 		add_history(input);
 		ms->elem_pars = check_input(input);
 		if (ms->elem_pars == NULL)
@@ -38,6 +44,17 @@ void	readline_loop(t_mini *ms)
 		if (!pars)
 			continue ;
 		ms->cmds = make_clear_cmds(ms->elem_pars, pars->first);
+	}
+}
+
+static t_bool	env_input(char *input)
+{
+	if (ft_strncmp(input, "#env", 4))
+		return (FALSE);
+	else
+	{
+		free(input);
+		return (TRUE);
 	}
 }
 

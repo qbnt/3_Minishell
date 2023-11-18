@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 20:43:06 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 21:00:50 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_mini		*ms;
 
+	if (argc > 1)
+		return (perror("too much args\n"), 1);
 	argv += 0;
 	ms = malloc(sizeof(t_mini));
 	ms->env = ft_envcpy(envp);
 	readline_loop(ms);
-	return (free_all(ms), argc);
+	return (free_all(ms), 0);
 }
 
 static void	free_all(t_mini *ms)
