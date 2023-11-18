@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 13:54:14 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:44:30 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_elem_pars	*check_input(char *input)
 		elem_count(oui, &input);
 		input ++;
 	}
-	printf("dcote = %d	| scote = %d	| pipe = %d	| cmd = %d\nand_op = %d	| and char = %d	| or op = %d\n\n", oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd, oui->nb_and_op, oui->nb_and_char, oui->nb_or_op);
+	printf("dcote = %d	| scote = %d	| pipe = %d	| cmd = %d\nand_op = %d	| and char = %d	| or op = %d	| parenth = %d\n\n", oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd, oui->nb_and_op, oui->nb_and_char, oui->nb_or_op, oui->nb_parenth);
 	if (!check_elems(oui))
 	{
 		printf("oups\n");
@@ -70,14 +70,16 @@ static t_bool	check_elems(t_elem_pars *oui)
 
 	total_op = oui->nb_or_op + oui->nb_and_op + oui->nb_pipe;
 	if (oui->nb_dcote % 2 != 0)
-		return (0);
+		return (printf("dcote open\n"), 0);
 	else if (oui->nb_scote % 2 != 0)
-		return (0);
+		return (printf("scote open\n"), 0);
 	else if (oui->nb_parenth % 2 != 0)
-		return (0);
+		return (printf("parenth open\n"), 0);
 	else if (oui->nb_and_char != 0)
-		return (0);
+		return (printf("and char\n"), 0);
 	else if (total_op != oui->nb_cmd - 1)
-		return (0);
+		return (printf("op sup\n"), 0);
+	else if (oui->error == TRUE)
+		return (printf("error elem\n"), 0);
 	return (1);
 }
