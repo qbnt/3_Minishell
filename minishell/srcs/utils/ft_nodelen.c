@@ -6,14 +6,15 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:04:32 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/16 13:28:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/18 13:14:04 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_cote(size_t *len, t_in **tmp, char cote);
-static int	is_end_cote(size_t *len, t_in **tmp, char cote);
+static int		is_cote(size_t *len, t_in **tmp, char cote);
+static int		is_end_cote(size_t *len, t_in **tmp, char cote);
+static int		is_end_cote_recursive(size_t *len, t_in **tmp, char cote);
 
 /*----------------------------------------------------------------------------*/
 
@@ -26,17 +27,18 @@ size_t	ft_nodelen(t_in **oui)
 	tmp = *oui;
 	while (tmp && (!ft_is_whitespace(tmp->c)))
 	{
-		if (tmp->c == 34 && is_cote(&len, &tmp, 34))
+		if (tmp && tmp->c == 34 && is_cote(&len, &tmp, 34))
 			return (len);
-		else if (tmp->c == 39 && is_cote(&len, &tmp, 39))
+		else if (tmp && tmp->c == 39 && is_cote(&len, &tmp, 39))
 			return (len);
 		else
 		{
-			if (ft_is_opp(tmp->c) && tmp->next && tmp->c == tmp->next->c)
+			if (tmp && ft_is_opp(tmp->c) && tmp->next && tmp->c == tmp->next->c)
 				return (2);
 			else if (tmp->next && ft_is_opp(tmp->next->c))
 				return (++len);
-			else if (ft_is_opp(tmp->c) && tmp->next->c != '&')
+			else if (tmp && ft_is_opp(tmp->c) && tmp->next
+				&& tmp->next->c != '&')
 				return (1);
 			len ++;
 			tmp = tmp->next;
@@ -51,10 +53,15 @@ static int	is_cote(size_t *len, t_in **tmp, char cote)
 	(*tmp) = (*tmp)->next;
 	while (*tmp)
 	{
-		if ((*tmp)->c == cote)
+		if ((*tmp)->c == cote && (*tmp)->next)
 		{
-			return (is_end_cote(len, tmp, cote));
+			(*len) += 1;
+			(*tmp) = (*tmp)->next;
+			is_end_cote(len, tmp, cote);
+			return (1);
 		}
+		else if ((*tmp)->c == cote)
+			return ((*len) += 1, (*tmp) = (*tmp)->next, 1);
 		else
 		{
 			*len += 1;
@@ -64,28 +71,43 @@ static int	is_cote(size_t *len, t_in **tmp, char cote)
 	return (0);
 }
 
-static int	is_end_cote(size_t *len, t_in **tmp, char cote)
+
+static int	is_end_cote_recursive(size_t *len, t_in **tmp, char cote)
 {
-	if (!(*tmp)->next || ((*tmp)->next
-			&& (ft_is_whitespace((*tmp)->next->c))))
-		return (*len += 1, 1);
-	else if ((*tmp)->next->c == cote)
+	if (!(*tmp))
+		return (0);
+	if ((*tmp)->c == cote)
 	{
-		*len += 2;
-		(*tmp) = (*tmp)->next->next;
+		(*len) += 1;
+		(*tmp) = (*tmp)->next;
+		return (is_end_cote(len, tmp, cote));
 	}
 	else
 	{
+		(*len) += 1;
+		(*tmp) = (*tmp)->next;
+		return (is_end_cote_recursive(len, tmp, cote));
+	}
+}
+
+static int	is_end_cote(size_t *len, t_in **tmp, char cote)
+{
+	if (!(*tmp))
+		return (0);
+	if ((*tmp)->c == 34 || (*tmp)->c == 39)
+	{
+		cote = (*tmp)->c;
+		(*len) += 1;
+		(*tmp) = (*tmp)->next;
+		return (is_end_cote_recursive(len, tmp, cote));
+	}
+	else if (!ft_is_whitespace((*tmp)->c))
+	{
 		while ((*tmp) && !ft_is_whitespace((*tmp)->c))
 		{
-			if ((*tmp)->next && ft_is_opp((*tmp)->next->c))
-				return (++(*len));
-			else if (ft_is_opp((*tmp)->c))
-				return (1);
-			*len += 1;
+			(*len) += 1;
 			(*tmp) = (*tmp)->next;
 		}
-		return (1);
 	}
-	return (0);
+	return (1);
 }
