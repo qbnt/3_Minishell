@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:44:22 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 11:39:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 16:31:34 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*----------------------------------------------------------------------------*/
 
 //Initiallise la premiere node d'un t_in avec le char c.
-t_in	*t_in_first(t_in *first, char c)
+t_in	*t_in_first(t_in *first, char c, int group)
 {
 	if (!first)
 	{
@@ -24,6 +24,7 @@ t_in	*t_in_first(t_in *first, char c)
 		first->next = NULL;
 		first->first = first;
 		first->c = c;
+		first->group = group;
 		first->id = 0;
 		return (first);
 	}
@@ -32,7 +33,7 @@ t_in	*t_in_first(t_in *first, char c)
 }
 
 //Ajoute une node a un t_in avec le char c et retourne la node d'apres.
-t_in	*t_in_add_back(t_in *in, char c)
+t_in	*t_in_add_back(t_in *in, char c, int group)
 {
 	t_in	*next;
 
@@ -44,6 +45,7 @@ t_in	*t_in_add_back(t_in *in, char c)
 	next->prev = in;
 	next->next = NULL;
 	next->c = c;
+	next->group = group;
 	next->id = next->prev->id + 1;
 	return (next);
 }

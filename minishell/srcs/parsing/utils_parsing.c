@@ -6,13 +6,15 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:26:25 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 15:53:10 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 15:30:41 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*----------------------------------------------------------------------------*/
+static void	pars_is_or_op(char **input, t_elem_pars **oui);
+
+/*============================================================================*/
 
 void	pars_is_pipe(char **input, t_elem_pars **oui)
 {
@@ -27,12 +29,18 @@ void	pars_is_pipe(char **input, t_elem_pars **oui)
 	}
 	else if ((!ft_strncmp(*input, "||", 2))
 		&& ((*oui)->nb_scote % 2 == 0 && (*oui)->nb_dcote % 2 == 0))
+		pars_is_or_op(input, oui);
+}
+
+static void	pars_is_or_op(char **input, t_elem_pars **oui)
+{
+	(*oui)->nb_or_op ++;
+	if (*(*input + 2))
 	{
-		(*oui)->nb_or_op ++;
-		if (*(*input + 2))
+		if (*(*input + 2) == '|')
+			(*oui)->error = TRUE;
+		else
 		{
-			if (*(*input + 2) == '|')
-				(*oui)->error = TRUE;
 			while (**input && ft_is_whitespace(**input))
 				(*input)++;
 			if (*(*input + 1))

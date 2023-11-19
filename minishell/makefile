@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/19 11:48:31 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/19 16:09:21 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ OBJ_DIR = obj
 INCLUDES = -I$(INC_DIR) $(LIBFT_INC)
 
 SRC_FILES = main.c \
+			readline/readline_loop.c \
 			parsing/parsing.c\
 			parsing/make_clear_cmds.c \
-			parsing/utils_parsing_1.c \
-			parsing/utils_parsing_2.c \
-			readline/readline_loop.c \
+			parsing/set_str_to_t_in.c \
+			parsing/set_in_to_t_pars.c \
+			parsing/utils_parsing.c \
+			exec/exec_cmds.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_env_elem.c \

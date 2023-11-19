@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 12:31:15 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 16:31:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ size_t		ft_nodelen(t_in **in);
 /*readline_loop.c*/
 void		readline_loop(t_mini *ms);
 
+/*_________________________________Execution__________________________________*/
+
+/*exec_cmds.c*/
+void		exec_cmds(t_mini *ms);
+
 /*__________________________________Builtins__________________________________*/
 
 
@@ -78,8 +83,8 @@ void		pars_is_pipe(char **input, t_elem_pars **oui);
 void		pars_is_and_op(char **input, t_elem_pars **oui);
 
 /*utils_t_in.c*/
-t_in		*t_in_first(t_in *first, char c);
-t_in		*t_in_add_back(t_in *in, char c);
+t_in		*t_in_first(t_in *first, char c, int group);
+t_in		*t_in_add_back(t_in *in, char c, int group);
 void		free_t_in(t_in *in);
 
 /*utils_t_pars.c*/
@@ -94,6 +99,7 @@ t_env		*ft_envcpy(char **system_env);
 /*utils_t_env_elem.c*/
 t_env_elems	*t_env_elems_first(char *key, char *value);
 void		t_env_elems_next(t_env_elems *env_elems, char *key, char *value);
+char		*t_env_elems_find_value_of(t_env_elems *env_elems, char *key);
 void		t_env_elems_free(t_env_elems *first);
 
 /*utils_1.c*/

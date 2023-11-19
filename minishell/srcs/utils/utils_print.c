@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 12:22:21 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 16:35:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void	ft_print_t_in(t_in **oui, int arg)
 	tmp = *oui;
 	if (arg == ID)
 	{
-		printf("__________________t_in___________________\n");
+		printf("__________________t_in___________________________\n");
 		while (tmp != NULL)
 		{
-			printf("|	%c	->	id = %d		|\n", tmp->c, tmp->id);
+			printf("|	%c	->	id = %d		gr = %d	|\n",
+				tmp->c, tmp->id, tmp->group);
 			tmp = tmp->next;
 		}
-		printf("-----------------------------------------\n");
+		printf("-------------------------------------------------\n");
 	}
 	else if (arg == CHAR)
 	{

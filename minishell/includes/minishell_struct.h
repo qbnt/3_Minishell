@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 12:07:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 15:39:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef int	t_bool;
 typedef struct s_in{
 	char				c;
 	int					id;
+	int					group;
 	struct s_in			*next;
 	struct s_in			*prev;
 	struct s_in			*first;
@@ -32,7 +33,8 @@ typedef struct s_elem_pars{
 	int					nb_and_char;
 	int					nb_scote;
 	int					nb_dcote;
-	int					nb_parenth;
+	int					nb_op_parenth;
+	int					nb_cl_parenth;
 	int					nb_redir;
 	int					nb_dredir_in;
 	int					nb_dredir_out;
@@ -45,6 +47,7 @@ typedef struct s_pars{
 	t_bool				pipe_op;
 	t_bool				and_op;
 	t_bool				or_op;
+	int					group;
 	struct s_pars		*next;
 	struct s_pars		*prev;
 	struct s_pars		*first;
