@@ -6,13 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 12:36:39 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:46:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*make_str_in_t_pars(t_in **in);
+static char	*make_str_in_t_pars(t_in **in, int *group);
 
 /*----------------------------------------------------------------------------*/
 
@@ -20,11 +20,11 @@ t_pars	*t_pars_first(t_in **in)
 {
 	t_pars	*oui;
 
-	oui = malloc(sizeof(t_pars));
+	oui = ft_calloc(sizeof(t_pars), 1);
 	oui->first = oui;
 	oui->prev = NULL;
 	oui->next = NULL;
-	oui->str = make_str_in_t_pars(in);
+	oui->str = make_str_in_t_pars(in, &(oui->group));
 	oui->token = NO_TOKEN;
 	return (oui);
 }
@@ -33,17 +33,17 @@ void	t_pars_add_next(t_in **in, t_pars *full_cmd)
 {
 	t_pars	*oui;
 
-	oui = malloc(sizeof(t_pars));
+	oui = ft_calloc(sizeof(t_pars), 1);
 	oui->first = full_cmd->first;
 	oui->prev = full_cmd;
 	oui->next = NULL;
-	oui->str = make_str_in_t_pars(in);
+	oui->str = make_str_in_t_pars(in, &(oui->group));
 	oui->token = NO_TOKEN;
 	full_cmd->next = oui;
 	full_cmd = oui;
 }
 
-static char	*make_str_in_t_pars(t_in **in)
+static char	*make_str_in_t_pars(t_in **in, int *group)
 {
 	char	*cmd;
 	size_t	len;
@@ -57,6 +57,7 @@ static char	*make_str_in_t_pars(t_in **in)
 	while (*in && len - i)
 	{
 		cmd[i++] = (*in)->c;
+		*group = (*in)->group;
 		(*in) = (*in)->next;
 	}
 	return (cmd[i] = 0, cmd);

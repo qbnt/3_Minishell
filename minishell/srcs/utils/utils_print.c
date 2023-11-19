@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 16:35:06 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:42:40 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ void	ft_print_t_pars(t_pars *oui)
 	t_pars	*tmp;
 
 	tmp = oui;
-	printf("_________________t_pars__________________\n");
+	printf("_________________t_pars__________________________\n");
 	while (tmp != NULL)
 	{
-		printf("|	%s	->	token = %d	|\n", tmp->str, tmp->token);
+		printf("|	%s	->	token = %d	gr = %d	|\n",
+			tmp->str, tmp->token, tmp->group);
 		tmp = tmp->next;
 	}
-	printf("-----------------------------------------\n");
+	printf("-------------------------------------------------\n");
 }
 
 void	ft_print_dtab(char **dtab)

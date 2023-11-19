@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 15:32:18 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 23:32:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	exec_cmds(t_mini *ms)
 	i = 0;
 	while (i < ms->elem_pars->nb_cmd)
 	{
-		printf("|	Exec cmd%d\n", i ++);
+		printf("| Exec	->	%s	gr = %d\n", ms->cmds[i]->str,
+			ms->cmds[i]->group);
+		i ++;
 	}
 	printf("\n");
 }

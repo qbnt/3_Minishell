@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 16:30:44 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 23:38:00 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ static void	make_parenth_groups(char *str, int *group)
 {
 	if ((*str) && ((*str) == '(' || (*str) == ')'))
 	{
-		if ((*str) == '(')
-			(*group)++;
-		else
-			(*group)--;
+		(*group) += 1;
 		str++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 15:39:28 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:29:52 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ typedef struct s_elem_pars{
 
 typedef struct s_pars{
 	char				*str;
+	int					group;
 	t_token				token;
 	t_bool				pipe_op;
 	t_bool				and_op;
 	t_bool				or_op;
-	int					group;
 	struct s_pars		*next;
 	struct s_pars		*prev;
 	struct s_pars		*first;

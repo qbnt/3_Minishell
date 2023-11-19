@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 15:56:15 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:47:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static t_pars	*cpy_cmd(t_pars *pars)
 	while (pars && pars->token != OPP)
 	{
 		cmd->str = clean_cote(pars->str, pars->token);
+		cmd->group = pars->group;
 		cmd->token = pars->token;
 		pars = pars->next;
 		cmd->next = ft_calloc(sizeof(t_pars), 1);
