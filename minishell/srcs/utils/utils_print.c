@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 20:32:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:22:21 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,17 @@ void	ft_print_dtab(char **dtab)
 		i ++;
 	}
 	printf("\n\n");
+}
+
+void	ft_print_t_env_elems(t_env_elems *elems)
+{
+	int	i;
+
+	i = 0;
+	while (elems)
+	{
+		printf("Elem %d\n", i ++);
+		printf("Key = %s\nValue = %s\n\n", elems->key, elems->value);
+		elems = elems->next;
+	}
 }

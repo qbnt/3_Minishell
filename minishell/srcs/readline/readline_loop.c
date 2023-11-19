@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 20:57:43 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:37:45 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,22 @@ static t_bool	env_input(char *input);		//fonction provisoire
 void	readline_loop(t_mini *ms)
 {
 	char	*input;
-	t_pars	*pars;
 
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
 		input = readline("minishell v1.5 > ");
-		if (space_input(input))
-			continue ;
 		if (stop_input(input))
 			break ;
+		if (space_input(input))
+			continue ;
 		if (env_input(input))
 		{
-			ft_print_dtab(ms->env);
+			ft_print_t_env_elems(ms->env->env_elems);
 			continue ;
 		}
 		add_history(input);
-		ms->elem_pars = check_input(input);
-		if (ms->elem_pars == NULL)
-			continue ;
-		pars = parsing(input);
-		if (!pars)
-			continue ;
-		ms->cmds = make_clear_cmds(ms->elem_pars, pars->first);
+		ms->cmds = parsing(input, ms);
 	}
 }
 

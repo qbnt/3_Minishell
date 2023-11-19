@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 15:44:30 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:31:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ static void		elem_count(t_elem_pars *oui, char **input);
 
 /*============================================================================*/
 
-t_pars	*parsing(char *input)
+t_pars	**parsing(char *input, t_mini *ms)
 {
 	t_in	*in;
+	t_pars	*pars;
 
+	ms->elem_pars = check_input(input);
 	in = set_str_to_t_in(input);
 	if (!in)
 		return (perror("Pars error\n"), NULL);
-	return (set_in_to_t_pars(in));
+	pars = set_in_to_t_pars(in);
+	free(input);
+	return (make_clear_cmds(ms->elem_pars, pars->first));
 }
 
 t_elem_pars	*check_input(char *input)

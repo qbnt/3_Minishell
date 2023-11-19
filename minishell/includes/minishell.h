@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 20:42:12 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:31:15 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 /*__________________________________Parsing___________________________________*/
 
 /*parsing.c*/
-t_pars		*parsing(char *input);
+t_pars		**parsing(char *input, t_mini *ms);
 t_elem_pars	*check_input(char *input);
 
 /*make_clear_cmds.c*/
@@ -89,7 +89,12 @@ int			t_pars_pick_token(t_pars *arg);
 void		free_t_pars(t_pars *pars);
 
 /*utils_env.c*/
-char		**ft_envcpy(char **system_env);
+t_env		*ft_envcpy(char **system_env);
+
+/*utils_t_env_elem.c*/
+t_env_elems	*t_env_elems_first(char *key, char *value);
+void		t_env_elems_next(t_env_elems *env_elems, char *key, char *value);
+void		t_env_elems_free(t_env_elems *first);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
@@ -101,5 +106,6 @@ size_t		ft_tablen(char **dtab);
 void		ft_print_t_in(t_in **oui, int arg);
 void		ft_print_t_pars(t_pars *oui);
 void		ft_print_dtab(char **dtab);
+void		ft_print_t_env_elems(t_env_elems *elems);
 
 #endif
