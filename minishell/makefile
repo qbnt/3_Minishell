@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/20 14:14:30 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/20 15:08:36 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,14 @@ SRC_FILES = main.c \
 			parsing/utils_parsing.c \
 			parsing/utils_parsing_2.c \
 			exec/exec_cmds.c \
+			builtin/builtins.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_env_elem.c \
 			utils/utils_env.c \
 			utils/utils_print.c \
 			utils/ft_nodelen.c \
-			utils/utils_1.c\
-			builtin/builtins.c
+			utils/utils_1.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
