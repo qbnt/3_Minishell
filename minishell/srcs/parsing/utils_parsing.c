@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:26:25 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 13:43:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 15:16:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,17 @@ void	pars_is_redir(char **input, t_elem_pars **oui)
 		(*oui)->nb_redir ++;
 		while (*(*input + 1) && ft_is_whitespace(*(*input + 1)))
 			(*input)++;
-//		if (*(*input + 1) && (*(*input + 1) == '<' || *(*input + 1) == '>'))
-//			(*oui)->error = TRUE;
+		if (*(*input + 1) && (*(*input + 1) == '<' || *(*input + 1) == '>'))
+			(*oui)->error = TRUE;
 	}
-	else if ((!ft_strncmp(*input, ">>", 2) || !ft_strncmp(*input, "<<", 2))
+	if ((!ft_strncmp(*input, ">>", 2) || !ft_strncmp(*input, "<<", 2))
 		&& ((*oui)->nb_scote % 2 == 0 && (*oui)->nb_dcote % 2 == 0))
 		pars_is_dredir(input, oui);
 }
 
 static void	pars_is_dredir(char **input, t_elem_pars **oui)
 {
+	(*oui)->error = FALSE;
 	if (!ft_strncmp(*input, ">>", 2))
 		(*oui)->nb_dredir_out ++;
 	else if (!ft_strncmp(*input, "<<", 2))
