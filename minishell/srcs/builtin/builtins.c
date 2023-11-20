@@ -28,7 +28,7 @@ int	ft_echo(t_pars *cmds)
 		while (cmds->str[i])
 		{
 			if (cmds->str[i++] != 'n')
-				ft_printf("%s", cmds->str);
+				ft_printf("%s ", cmds->str);
 		}
 		cmds = cmds->next;
 		flag = 1;
