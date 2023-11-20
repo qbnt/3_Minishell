@@ -23,16 +23,20 @@ int	ft_echo(t_pars *cmds)
 	i = 1;
 	flag = 0;
 	cmds = cmds->next;
-	while (cmds && cmds->token == 11)
+	while (cmds)
 	{
-		while (cmds->str[i])
+		if (cmds->token == 11)
 		{
-			if (cmds->str[i++] != 'n')
-			{
+			while (cmds->str[i] && cmds->str[i] == 'n')
+				i++;
+			if (cmds->str[i] && (cmds->str[i] != 'n'))
 				cmds->token = 12;
-				cmds = cmds->prev;
-				break ;
-			}
+		}
+		if (cmds->token == 12 || cmds->token == 18)
+		{
+			ft_printf("%s", cmds->str);
+			if (cmds->next)
+				ft_printf(" ");
 		}
 		if (cmds->token == 11)
 			flag = 1;
@@ -41,15 +45,8 @@ int	ft_echo(t_pars *cmds)
 		else
 			break ;
 	}
-	while (cmds && (cmds->token == 12 || cmds->token == 18))
-	{
-		ft_printf("%s", cmds->str);
-		if (cmds->next)
-			ft_printf(" ");
-		cmds = cmds->next;
-	}
-	if (flag == 0)
-		ft_printf("\n");
+		if (flag == 0)
+			ft_printf("\n");
 	return (SUCCESS);
 }
 
