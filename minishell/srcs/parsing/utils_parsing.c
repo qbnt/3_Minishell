@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:26:25 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 15:39:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:07:21 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,20 @@ void	pars_is_redir(char **input, t_elem_pars **oui)
 static void	pars_is_dredir(char **input, t_elem_pars **oui)
 {
 	if (!ft_strncmp(*input, "<<", 2))
-		(*oui)->nb_dredir_out ++;
+		(*oui)->nb_dredir_out += 1;
 	else if (!ft_strncmp(*input, ">>", 2))
-		(*oui)->nb_dredir_in ++;
+		(*oui)->nb_dredir_in += 1;
 	if (*(*input + 2))
 	{
 		if (*(*input + 2) == '<' || *(*input + 2) == '>')
 			(*oui)->error = TRUE;
+		else
+		{
+			(*input) += 2;
+			while (**input && ft_is_whitespace(**input))
+				(*input)++;
+			if (*(*input) == '<' || *(*input) == '>')
+				(*oui)->error = TRUE;
+		}
 	}
 }
