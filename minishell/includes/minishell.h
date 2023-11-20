@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 15:09:11 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 17:54:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ t_bool		ft_is_whitespace(char c);
 t_bool		ft_is_opp(char c);
 t_bool		ft_strcmp(const char *s1, const char *s2);
 size_t		ft_tablen(char **dtab);
+void		free_cmds_tab(t_pars **cmds, int nb_cmds);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

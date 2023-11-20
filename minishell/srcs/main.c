@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 16:46:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 18:05:14 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		return (perror("need no args\n"), 1);
 	argv += 0;
-	ms = malloc(sizeof(t_mini));
+	ms = ft_calloc(sizeof(t_mini), 1);
 	ms->env = ft_envcpy(envp);
 	readline_loop(ms);
 	return (free_all(ms), 0);
@@ -34,13 +34,8 @@ static void	free_all(t_mini *ms)
 	int	i;
 
 	i = -1;
-	if (ms->cmds)
-	{
-		while (++i < ms->elem_pars->nb_cmd)
-			free_t_pars(ms->cmds[i]);
-		free (ms->cmds);
-	}
-	i = -1;
+	if (ms->elem_pars != NULL)
+		free (ms->elem_pars);
 	if (ms->env)
 	{
 		t_env_elems_free(ms->env->env_elems);
@@ -49,8 +44,6 @@ static void	free_all(t_mini *ms)
 		free(ms->env->env_cpy);
 		free(ms->env);
 	}
-	if (ms->elem_pars)
-		free (ms->elem_pars);
 	free (ms);
 	printf("All is free\n");
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 12:18:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 18:08:46 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,4 @@ t_bool	empty_parenth(char *input)
 	}
 	return (FALSE);
 }
+
