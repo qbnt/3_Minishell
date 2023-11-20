@@ -6,14 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 23:38:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:53:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	parenth_cote(t_bool *in_cote, char c);
-static void	make_parenth_groups(char *str, int *group);
+static void	make_parenth_groups(char **str, int *group);
 static void	cpy_loop(char *str, t_bool *in_cote, int *group, t_in **oui);
 
 /*----------------------------------------------------------------------------*/
@@ -28,7 +28,7 @@ t_in	*set_str_to_t_in(char *str)
 
 	group = 0;
 	in_cote = FALSE;
-	make_parenth_groups(str, &group);
+	make_parenth_groups(&str, &group);
 	oui = NULL;
 	if (*str)
 	{
@@ -44,26 +44,27 @@ t_in	*set_str_to_t_in(char *str)
 
 static void	cpy_loop(char *str, t_bool *in_cote, int *group, t_in **oui)
 {
+	str ++;
 	while (*(str) && *(str + 1))
 	{
-		str ++;
 		parenth_cote(in_cote, *str);
 		if ((*str == '(' || *str == ')') && *in_cote == FALSE)
 		{
-			make_parenth_groups(str, group);
+			make_parenth_groups(&str, group);
 			continue ;
 		}
 		else
 			(*oui) = t_in_add_back((*oui), *str, *group);
+		str ++;
 	}
 }
 
-static void	make_parenth_groups(char *str, int *group)
+static void	make_parenth_groups(char **str, int *group)
 {
-	if ((*str) && ((*str) == '(' || (*str) == ')'))
+	if (*(*str) && (*(*str) == '(' || *(*str) == ')'))
 	{
 		(*group) += 1;
-		str++;
+		(*str)++;
 	}
 }
 

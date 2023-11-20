@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:46:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 12:37:17 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:14:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,22 @@ static t_env_elems	*set_env_elems(t_env *env)
 	t_env_elems	*oui;
 	char		**line;
 	int			i;
+	int			j;
 
 	line = ft_split(env->env_cpy[0], '=');
 	oui = t_env_elems_first(line[0], line[1]);
+	j = -1;
+	while (line[++j])
+		free (line[j]);
 	free (line);
 	i = 1;
 	while (env->env_cpy[i])
 	{
+		j = -1;
 		line = ft_split(env->env_cpy[i], '=');
 		t_env_elems_next(oui, line[0], line[1]);
+		while (line[++j])
+			free (line[j]);
 		free (line);
 		oui = oui->next;
 		i ++;

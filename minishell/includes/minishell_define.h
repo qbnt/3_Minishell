@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/15 15:13:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:16:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@
 
 /*---------arg define fnct---------*/
 
+/*general*/
+# define SUCCESS		0
+# define FAIL			1
+
+/*ft_print_t_in*/
 # define ID				1
 # define CHAR			2
 #endif

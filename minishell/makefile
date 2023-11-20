@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/19 16:09:21 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/20 12:21:09 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_FILES = main.c \
 			parsing/set_str_to_t_in.c \
 			parsing/set_in_to_t_pars.c \
 			parsing/utils_parsing.c \
+			parsing/utils_parsing_1.c \
 			exec/exec_cmds.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \

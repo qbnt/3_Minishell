@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:06:14 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 22:46:17 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:02:56 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ void	free_t_pars(t_pars *pars)
 	node = pars;
 	while (pars)
 	{
-		node = node->next;
-		free (pars->str);
-		free (pars);
-		pars = node;
+		pars = pars->next;
+		free (node->str);
+		free (node);
+		node = pars;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 22:47:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:19:50 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ static int		count_cote(char *str, t_token token);
 t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars)
 {
 	t_pars	**res;
+	t_pars	*tmp;
 	int		i;
 
 	res = ft_calloc(sizeof(t_pars), elems->nb_cmd);
 	i = -1;
+	tmp = pars;
 	while (++i < elems->nb_cmd)
 	{
 		res[i] = cpy_cmd(pars);
@@ -38,7 +40,7 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars)
 		printf("pipe = %d	| and = %d	| or = %d\n\n", res[i]->pipe_op,
 			res[i]->and_op, res[i]->or_op);
 	}
-	free_t_pars(pars);
+	free_t_pars(tmp);
 	return (res);
 }
 

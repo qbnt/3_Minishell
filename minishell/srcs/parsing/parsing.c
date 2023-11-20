@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 23:18:02 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:11:58 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_pars	**parsing(char *input, t_mini *ms)
 	if (!in)
 		return (printf("Pars error\n"), NULL);
 	pars = set_in_to_t_pars(in);
-	free(input);
+	free (input);
 	return (make_clear_cmds(ms->elem_pars, pars->first));
 }
 
@@ -46,7 +46,7 @@ t_elem_pars	*check_input(char *input)
 	}
 	printf("dcote = %d	| scote = %d	| pipe = %d	| cmd = %d\nand_op = %d	| and char = %d	| or op = %d	| parenth = %d\n",
 		oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd, oui->nb_and_op, oui->nb_and_char, oui->nb_or_op, (oui->nb_op_parenth + oui->nb_cl_parenth));
-	printf("Error = %d\n\n", oui->error);
+	printf("Error = %d	| Redir = %d\n\n", oui->error, oui->nb_redir);
 	if (!check_elems(oui))
 		return (free (oui), NULL);
 	return (oui);
@@ -70,6 +70,9 @@ static void	elem_count(t_elem_pars *oui, char **input)
 	else if ((**input == ')')
 		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
 		oui->nb_cl_parenth ++;
+	else if ((**input == '>' || **input == '<')
+		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
+		pars_is_redir(input, &oui);
 	if ((empty_parenth(*input))
 		&& (oui->nb_scote % 2 == 0 && oui->nb_dcote % 2 == 0))
 		oui->error = TRUE;

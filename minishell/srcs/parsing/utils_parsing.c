@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:26:25 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 23:39:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:15:41 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,35 @@ void	pars_is_and_op(char **input, t_elem_pars **oui)
 	}
 }
 
-t_bool	empty_parenth(char *input)
+void	pars_is_redir(char **input, t_elem_pars **oui)
 {
-	if (*input == '(' && *(input + 1) == ')')
-		return (TRUE);
-	else if (*input == '(')
+	if (((*(*input - 1) != **input && *(*input + 1) != **input))
+		&& ((*oui)->nb_scote % 2 == 0 && (*oui)->nb_dcote % 2 == 0))
 	{
-		input += 1;
-		while (*input && ft_is_whitespace(*input))
-			input += 1;
-		if (*input == ')')
-			return (TRUE);
+		(*oui)->nb_redir ++;
+		while (*(*input + 1) && ft_is_whitespace(*(*input + 1)))
+			(*input)++;
+		if (*(*input + 1) && !ft_is_opp(*(*input + 1)))
+			(*oui)->error = TRUE;
 	}
-	else if (*input == ')')
+	else if ((!ft_strncmp(*input, ">>", 2))
+		&& ((*oui)->nb_scote % 2 == 0 && (*oui)->nb_dcote % 2 == 0))
+		pars_is_or_op(input, oui);
+}
+
+static void	pars_is_redir(char **input, t_elem_pars **oui)
+{
+	(*oui)->nb_or_op ++;
+	if (*(*input + 2))
 	{
-		input += 1;
-		while (*input && ft_is_whitespace(*input))
-			input += 1;
-		if (*input == '(')
-			return (TRUE);
+		if (*(*input + 2) == '|')
+			(*oui)->error = TRUE;
+		else
+		{
+			while (**input && ft_is_whitespace(**input))
+				(*input)++;
+			if (*(*input + 1))
+				(*oui)->nb_cmd ++;
+		}
 	}
-	return (FALSE);
 }

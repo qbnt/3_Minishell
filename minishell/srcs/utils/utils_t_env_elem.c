@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:49:47 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 15:08:18 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:40:21 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	t_env_elems_free(t_env_elems *first)
 		tmp = tmp->next;
 		free (first->key);
 		free (first->value);
+		free (first);
 		first = tmp;
 	}
 }
