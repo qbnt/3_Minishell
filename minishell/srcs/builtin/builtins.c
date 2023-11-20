@@ -12,33 +12,35 @@
 
 #include "minishell.h"
 
+//ECHO : cette fonction prends en parametre le t_pars correspondant a la commande echo et print les parametres
+//si le parametre -n est specifie la newline n est pas ajoutee
+
 int	ft_echo(t_pars *cmds)
 {
-	int	i; //index pour la verif du -n
-	int	flag; //flag pour veif la presence d'un -n
+	int	i;
+	int	flag;
 
-	i = 1; // 1 pour pas check le tiret
+	i = 1;
 	flag = 0;
-	cmds = cmds->next; // le premier c'est echo donc on skip
-	if (cmds->token == 11) // verif de la presence du -n
+	cmds = cmds->next;
+	if (cmds->token == 11)
 	{
-		while (cmds->str[i] == 'n') //si c'est pas un n il rentre pas dedans
-			i++;
-		if (cmds->str[i] != ' ') //si c'est pas un n en premier ni au milieu ca return 
-			return (FAIL);
-		cmds = cmds->next; // je passe au prochain dans le if au cas ou y'a pas de -n
-		flag = 1; // la verif pour la fin
+		while (cmds->str[i])
+		{
+			if (cmds->str[i++] != 'n')
+				ft_printf("%s", cmds->str);
+		}
+		cmds = cmds->next;
+		flag = 1;
 	}
-	while (cmds && (cmds->token == 12 || cmds->token == 18)) // tant que y'a des trucs a ecrire
+	while (cmds && (cmds->token == 12 || cmds->token == 18))
 	{
 		ft_printf("%s", cmds->str);
-		if (cmds->next) // si y'a une autre string je met un espace
-		{
+		if (cmds->next)
 			ft_printf(" ");
-			cmds = cmds->next;
-		}
+		cmds = cmds->next;
 	}
-	if (flag == 0) //si y'a pas de flag je rajoute une newline
+	if (flag == 0)
 		ft_printf("\n");
 	return (SUCCESS);
 }
