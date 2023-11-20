@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 23:14:46 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:23:08 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_in		*set_str_to_t_in(char *str);
 t_pars		*set_in_to_t_pars(t_in *in);
 void		pars_is_pipe(char **input, t_elem_pars **oui);
 void		pars_is_and_op(char **input, t_elem_pars **oui);
+void		pars_is_redir(char **input, t_elem_pars **oui);
 t_bool		empty_parenth(char *input);
 
 /*utils_t_in.c*/

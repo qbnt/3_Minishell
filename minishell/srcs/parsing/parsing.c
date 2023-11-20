@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 12:11:58 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:42:09 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ t_elem_pars	*check_input(char *input)
 	}
 	printf("dcote = %d	| scote = %d	| pipe = %d	| cmd = %d\nand_op = %d	| and char = %d	| or op = %d	| parenth = %d\n",
 		oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd, oui->nb_and_op, oui->nb_and_char, oui->nb_or_op, (oui->nb_op_parenth + oui->nb_cl_parenth));
-	printf("Error = %d	| Redir = %d\n\n", oui->error, oui->nb_redir);
+	printf("Error = %d	| Redir = %d	| Dredir in = %d	| Dredir out = %d\n\n",
+		oui->error, oui->nb_redir, oui->nb_dredir_in, oui->nb_dredir_in);
 	if (!check_elems(oui))
 		return (free (oui), NULL);
 	return (oui);
@@ -86,17 +87,17 @@ static t_bool	check_elems(t_elem_pars *oui)
 	total_op = oui->nb_or_op + oui->nb_and_op + oui->nb_pipe;
 	total_parenth = oui->nb_op_parenth + oui->nb_cl_parenth;
 	if (oui->nb_dcote % 2 != 0)
-		return (printf("dcote open\n"), 0);
+		return (printf("Dcote open\n"), 0);
 	else if (oui->nb_scote % 2 != 0)
-		return (printf("scote open\n"), 0);
+		return (printf("Scote open\n"), 0);
 	else if (total_parenth % 2 != 0
 		|| (oui->nb_op_parenth != oui->nb_cl_parenth))
-		return (printf("parenth open\n"), 0);
+		return (printf("Parenth open\n"), 0);
 	else if (oui->nb_and_char != 0)
-		return (printf("and char\n"), 0);
+		return (printf("And char\n"), 0);
 	else if (total_op != oui->nb_cmd - 1)
-		return (printf("op sup\n"), 0);
+		return (printf("Op sup\n"), 0);
 	else if (oui->error == TRUE)
-		return (printf("error elem\n"), 0);
+		return (printf("Error on true\n"), 0);
 	return (1);
 }

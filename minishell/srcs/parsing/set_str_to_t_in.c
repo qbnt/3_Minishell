@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 11:53:49 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:35:05 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_in	*set_str_to_t_in(char *str)
 		if (*str == 34 || *str == 39)
 			in_cote = TRUE;
 		oui = t_in_first(oui, *str, group);
+		str ++;
 		cpy_loop(str, &in_cote, &group, &oui);
 		return (oui->first);
 	}
@@ -44,8 +45,7 @@ t_in	*set_str_to_t_in(char *str)
 
 static void	cpy_loop(char *str, t_bool *in_cote, int *group, t_in **oui)
 {
-	str ++;
-	while (*(str) && *(str + 1))
+	while (*(str))
 	{
 		parenth_cote(in_cote, *str);
 		if ((*str == '(' || *str == ')') && *in_cote == FALSE)
