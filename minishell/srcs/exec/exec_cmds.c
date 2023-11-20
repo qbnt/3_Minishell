@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 14:14:05 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 14:18:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	exec_cmds(t_mini *ms)
 	{
 		printf("| Exec	->	%s	gr = %d\n", ms->cmds[i]->str,
 			ms->cmds[i]->group);
-		i ++;
-		if (ft_strcmp(ms->cmds[i]->str, "echo"))
+		if (!ft_strncmp(ms->cmds[i]->str, "echo", 4))
 			ft_echo(ms->cmds[i]);
+		i ++;
 	}
 	printf("\n");
 }
