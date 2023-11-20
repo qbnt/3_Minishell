@@ -25,13 +25,17 @@ int	ft_echo(t_pars *cmds)
 	cmds = cmds->next;
 	if (cmds->token == 11)
 	{
+		flag = 1;
 		while (cmds->str[i])
 		{
 			if (cmds->str[i++] != 'n')
+			{
 				ft_printf("%s ", cmds->str);
+				flag = 0;
+				break ;
+			}
 		}
 		cmds = cmds->next;
-		flag = 1;
 	}
 	while (cmds && (cmds->token == 12 || cmds->token == 18))
 	{
