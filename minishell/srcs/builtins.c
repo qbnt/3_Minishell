@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 void	echo(t_mini *mini)
 {
 	int	i;
@@ -42,6 +42,7 @@ void	echo(t_mini *mini)
 		ft_printf("\n");
 	return (SUCCESS);
 }
+*/
 // cd
 // pwd
 // export

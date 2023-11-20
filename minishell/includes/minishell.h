@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 13:52:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:58:37 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ void		ft_print_dtab(char **dtab);
 void		ft_print_t_env_elems(t_env_elems *elems);
 
 /*builtins.c*/
-void		echo(t_mini *mini);
+//void		echo(t_mini *mini);
 
 #endif
