@@ -12,33 +12,33 @@
 
 #include "minishell.h"
 
-void	echo(t_mini *mini)
+void	echo(t_pars *cmds)
 {
-	int	i;
-	int	flag;
+	int	i; //index pour la verif du -n
+	int	flag; //flag pour veif la presence d'un -n
 
-	i = 1;
+	i = 1; // 1 pour pas check le tiret
 	flag = 0;
-	mini = mini->cmds->next
-	if (mini->cmds->token == 11)
+	cmds = cmds->next // le premier c'est echo donc on skip
+	if (cmds->token == 11) // verif de la presence du -n
 	{
-		while (str[i] == 'n')
+		while (str[i] == 'n') //si c'est pas un n il rentre pas dedans
 			i++
-		if (str[i] != ' ')
+		if (str[i] != ' ') //si c'est pas un n en premier ni au milieu ca return 
 			return (FAIL);
-		mini = mini->cmds->next;
-		flag = 1;
+		cmds = cmds->next; // je passe au prochain dans le if au cas ou y'a pas de -n
+		flag = 1; // la verif pour la fin
 	}
-	while (mini->cmds)
+	while (cmds && (token == 12 || token == 18)) // tant que y'a des trucs a ecrire
 	{
-		ft_printf("%s", mini->cmds->str);
-		if (mini->cmds->next)
+		ft_printf("%s", cmds->str);
+		if (cmds->next) // si y'a une autre string je met un espace
 		{
 			ft_printf(" ");
-			mini = mini->cmds->next;
+			cmds = cmds->next;
 		}
 	}
-	if (flag == 0)
+	if (flag == 0) //si y'a pas de flag je rajoute une newline
 		ft_printf("\n");
 	return (SUCCESS);
 }
