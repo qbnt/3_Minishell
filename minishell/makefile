@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/20 13:26:12 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/20 13:52:14 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_FILES = main.c \
 			utils/utils_env.c \
 			utils/utils_print.c \
 			utils/ft_nodelen.c \
-			utils/utils_1.c
+			utils/utils_1.c\
+			builtins.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
