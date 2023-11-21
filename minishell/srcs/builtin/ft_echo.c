@@ -55,4 +55,3 @@ int	ft_echo(t_pars *cmds)
 // export
 // unset
 // env
-// exit

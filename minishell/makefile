@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
+#    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/20 15:08:36 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/21 13:52:29 by qpuig            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC_FILES = main.c \
 			parsing/utils_parsing.c \
 			parsing/utils_parsing_2.c \
 			exec/exec_cmds.c \
-			builtin/builtins.c \
+			builtin/ft_echo.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_env_elem.c \
