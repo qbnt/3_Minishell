@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 17:54:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/21 19:14:34 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ t_pars		**parsing(char *input, t_mini *ms);
 t_elem_pars	*check_input(char *input);
 
 /*make_clear_cmds.c*/
-t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars);
+t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars,
+				t_env_elems *env);
 
 /*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
@@ -84,7 +85,12 @@ t_pars		*set_in_to_t_pars(t_in *in);
 void		pars_is_pipe(char **input, t_elem_pars **oui);
 void		pars_is_and_op(char **input, t_elem_pars **oui);
 void		pars_is_redir(char **input, t_elem_pars **oui);
+
+/*utils_parsing_2.c*/
 t_bool		empty_parenth(char *input);
+void		select_opp(t_pars	*pars, t_pars **cmd);
+size_t		count_cote(char *str, t_token token);
+char		*clean_dol(char *str, t_env_elems *env, t_token token);
 
 /*utils_t_in.c*/
 t_in		*t_in_first(t_in *first, char c, int group);
@@ -105,6 +111,10 @@ t_env_elems	*t_env_elems_first(char *key, char *value);
 void		t_env_elems_next(t_env_elems *env_elems, char *key, char *value);
 char		*t_env_elems_find_value_of(t_env_elems *env_elems, char *key);
 void		t_env_elems_free(t_env_elems *first);
+
+/*utils_t_env_elem_2.c*/
+char		*ft_cpy_dol(char *dol_str);
+int			ft_dol_len_in_str(char *str);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
