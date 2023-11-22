@@ -6,7 +6,7 @@
 #    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/21 18:36:20 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/22 15:57:47 by qpuig            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_FILES = main.c \
 			parsing/utils_parsing_2.c \
 			exec/exec_cmds.c \
 			builtin/ft_echo.c \
+			builtin/ft_pwd.c\
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_env_elem.c \

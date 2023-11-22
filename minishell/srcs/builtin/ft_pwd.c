@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:11:23 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/21 17:22:44 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/22 15:59:44 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int ft_pwd(t_env env)
 {
     char	*path;
 	
-	path = ft_calloc(ft_strlen(env_pwd), sizeof(char));
-	ft_printf("%s", getcwd(path, ft_strlen(env_pwd)));
+	while (ft_strcmp(env.env_elems->key, "PWD") != TRUE)
+		env.env_elems = env.env_elems->next;
+	path = ft_calloc(env.env_elems->value_len, sizeof(char));
+	ft_printf("%s", getcwd(path, env.env_elems->value_len));
 	free(path);
 	exit(SUCCESS);
 }
