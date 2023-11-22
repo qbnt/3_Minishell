@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 15:57:20 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/22 16:40:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		exec_cmds(t_mini *ms);
 
 /*builtins.c*/
 int			ft_echo(t_pars *cmds);
-int 		ft_pwd(t_env env);
+int 		ft_pwd(t_env *env);
 
 /*__________________________________Signals___________________________________*/
 
