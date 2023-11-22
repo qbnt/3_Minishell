@@ -6,13 +6,11 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 18:05:14 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 17:28:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void		free_all(t_mini *ms);
 
 /*============================================================================*/
 
@@ -29,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	return (free_all(ms), 0);
 }
 
-static void	free_all(t_mini *ms)
+void	free_all(t_mini *ms)
 {
 	int	i;
 

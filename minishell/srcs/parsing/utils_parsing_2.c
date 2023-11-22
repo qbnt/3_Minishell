@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 14:10:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 16:32:41 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ char	*clean_dol(char *str, t_env_elems *env, t_token token)
 	size_t	total_len;
 	char	*res_str;
 	char	*tmp;
+	char	*tmp_str;
 
 	i = 0;
+	tmp_str = str;
 	total_len = ft_strlen(str) + ft_dol_len_in_str(str, env);
 	res_str = ft_calloc(sizeof(char), total_len + 1);
 	while (*str)
@@ -88,8 +90,10 @@ char	*clean_dol(char *str, t_env_elems *env, t_token token)
 				total_len + 1);
 			str += ft_strlen(tmp);
 			i += ft_strlen(t_env_elems_find_value_of(env, tmp));
+			free (tmp);
 		}
-		res_str[i++] = *(str++);
+		if (*str && *str != '$')
+			res_str[i++] = *(str++);
 	}
-	return (res_str);
+	return (free(tmp_str), res_str);
 }

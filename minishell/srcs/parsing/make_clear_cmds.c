@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/21 15:19:34 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 14:25:50 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env)
 		cmd = cmd->prev;
 	free(cmd->next);
 	cmd->next = NULL;
-	ft_print_t_pars(cmd->first);
 	return (cmd->first);
 }
 
