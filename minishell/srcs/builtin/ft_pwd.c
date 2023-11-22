@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:11:23 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/22 16:53:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 18:03:28 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(t_env *env)
+int ft_pwd(void)
 {
     char	*path;
 
-	while (ft_strcmp(env->env_elems->key, "PWD") != TRUE)
-		env->env_elems = env->env_elems->next;
-	if (env->env_elems)
-	{
-		path = ft_calloc(env->env_elems->value_len, sizeof(char));
-		ft_printf("%s", getcwd(path, env->env_elems->value_len));
-		free(path);
-	}
-	exit(SUCCESS);
+	path = ft_calloc(4096, sizeof(char));
+	getcwd(path, 4096);
+	ft_printf("%s\n", path);
+	free(path);
+	return (SUCCESS);
 }
