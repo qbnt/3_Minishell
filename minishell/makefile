@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
+#    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/22 15:57:47 by qpuig            ###   ########.fr        #
+#    Updated: 2023/11/22 17:31:27 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INCLUDES = -I$(INC_DIR) $(LIBFT_INC)
 
 SRC_FILES = main.c \
 			readline/readline_loop.c \
-			parsing/parsing.c\
+			parsing/parsing.c \
 			parsing/make_clear_cmds.c \
 			parsing/set_str_to_t_in.c \
 			parsing/set_in_to_t_pars.c \
@@ -33,7 +33,8 @@ SRC_FILES = main.c \
 			parsing/utils_parsing_2.c \
 			exec/exec_cmds.c \
 			builtin/ft_echo.c \
-			builtin/ft_pwd.c\
+			builtin/ft_pwd.c \
+			builtin/ft_exit.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_env_elem.c \
