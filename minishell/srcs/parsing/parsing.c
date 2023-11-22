@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/21 11:48:59 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 14:26:35 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ t_elem_pars	*check_input(char *input)
 		elem_count(oui, &input);
 		input ++;
 	}
-	printf("dcote = %d	| scote = %d	| pipe = %d	| cmd = %d\nand_op = %d	| and char = %d	| or op = %d	| parenth = %d\n",
-		oui->nb_dcote, oui->nb_scote, oui->nb_pipe, oui->nb_cmd, oui->nb_and_op, oui->nb_and_char, oui->nb_or_op, (oui->nb_op_parenth + oui->nb_cl_parenth));
-	printf("Error = %d	| Redir = %d	| Dredir in = %d	| Dredir out = %d\n\n",
-		oui->error, oui->nb_redir, oui->nb_dredir_in, oui->nb_dredir_out);
 	if (!check_elems(oui))
 		return (free (oui), NULL);
 	return (oui);
