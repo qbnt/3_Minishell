@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   utils_parsing_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 17:11:23 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/22 17:45:32 by qbanet           ###   ########.fr       */
+/*   Created: 2023/11/22 17:57:00 by qbanet            #+#    #+#             */
+/*   Updated: 2023/11/22 17:59:10 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(t_env *env)
-{
-    char	*path;
+/*============================================================================*/
 
-	while (ft_strcmp(env->env_elems->key, "PWD") != TRUE)
-		env->env_elems = env->env_elems->next;
-	if (env->env_elems)
-	{
-		path = ft_calloc(env->env_elems->value_len, sizeof(char));
-		ft_printf("%s\n", getcwd(path, env->env_elems->value_len));
-		free(path);
-	}
-	return(SUCCESS);
+void	verif_cmd(t_pars *cmd, t_env_elems *env)
+{
+	
 }
