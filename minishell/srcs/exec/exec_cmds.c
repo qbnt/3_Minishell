@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 22:54:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 23:10:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	exec_simple_cmd(t_pars *cmd, t_env *env);
 static void	select_syst_cmd(t_pars *cmd, t_env *env);
+static void	exec_syst_cmd(char *path, char **tab_cmd, char **tab_env);
 
 /*============================================================================*/
 
@@ -53,6 +54,20 @@ static void	select_syst_cmd(t_pars *cmd, t_env *env)
 	tab_cmd = get_dtab_cmd(cmd);
 	if (!path)
 		return (printf("cmd not found\n"), (void) 0);
-	execve(path, tab_cmd, env->env_cpy);
+	exec_syst_cmd(path, tab_cmd, env->env_cpy);
 	free (tab_cmd);
+}
+
+static void	exec_syst_cmd(char *path, char **tab_cmd, char **tab_env)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
+		execve(path, tab_cmd, tab_env);
+	else
+	{
+		waitpid(pid, NULL, 0);
+		return ;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 21:56:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 22:57:46 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 23:09:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_cmd_path(char *cmd, t_env_elems *env)
 	val = t_env_elems_find_value_of(env, "PATH");
 	if (!val)
 	{
-		printf("%s - no path\n", cmd);
+		printf("No path in env\n");
 		return (NULL);
 	}
 	dir = ft_split(val, ':');
