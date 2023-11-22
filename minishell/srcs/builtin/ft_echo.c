@@ -23,29 +23,30 @@ int	ft_echo(t_pars *cmds)
 	i = 1;
 	flag = 0;
 	cmds = cmds->next;
-	if (cmds->token == 11)
+	while (cmds)
 	{
-		flag = 1;
-		while (cmds->str[i])
+		if (cmds->token == 11)
 		{
-			if (cmds->str[i++] != 'n')
-			{
-				ft_printf("%s ", cmds->str);
-				flag = 0;
-				break ;
-			}
+			while (cmds->str[i] && cmds->str[i] == 'n')
+				i++;
+			if (cmds->str[i] && (cmds->str[i] != 'n'))
+				cmds->token = 12;
 		}
-		cmds = cmds->next;
-	}
-	while (cmds && (cmds->token == 12 || cmds->token == 18))
-	{
-		ft_printf("%s", cmds->str);
+		if (cmds->token == 12 || cmds->token == 18)
+		{
+			ft_printf("%s", cmds->str);
+			if (cmds->next)
+				ft_printf(" ");
+		}
+		if (cmds->token == 11)
+			flag = 1;
 		if (cmds->next)
-			ft_printf(" ");
-		cmds = cmds->next;
+			cmds = cmds->next;
+		else
+			break ;
 	}
-	if (flag == 0)
-		ft_printf("\n");
+		if (flag == 0)
+			ft_printf("\n");
 	return (SUCCESS);
 }
 
@@ -54,4 +55,3 @@ int	ft_echo(t_pars *cmds)
 // export
 // unset
 // env
-// exit
