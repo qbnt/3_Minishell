@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 15:57:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:48:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ t_pars	**parsing(char *input, t_mini *ms)
 	if (!in)
 		return (printf("Pars error\n"), NULL);
 	pars = set_in_to_t_pars(in);
-	free (input);
-	return (make_clear_cmds(ms->elem_pars, pars->first));
+	return (make_clear_cmds(ms->elem_pars, pars->first, ms->env->env_elems));
 }
 
 t_elem_pars	*check_input(char *input)

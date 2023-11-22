@@ -6,13 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 13:35:05 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:24:38 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	parenth_cote(t_bool *in_cote, char c);
+static void	in_cote(t_bool *in_cote, char c);
 static void	make_parenth_groups(char **str, int *group);
 static void	cpy_loop(char *str, t_bool *in_cote, int *group, t_in **oui);
 
@@ -23,32 +23,32 @@ static void	cpy_loop(char *str, t_bool *in_cote, int *group, t_in **oui);
 t_in	*set_str_to_t_in(char *str)
 {
 	t_in	*oui;
-	t_bool	in_cote;
+	t_bool	is_in_cote;
 	int		group;
 
 	group = 0;
-	in_cote = FALSE;
+	is_in_cote = FALSE;
 	make_parenth_groups(&str, &group);
 	oui = NULL;
 	if (*str)
 	{
 		if (*str == 34 || *str == 39)
-			in_cote = TRUE;
+			is_in_cote = TRUE;
 		oui = t_in_first(oui, *str, group);
 		str ++;
-		cpy_loop(str, &in_cote, &group, &oui);
+		cpy_loop(str, &is_in_cote, &group, &oui);
 		return (oui->first);
 	}
 	else
 		return (NULL);
 }
 
-static void	cpy_loop(char *str, t_bool *in_cote, int *group, t_in **oui)
+static void	cpy_loop(char *str, t_bool *is_in_cote, int *group, t_in **oui)
 {
 	while (*(str))
 	{
-		parenth_cote(in_cote, *str);
-		if ((*str == '(' || *str == ')') && *in_cote == FALSE)
+		in_cote(is_in_cote, *str);
+		if ((*str == '(' || *str == ')') && *is_in_cote == FALSE)
 		{
 			make_parenth_groups(&str, group);
 			continue ;
@@ -68,7 +68,7 @@ static void	make_parenth_groups(char **str, int *group)
 	}
 }
 
-static void	parenth_cote(t_bool *in_cote, char c)
+static void	in_cote(t_bool *in_cote, char c)
 {
 	if ((c == 34 || c == 39) && *in_cote == FALSE)
 		*in_cote = TRUE;

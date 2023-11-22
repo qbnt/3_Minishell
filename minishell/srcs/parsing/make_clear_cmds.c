@@ -6,21 +6,22 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 11:19:50 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:19:34 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //static void		clear_prev(t_pars *res);
-static t_pars	*cpy_cmd(t_pars *pars);
-static void		select_opp(t_pars	*pars, t_pars **cmd);
+static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env);
 static char		*clean_cote(char *str, t_token token);
-static int		count_cote(char *str, t_token token);
+static int		clean_cote_loop(char *str, t_token token, char *res);
+static void		clear_cmd(char **str, char *res, int *i);
+
 
 /*----------------------------------------------------------------------------*/
 
-t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars)
+t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_env_elems *env)
 {
 	t_pars	**res;
 	t_pars	*tmp;
@@ -31,20 +32,17 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars)
 	tmp = pars;
 	while (++i < elems->nb_cmd)
 	{
-		res[i] = cpy_cmd(pars);
+		res[i] = cpy_cmd(pars, env);
 		while (pars && pars->token != OPP)
 			pars = pars->next;
 		while (pars && pars->token == OPP)
 			pars = pars->next;
-		ft_print_t_pars(res[i]->first);
-		printf("pipe = %d	| and = %d	| or = %d\n\n", res[i]->pipe_op,
-			res[i]->and_op, res[i]->or_op);
 	}
 	free_t_pars(tmp);
 	return (res);
 }
 
-static t_pars	*cpy_cmd(t_pars *pars)
+static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env)
 {
 	t_pars	*cmd;
 
@@ -53,7 +51,8 @@ static t_pars	*cpy_cmd(t_pars *pars)
 	cmd->first = cmd;
 	while (pars && pars->token != OPP)
 	{
-		cmd->str = clean_cote(pars->str, pars->token);
+		cmd->str = clean_dol(clean_cote(pars->str, pars->token), env,
+				pars->token);
 		cmd->group = pars->group;
 		cmd->token = pars->token;
 		pars = pars->next;
@@ -68,68 +67,60 @@ static t_pars	*cpy_cmd(t_pars *pars)
 		cmd = cmd->prev;
 	free(cmd->next);
 	cmd->next = NULL;
+	ft_print_t_pars(cmd->first);
 	return (cmd->first);
 }
 
 static char	*clean_cote(char *str, t_token token)
 {
 	char	*res;
-	int		nb_cote;
+	size_t	nb_cote;
 	int		i;
 
+	i = 0;
 	nb_cote = count_cote(str, token);
 	res = malloc((sizeof(char) * (ft_strlen(str) - nb_cote)) + 1);
+	i = clean_cote_loop(str, token, res);
+	return (res[i] = 0, res);
+}
+
+static int	clean_cote_loop(char *str, t_token token, char *res)
+{
+	int		i;
+
 	i = 0;
 	while (*str)
 	{
-		if (token == STR)
+		if (token == CMD)
+			clear_cmd(&str, res, &i);
+		else if (token == STR)
 		{
 			if (*str != 34)
 				res[i++] = *(str++);
 			else
 				str ++;
 		}
-		else
+		else if (token == LIT_STR)
 		{
 			if (*str != 39)
 				res[i++] = *(str++);
 			else
 				str ++;
 		}
+		else
+			res[i++] = *(str++);
 	}
-	return (res[i] = 0, res);
+	return (i);
 }
 
-static int	count_cote(char *str, t_token token)
+static void	clear_cmd(char **str, char *res, int *i)
 {
-	int		res;
-	char	c;
+	int	j;
 
-	if (token == STR)
-		c = 34;
-	else if (token == LIT_STR)
-		c = 39;
+	j = *i;
+	if ((*(*str)) != 34 && (*(*str)) != 39)
+				res[j++] = (*(*str)++);
 	else
-		c = 0;
-	res = 0;
-	while (*str)
-	{
-		if (*str == c)
-			res ++;
-		str ++;
-	}
-	return (res);
-}
-
-static void	select_opp(t_pars	*pars, t_pars **cmd)
-{
-	if (pars && pars->token == OPP && !ft_strncmp(pars->str, "|", 1)
-		&& ft_strlen(pars->str) == 1)
-		(*cmd)->first->pipe_op = TRUE;
-	else if (pars && pars->token == OPP && !ft_strncmp(pars->str, "||", 2)
-		&& ft_strlen(pars->str) == 2)
-		(*cmd)->first->or_op = TRUE;
-	else if (pars && pars->token == OPP && !ft_strncmp(pars->str, "&&", 2)
-		&& ft_strlen(pars->str) == 2)
-		(*cmd)->first->and_op = TRUE;
+		(*str)++;
+	*i += (j - (*i));
 }
