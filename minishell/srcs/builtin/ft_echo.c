@@ -45,8 +45,8 @@ int	ft_echo(t_pars *cmds)
 		else
 			break ;
 	}
-		if (flag == 0)
-			ft_printf("\n");
+	if (flag == 0)
+		ft_printf("\n");
 	return (SUCCESS);
 }
 

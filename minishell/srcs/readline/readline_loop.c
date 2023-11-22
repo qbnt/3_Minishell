@@ -6,14 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 22:14:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 17:03:30 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static t_bool	space_input(char *input);
-static t_bool	stop_input(char *input);
 static t_bool	env_input(char *input);		//fonction provisoire
 
 /*============================================================================*/
@@ -26,8 +25,6 @@ void	readline_loop(t_mini *ms)
 	while (1)
 	{
 		input = readline("minishell v1.5 > ");
-		if (stop_input(input))
-			break ;
 		if (space_input(input))
 			continue ;
 		if (env_input(input))
@@ -48,17 +45,6 @@ void	readline_loop(t_mini *ms)
 static t_bool	env_input(char *input)
 {
 	if (ft_strncmp(input, "#env", 4))
-		return (FALSE);
-	else
-	{
-		free(input);
-		return (TRUE);
-	}
-}
-
-static t_bool	stop_input(char *input)
-{
-	if (ft_strncmp(input, "exit", 5))
 		return (FALSE);
 	else
 	{
