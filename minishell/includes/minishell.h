@@ -97,6 +97,9 @@ void		select_opp(t_pars	*pars, t_pars **cmd);
 size_t		count_cote(char *str, t_token token);
 char		*clean_dol(char *str, t_env_elems *env, t_token token);
 
+/*utils_parsing_2.c*/
+void		verif_cmd(t_pars *cmd, t_env_elems *env);
+
 /*utils_t_in.c*/
 t_in		*t_in_first(t_in *first, char c, int group);
 t_in		*t_in_add_back(t_in *in, char c, int group);
