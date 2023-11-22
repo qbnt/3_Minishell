@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 17:29:41 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 18:05:14 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_cmds(t_mini *ms)
 		if (!ft_strncmp(ms->cmds[i]->str, "echo", 4))
 			ft_echo(ms->cmds[i]);
 		else if (!ft_strncmp(ms->cmds[i]->str, "pwd", 3))
-			ft_pwd(ms->env);
+			ft_pwd();
 		else if (!ft_strncmp(ms->cmds[i]->str, "exit", 4))
 			ft_exit();
 //		else

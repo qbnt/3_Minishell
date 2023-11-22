@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 17:29:20 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 18:03:53 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -75,7 +76,7 @@ void		exec_cmds(t_mini *ms);
 
 /*builtins.c*/
 int			ft_echo(t_pars *cmds);
-int			ft_pwd(t_env *env);
+int			ft_pwd(void);
 void		ft_exit(void);
 
 /*__________________________________Signals___________________________________*/
