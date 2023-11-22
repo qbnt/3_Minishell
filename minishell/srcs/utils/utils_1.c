@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 20:20:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/21 19:15:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,14 @@ size_t	ft_tablen(char **dtab)
 	while (dtab[len])
 		len ++;
 	return (len);
+}
+
+void	free_cmds_tab(t_pars **cmds, int nb_cmds)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nb_cmds)
+		free_t_pars(cmds[i]);
+	free(cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 22:29:52 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/20 18:28:03 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_pars{
 typedef struct s_env_elems{
 	char				*key;
 	char				*value;
+	unsigned int		key_len;
+	unsigned int		value_len;
 	struct s_env_elems	*next;
 	struct s_env_elems	*prev;
 	struct s_env_elems	*first;
