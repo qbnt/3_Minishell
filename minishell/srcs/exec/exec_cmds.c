@@ -6,14 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/23 15:41:20 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:30:37 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	exec_simple_cmd(t_pars *cmd, t_env *env);
-static void	exec_prio_cmd(t_mini *ms, int *i);
+static int		exec_simple_cmd(t_pars *cmd, t_env *env);
+static t_bool	exec_prio_cmd(t_mini *ms, int *i);
 
 /*============================================================================*/
 
@@ -24,13 +24,12 @@ void	exec_cmds(t_mini *ms)
 	i = 0;
 	while (i < ms->elem_pars->nb_cmd)
 	{
-		if (!ms->cmds[i]->and_op
-			&& !ms->cmds[i]->or_op
+		if (!ms->cmds[i]->and_op && !ms->cmds[i]->or_op
 			&& !ms->cmds[i]->pipe_op)
-			exec_simple_cmd(ms->cmds[i], ms->env);
+			exec_simple_cmd(ms->cmds[i++], ms->env);
 		else if (ms->cmds[i]->first->and_op || ms->cmds[i]->first->or_op)
-			exec_prio_cmd(ms, &i);
-		i ++;
+			if (exec_prio_cmd(ms, &i) == FAIL)
+				break ;
 	}
 }
 
@@ -44,36 +43,40 @@ static t_bool	exec_simple_cmd(t_pars *cmd, t_env *env)
 		res = ft_pwd();
 	else if (ft_strcmp(cmd->str, "exit"))
 		ft_exit();
+	else if (ft_strcmp(cmd->str, "env"))
+		ft_env(env);
 	else
 		res = select_syst_cmd(cmd, env);
 	return (res);
 }
 
-static void	exec_prio_cmd(t_mini *ms, int *i)
+static t_bool	exec_prio_cmd(t_mini *ms, int *i)
 {
 	t_bool	res;
 
 	res = exec_simple_cmd(ms->cmds[(*i)], ms->env);
-	while (*i < ms->elem_pars->nb_cmd)
+	while (((*i) + 1) < ms->elem_pars->nb_cmd)
 	{
 		if (ms->cmds[((*i))]->first->and_op)
 		{
 			if (res == FAIL)
 			{
-				(*i)++;
-				break ;
+				while (ms->cmds[((*i))]->first->and_op)
+					(*i)++;
+				if ((*i) + 1 >= ms->elem_pars->nb_cmd)
+					return (FAIL);
 			}
 			res = exec_simple_cmd(ms->cmds[++(*i)], ms->env);
 		}
 		else if (ms->cmds[((*i))]->first->or_op)
 		{
 			if (res == SUCCESS)
-			{
-				(*i)++;
-				break ;
-			}
+				return (FAIL);
 			res = exec_simple_cmd(ms->cmds[++(*i)], ms->env);
+			while (ms->cmds[((*i))]->first->or_op)
+				(*i)++;
 		}
-		(*i)++;
 	}
+	(*i)++;
+	return (SUCCESS);
 }
