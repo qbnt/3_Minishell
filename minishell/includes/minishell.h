@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
 /*   Updated: 2023/11/23 15:16:31 by qpuig            ###   ########.fr       */
@@ -36,6 +36,7 @@
 # include <unistd.h>
 
 # include <errno.h>
+# include <dirent.h>
 # include <string.h>
 
 # include <termios.h>
@@ -72,6 +73,12 @@ void		readline_loop(t_mini *ms);
 /*exec_cmds.c*/
 void		exec_cmds(t_mini *ms);
 
+/*get_cmd_path.c*/
+char		*get_cmd_path(char *cmd, t_env_elems *env);
+
+/*utils_exec.c*/
+char		**get_dtab_cmd(t_pars *cmd);
+
 /*__________________________________Builtins__________________________________*/
 
 /*builtins.c*/
@@ -97,6 +104,8 @@ t_bool		empty_parenth(char *input);
 void		select_opp(t_pars	*pars, t_pars **cmd);
 size_t		count_cote(char *str, t_token token);
 char		*clean_dol(char *str, t_env_elems *env, t_token token);
+
+/*utils_parsing_2.c*/
 
 /*utils_t_in.c*/
 t_in		*t_in_first(t_in *first, char c, int group);
@@ -128,6 +137,10 @@ t_bool		ft_is_opp(char c);
 t_bool		ft_strcmp(const char *s1, const char *s2);
 size_t		ft_tablen(char **dtab);
 void		free_cmds_tab(t_pars **cmds, int nb_cmds);
+
+/*utils_2.c*/
+void		free_dtab(char **str);
+size_t		t_parslen(t_pars *cmd);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
