@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 22:54:12 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/23 14:51:15 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char		*get_cmd_path(char *cmd, t_env_elems *env);
 
 /*utils_exec.c*/
 char		**get_dtab_cmd(t_pars *cmd);
+int			select_syst_cmd(t_pars *cmd, t_env *env);
+int			exec_syst_cmd(char *path, char **tab_cmd, char **tab_env);
 
 /*__________________________________Builtins__________________________________*/
 
