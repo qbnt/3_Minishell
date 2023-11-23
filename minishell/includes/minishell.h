@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 18:03:53 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/23 15:16:31 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void		exec_cmds(t_mini *ms);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
+void    	ft_env(t_env *env);
 
 /*__________________________________Signals___________________________________*/
 
