@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/23 14:51:15 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/23 15:16:31 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int			exec_syst_cmd(char *path, char **tab_cmd, char **tab_env);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
+void    	ft_env(t_env *env);
 
 /*__________________________________Signals___________________________________*/
 

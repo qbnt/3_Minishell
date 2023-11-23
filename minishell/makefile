@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
+#    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/11/22 22:55:05 by qbanet           ###   ########.fr        #
+#    Updated: 2023/11/23 15:16:48 by qpuig            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_FILES = main.c \
 			exec/utils_exec.c \
 			builtin/ft_echo.c \
 			builtin/ft_pwd.c \
+			builtin/ft_env.c \
 			builtin/ft_exit.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
