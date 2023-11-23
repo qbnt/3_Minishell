@@ -78,6 +78,8 @@ char		*get_cmd_path(char *cmd, t_env_elems *env);
 
 /*utils_exec.c*/
 char		**get_dtab_cmd(t_pars *cmd);
+int			select_syst_cmd(t_pars *cmd, t_env *env);
+int			exec_syst_cmd(char *path, char **tab_cmd, char **tab_env);
 
 /*__________________________________Builtins__________________________________*/
 
