@@ -1,7 +1,8 @@
 {
 	"files.associations": {
 		"type_traits": "c",
-		"random": "c"
+		"random": "c",
+		"*.tcc": "c"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }

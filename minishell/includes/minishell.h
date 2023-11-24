@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/23 15:16:31 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/24 18:51:15 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ void		readline_loop(t_mini *ms);
 /*_________________________________Execution__________________________________*/
 
 /*exec_cmds.c*/
-void		exec_cmds(t_mini *ms);
+int			exec_cmds(t_mini *ms);
+t_bool		exec_simple_cmd(t_pars *cmd, t_env *env);
+
+/*exec_proces.c*/
+//t_bool		child_process(t_mini *ms, t_pipes *pipes, pid_t *pid, int *i);
 
 /*get_cmd_path.c*/
 char		*get_cmd_path(char *cmd, t_env_elems *env);
@@ -79,7 +83,14 @@ char		*get_cmd_path(char *cmd, t_env_elems *env);
 /*utils_exec.c*/
 char		**get_dtab_cmd(t_pars *cmd);
 int			select_syst_cmd(t_pars *cmd, t_env *env);
-int			exec_syst_cmd(char *path, char **tab_cmd, char **tab_env);
+
+/*________________________________Redirections________________________________*/
+
+/*redirections.c*/
+void		redirections(t_mini *ms);
+
+/*utils_redir.c*/
+t_bool		redir_in_cmd(t_pars *cmd);
 
 /*__________________________________Builtins__________________________________*/
 
@@ -87,7 +98,7 @@ int			exec_syst_cmd(char *path, char **tab_cmd, char **tab_env);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-void    	ft_env(t_env *env);
+void		ft_env(t_env *env);
 
 /*__________________________________Signals___________________________________*/
 
