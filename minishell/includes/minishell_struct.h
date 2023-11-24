@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 18:28:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/22 18:00:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_pars{
 	t_bool				pipe_op;
 	t_bool				and_op;
 	t_bool				or_op;
+	t_bool				cmd_ok;
 	struct s_pars		*next;
 	struct s_pars		*prev;
 	struct s_pars		*first;

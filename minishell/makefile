@@ -32,6 +32,8 @@ SRC_FILES = main.c \
 			parsing/utils_parsing.c \
 			parsing/utils_parsing_2.c \
 			exec/exec_cmds.c \
+			exec/get_cmd_path.c \
+			exec/utils_exec.c \
 			builtin/ft_echo.c \
 			builtin/ft_pwd.c \
 			builtin/ft_env.c \
@@ -43,7 +45,8 @@ SRC_FILES = main.c \
 			utils/utils_env.c \
 			utils/utils_print.c \
 			utils/ft_nodelen.c \
-			utils/utils_1.c
+			utils/utils_1.c \
+			utils/utils_2.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
