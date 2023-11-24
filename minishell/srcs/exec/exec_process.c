@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/24 14:35:32 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/24 20:56:32 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 /*============================================================================*/
 
-/*
-t_bool	child_process(t_mini *ms, t_pipes *pipes, pid_t *pid, int *i)
+void	exec_child(t_mini *ms, int *i, int count, t_pipes *pipes)
 {
-	pipes += 0;
-	pid += 0;
-	printf("actions process %d\n", *i);
-	if (ms->cmds[*i]->and_op || ms->cmds[*i]->or_op)
-		exec_prio_cmd(ms, i);
+	dup2(pipes->save_fd, STDIN_FILENO);
+	printf("%d exec %s\n", *i, ms->cmds[(*i)]->str);
+	if (count)
+		dup2(pipes->fd[1], STDOUT_FILENO);
+	close_pipe(pipes->fd);
+	if (count)
+		exec_simple_cmd(ms->cmds[(*i)], ms->env);
 	else
-		exec_simple_cmd(ms->cmds[*i], ms->env);
-	return (SUCCESS);
+	{
+		exec_simple_cmd(ms->cmds[(*i) + 1], ms->env);
+		_exit(SUCCESS);
+	}
 }
 
-t_bool	parent_process(t_pars *cmd, t_env *env, t_pipes *pipes, int *i)
+void	close_pipe(int *fd)
 {
-
+	close(fd[0]);
+	close(fd[1]);
 }
-
-*/

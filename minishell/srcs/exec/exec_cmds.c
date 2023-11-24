@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/24 20:06:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/24 21:00:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_bool	exec_prio_cmd(t_mini *ms, int *i);
 static void		handle_and_op(t_mini *ms, int *i, t_bool *res);
 static void		handle_or_op(t_mini *ms, int *i, t_bool *res);
-static t_bool	exec_whith_pipe(t_mini *ms, int *i, int count, int save_fd);
+static t_bool	exec_with_pipe(t_mini *ms, int *i, int count, int save_fd);
 
 /*============================================================================*/
 
@@ -30,39 +30,34 @@ int	exec_cmds(t_mini *ms)
 	{
 		if (!ms->cmds[i]->first->and_op && !ms->cmds[i]->first->or_op
 			&& !ms->cmds[i]->first->pipe_op)
-			exec_simple_cmd(ms->cmds[i++], ms->env);
+			exec_simple_cmd(ms->cmds[i], ms->env);
 		else if (ms->cmds[i]->first->and_op || ms->cmds[i]->first->or_op)
 			exec_prio_cmd(ms, &i);
 		else if (ms->cmds[i]->first->pipe_op)
-			exec_whith_pipe(ms, &i, 1, 0);
+			exec_with_pipe(ms, &i, 1, STDOUT_FILENO);
+		i ++;
 	}
 	return (SUCCESS);
 }
 
-static t_bool	exec_whith_pipe(t_mini *ms, int *i, int count, int save_fd)
+static t_bool	exec_with_pipe(t_mini *ms, int *i, int count, int save_fd)
 {
-	int	fd[2];
-	int	pid;
+	t_pipes	pipes;
 
-	if (!ms->cmds[*i])
+	pipes.save_fd = save_fd;
+	if (!ms->cmds[*i] || pipe(pipes.fd) == -1)
 		return (FAIL);
-	pipe(fd);
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(save_fd, STDIN_FILENO);
-		if (count)
-			dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		if (count)
-			exec_simple_cmd(ms->cmds[*i + 1], ms->env);
-		else
-			exec_simple_cmd(ms->cmds[(*i)], ms->env);
-		exit(SUCCESS);
-	}
-	close(fd[1]);
-	exec_whith_pipe(ms, i, count - 1, fd[0]);
-	pid = waitpid(pid, NULL, 0);
+	pipes.pid = fork();
+	if (pipes.pid == -1)
+		return (close_pipe(pipes.fd), FAIL);
+	if (pipes.pid == 0)
+		exec_child(ms, i, count, &pipes);
+	close_pipe(pipes.fd);
+	(*i)++;
+	if (count > 0)
+		exec_with_pipe(ms, i, count - 1, pipes.fd[0]);
+	if (waitpid(pipes.pid, NULL, 0) == -1)
+		return (FAIL);
 	return (SUCCESS);
 }
 
