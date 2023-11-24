@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/23 18:19:02 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/24 14:56:31 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
 void    	ft_env(t_env *env);
+void		ft_cd(t_pars *cmds, t_env *env);
 
 /*__________________________________Signals___________________________________*/
 

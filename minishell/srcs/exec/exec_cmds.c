@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/23 15:34:01 by qpuig            ###   ########.fr       */
-=======
-/*   Updated: 2023/11/23 16:30:37 by qbanet           ###   ########.fr       */
->>>>>>> e631e174b877a50b601df213e7d65756f497ae83
+/*   Updated: 2023/11/24 14:57:56 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +45,8 @@ static t_bool	exec_simple_cmd(t_pars *cmd, t_env *env)
 		ft_exit();
 	else if (ft_strcmp(cmd->str, "env"))
 		ft_env(env);
+	else if (ft_strcmp(cmd->str, "cd"))
+		ft_cd(cmd, env);
 	else
 		res = select_syst_cmd(cmd, env);
 	return (res);
