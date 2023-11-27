@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
 /*   Updated: 2023/11/27 09:34:18 by qbanet           ###   ########.fr       */
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <dirent.h>
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -100,7 +101,8 @@ t_bool		redir_in_cmd(t_pars *cmd);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-void		ft_env(t_env *env);
+void    	ft_env(t_env *env);
+void		ft_cd(t_pars *cmds, t_env *env);
 
 /*__________________________________Signals___________________________________*/
 
