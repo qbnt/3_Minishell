@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/24 21:00:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/27 11:27:32 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_bool	exec_prio_cmd(t_mini *ms, int *i);
 static void		handle_and_op(t_mini *ms, int *i, t_bool *res);
 static void		handle_or_op(t_mini *ms, int *i, t_bool *res);
-static t_bool	exec_with_pipe(t_mini *ms, int *i, int count, int save_fd);
+static t_bool	exec_with_pipe(t_mini *ms, int *i);
 
 /*============================================================================*/
 
@@ -34,30 +34,35 @@ int	exec_cmds(t_mini *ms)
 		else if (ms->cmds[i]->first->and_op || ms->cmds[i]->first->or_op)
 			exec_prio_cmd(ms, &i);
 		else if (ms->cmds[i]->first->pipe_op)
-			exec_with_pipe(ms, &i, 1, STDOUT_FILENO);
-		i ++;
+			exec_with_pipe(ms, &i);
 	}
 	return (SUCCESS);
 }
 
-static t_bool	exec_with_pipe(t_mini *ms, int *i, int count, int save_fd)
+static t_bool	exec_with_pipe(t_mini *ms, int *i)
 {
-	t_pipes	pipes;
+	t_pipes	*pipes;
+	int		pipelen;
+	int		j;
 
-	pipes.save_fd = save_fd;
-	if (!ms->cmds[*i] || pipe(pipes.fd) == -1)
-		return (FAIL);
-	pipes.pid = fork();
-	if (pipes.pid == -1)
-		return (close_pipe(pipes.fd), FAIL);
-	if (pipes.pid == 0)
-		exec_child(ms, i, count, &pipes);
-	close_pipe(pipes.fd);
-	(*i)++;
-	if (count > 0)
-		exec_with_pipe(ms, i, count - 1, pipes.fd[0]);
-	if (waitpid(pipes.pid, NULL, 0) == -1)
-		return (FAIL);
+	pipelen = ft_pipelen(ms->cmds, *i);
+	pipes = init_pipe(pipelen);
+	j = -1;
+	while (++j < pipelen + 1)
+	{
+		pipes->pid[pipes->pid_index] = fork();
+		if (pipes->pid[pipes->pid_index] == -1)
+			return (printf("Error during fork\n"), FAIL);
+		else if (pipes->pid[pipes->pid_index] == 0)
+		{
+			exec_child(ms, *i, pipes->pipes, pipes->pid_index);
+			return (SUCCESS);
+		}
+		else
+			(*i)++;
+		pipes->pid_index ++;
+		wait(NULL);
+	}
 	return (SUCCESS);
 }
 

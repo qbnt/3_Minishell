@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/24 20:38:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/27 09:34:18 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ int			exec_cmds(t_mini *ms);
 t_bool		exec_simple_cmd(t_pars *cmd, t_env *env);
 
 /*exec_proces.c*/
-void		exec_child(t_mini *ms, int *i, int count, t_pipes *pipes);
-void		close_pipe(int *fd);
+void		exec_child(t_mini *ms, int i, int **pipes, int index);
+int			ft_pipelen(t_pars **cmds, int i);
+t_pipes		*init_pipe(int pipelen);
 
 /*get_cmd_path.c*/
 char		*get_cmd_path(char *cmd, t_env_elems *env);
