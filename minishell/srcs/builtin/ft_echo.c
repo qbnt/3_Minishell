@@ -50,8 +50,5 @@ int	ft_echo(t_pars *cmds)
 	return (SUCCESS);
 }
 
-// cd
-// pwd
 // export
 // unset
-// env
