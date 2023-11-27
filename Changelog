@@ -1,1 +1,2 @@
 23/11/2023 | commit : "env_v1" | ajout de la commande "env" via la fonction ft_env (deja ajoute dans .h et Makefile)
+27/11/2023 | commit : "cd_v1" | ajout de la commande "cd" via la fonction ft_cd (deja ajoute dans .h et Makefile) | bugs potentiels de parsing
