@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 17:55:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/27 13:28:41 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_elem_pars	*check_input(char *input)
 		elem_count(oui, &input);
 		input ++;
 	}
+	oui->tmp_pipes = oui->nb_pipe;
+	printf("pipes = %d	| or = %d\n", oui->tmp_pipes, oui->nb_or_op);
 	if (!check_elems(oui))
 		return (free (oui), NULL);
 	return (oui);
