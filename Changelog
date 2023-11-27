@@ -1,2 +1,3 @@
-23/11/2023 | commit : "env_v1" | ajout de la commande "env" via la fonction ft_env (deja ajoute dans .h et Makefile)
-27/11/2023 | commit : "cd_v1" | ajout de la commande "cd" via la fonction ft_cd (deja ajoute dans .h et Makefile) | bugs potentiels de parsing
+23/11/2023	| commit : "env_v1"				| ajout de la commande "env" via la fonction ft_env (deja ajoute dans .h et Makefile)
+27/11/2023	| commit : "cd_v1"				| ajout de la commande "cd" via la fonction ft_cd (deja ajoute dans .h et Makefile) | bugs potentiels de parsing
+27/11/2023	| commit : "ajout cd dans exec"	| ajout des builtins dans la fonction exec_simple_cmd dans utils_exec.c
