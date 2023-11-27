@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 18:00:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/27 09:31:50 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ typedef struct s_env{
 	t_env_elems			*env_elems;
 }	t_env;
 
+typedef struct s_pipes{
+	int					*pid;
+	int					pid_index;
+	int					**pipes;
+	int					saved_fd;
+}	t_pipes;
 typedef struct s_mini{
 	t_env				*env;
 	t_pars				**cmds;
