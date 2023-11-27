@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 12:57:49 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/27 14:00:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_bool	exec_simple_cmd(t_pars *cmd, t_env *env)
 	else if (ft_strcmp(cmd->str, "env"))
 		ft_env(env);
 	else if (ft_strcmp(cmd->str, "cd"))
-		ft_env(env);
+		ft_cd(cmd, env);
 	else
 		res = select_syst_cmd(cmd, env);
 	return (res);
