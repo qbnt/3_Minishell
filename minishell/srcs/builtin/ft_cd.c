@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:38:58 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/27 13:34:08 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/27 14:18:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_cd(t_pars *cmds, t_env *env) // pas sur qu'un pointeur simple mofifie le
 		if (ft_strcmp(env->env_elems->key, "PWD") == TRUE)
 		{
 			old = ft_calloc((env->env_elems->value_len + 1), sizeof(char));
-			strcpy(old, env->env_elems->value);
+			ft_strcpy(old, env->env_elems->value);
 			free(env->env_elems->value);
 			env->env_elems->value = ft_calloc(4097, sizeof(char));
 			getcwd(env->env_elems->value, 4096);

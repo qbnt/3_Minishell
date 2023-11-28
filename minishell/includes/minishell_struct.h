@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 13:23:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:37:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ typedef struct s_elem_pars{
 }	t_elem_pars;
 typedef struct s_pipes{
 	int					*pipes;
+	int					*pid;
 	int					nb_pipes;
-	int					saved_fd;
+	int					saved_fd_out;
+	int					saved_fd_in;
+	int					status;
 }	t_pipes;
 typedef struct s_pars{
 	char				*str;
@@ -72,9 +75,11 @@ typedef struct s_env{
 	t_env_elems			*env_elems;
 }	t_env;
 typedef struct s_mini{
-	t_env				*env;
+	int					res;
+	t_pipes				*pipes;
 	t_pars				**cmds;
 	t_elem_pars			*elem_pars;
+	t_env				*env;
 }	t_mini;
 
 #endif
