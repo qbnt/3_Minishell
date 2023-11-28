@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 13:54:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 /*============================================================================*/
 
-void	exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env)
+void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 	if (!end)
-		dup2(pipes->pipes[1], STDOUT_FILENO);
+		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
-		dup2(pipes->saved_fd_out, STDOUT_FILENO);
-	close(pipes->pipes[0]);
-	close(pipes->pipes[1]);
+		dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
+	close(ms->pipes->pipes[0]);
+	close(ms->pipes->pipes[1]);
 	if (ft_strcmp(cmd->str, "echo"))
-		ft_echo(cmd);
+		ms->res = ft_echo(cmd);
 	else if (ft_strcmp(cmd->str, "pwd"))
-		ft_pwd();
+		ms->res = ft_pwd();
 	else if (ft_strcmp(cmd->str, "env"))
-		ft_env(env);
+		ms->res = ft_env(ms->env);
 	else if (ft_strcmp(cmd->str, "cd"))
-		ft_cd(cmd, env);
+		ms->res = ft_cd(cmd, ms->env);
 	else
-		select_syst_cmd(cmd, env);
+		select_syst_cmd(cmd, ms->env);
 	return ;
 }
 

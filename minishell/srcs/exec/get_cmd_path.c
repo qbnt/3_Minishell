@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 21:56:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 23:09:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:33:20 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static char	*find_dir(char *dir, char *cmd)
 	struct dirent	*dir_enter;
 
 	d = opendir(dir);
+	if (!d)
+		return (closedir(d), NULL);
 	dir_enter = readdir(d);
 	while (dir_enter)
 	{

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 13:48:21 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:26 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,22 @@ void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
 		return (printf("fork error\n"), (void) 0);
 	if (ms->pipes->pid[i] == 0)
 	{
-		exec_child(cmd, ms->pipes, end, ms->env);
+		exec_child(cmd, end, ms);
 		return ;
 	}
 	if (!end)
+	{
 		dup2(ms->pipes->pipes[0], STDIN_FILENO);
+		close(ms->pipes->pipes[0]);
+		close(ms->pipes->pipes[1]);
+	}
 	else
 	{
-		ft_waitpid(ms);
 		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
+		close(ms->pipes->pipes[0]);
+		close(ms->pipes->pipes[1]);
+		ft_waitpid(ms);
 	}
-	close(ms->pipes->pipes[0]);
-	close(ms->pipes->pipes[1]);
 }
 
 t_bool	select_syst_cmd(t_pars *cmd, t_env *env)

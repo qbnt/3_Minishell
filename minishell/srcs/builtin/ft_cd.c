@@ -6,13 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:38:58 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/28 13:56:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:01:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(t_pars *cmds, t_env *env)
+int	ft_cd(t_pars *cmds, t_env *env)
 {
 
 	char	*old;
@@ -48,7 +48,8 @@ void	ft_cd(t_pars *cmds, t_env *env)
 			free(old);
 		}
 	}
-	else 
+	else
 		ft_printf("cd: %s: No such file or directory\n", cmds->str);
 	env->env_elems = env->env_elems->first;
+	return (0);
 }

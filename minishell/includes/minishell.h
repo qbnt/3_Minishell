@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 13:47:06 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:35:26 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			exec_cmds(t_mini *ms);
 void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
 /*exec_proces.c*/
-void		exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env);
+void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
 void		ft_waitpid(t_mini *ms);
 
 /*get_cmd_path.c*/
@@ -101,8 +101,8 @@ t_bool		redir_in_cmd(t_pars *cmd);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-void		ft_env(t_env *env);
-void		ft_cd(t_pars *cmds, t_env *env);
+int			ft_env(t_env *env);
+int			ft_cd(t_pars *cmds, t_env *env);
 
 /*__________________________________Signals___________________________________*/
 

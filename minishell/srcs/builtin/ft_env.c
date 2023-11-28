@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:02:32 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/23 15:38:26 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/28 15:34:52 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-void    ft_env(t_env *env)
+int    ft_env(t_env *env)
 {
     while (env->env_elems && env->env_elems->key && env->env_elems->value)
     {
@@ -23,4 +23,5 @@ void    ft_env(t_env *env)
             break ;
     }
     env->env_elems = env->env_elems->first;
+	return (0);
 }
