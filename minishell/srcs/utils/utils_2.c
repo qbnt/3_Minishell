@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:04:44 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 22:44:33 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:26:21 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*============================================================================*/
+
+int	ft_strcmp_ex(char const *s1, char const *s2)
+{
+	while ((unsigned char)*s1 == (unsigned char)*s2 && *s1)
+	{
+		s1++;
+		s2++;
+	}
+	if ((unsigned char)*s1 == (unsigned char)*s2)
+		return (0);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
 
 void	free_dtab(char **str)
 {

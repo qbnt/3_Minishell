@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
 /*   Updated: 2023/11/28 13:48:21 by qbanet           ###   ########.fr       */
