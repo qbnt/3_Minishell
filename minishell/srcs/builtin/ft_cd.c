@@ -6,19 +6,25 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:38:58 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/27 14:18:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:56:08 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(t_pars *cmds, t_env *env) // pas sur qu'un pointeur simple mofifie le vrai env
+void	ft_cd(t_pars *cmds, t_env *env)
 {
 
 	char	*old;
 
 	if (cmds->next)
 		cmds = cmds->next;
+	if (ft_strcmp(cmds->str, "~") == TRUE)
+	{
+		free(cmds->str);
+		cmds->str = ft_calloc((ft_strlen(getenv("HOME")) + 1), sizeof(char));
+		ft_strcpy(cmds->str, getenv("HOME"));
+	}
 	if (chdir(cmds->str) == 0)
 	{
 		while ((ft_strcmp(env->env_elems->key, "PWD") == FALSE) && env->env_elems->next)
