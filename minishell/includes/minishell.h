@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 09:34:18 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:47:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ void		readline_loop(t_mini *ms);
 
 /*exec_cmds.c*/
 int			exec_cmds(t_mini *ms);
-t_bool		exec_simple_cmd(t_pars *cmd, t_env *env);
+void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
 /*exec_proces.c*/
-void		exec_child(t_mini *ms, int i, int **pipes, int index);
-int			ft_pipelen(t_pars **cmds, int i);
-t_pipes		*init_pipe(int pipelen);
+void		exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env);
+void		ft_waitpid(t_mini *ms);
 
 /*get_cmd_path.c*/
 char		*get_cmd_path(char *cmd, t_env_elems *env);
@@ -86,6 +85,7 @@ char		*get_cmd_path(char *cmd, t_env_elems *env);
 /*utils_exec.c*/
 char		**get_dtab_cmd(t_pars *cmd);
 int			select_syst_cmd(t_pars *cmd, t_env *env);
+t_pipes		*init_pipes(t_mini *ms);
 
 /*________________________________Redirections________________________________*/
 
@@ -101,7 +101,7 @@ t_bool		redir_in_cmd(t_pars *cmd);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-void    	ft_env(t_env *env);
+void		ft_env(t_env *env);
 void		ft_cd(t_pars *cmds, t_env *env);
 
 /*__________________________________Signals___________________________________*/
