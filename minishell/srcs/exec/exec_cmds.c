@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 11:27:32 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:51:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static t_bool	exec_prio_cmd(t_mini *ms, int *i);
-static void		handle_and_op(t_mini *ms, int *i, t_bool *res);
-static void		handle_or_op(t_mini *ms, int *i, t_bool *res);
-static t_bool	exec_with_pipe(t_mini *ms, int *i);
+static void		handle_and_op(t_mini *ms, int *i);
+static void		handle_or_op(t_mini *ms, int *i);
 
 /*============================================================================*/
 
@@ -23,6 +22,7 @@ int	exec_cmds(t_mini *ms)
 {
 	int	i;
 
+	ms->pipes = init_pipes(ms);
 	if (!ms->cmds)
 		return (FAIL);
 	i = -1;
@@ -30,73 +30,52 @@ int	exec_cmds(t_mini *ms)
 	{
 		if (!ms->cmds[i]->first->and_op && !ms->cmds[i]->first->or_op
 			&& !ms->cmds[i]->first->pipe_op)
-			exec_simple_cmd(ms->cmds[i], ms->env);
+			exec_simple_cmd(ms->cmds[i], ms, 1);
 		else if (ms->cmds[i]->first->and_op || ms->cmds[i]->first->or_op)
 			exec_prio_cmd(ms, &i);
 		else if (ms->cmds[i]->first->pipe_op)
-			exec_with_pipe(ms, &i);
-	}
-	return (SUCCESS);
-}
-
-static t_bool	exec_with_pipe(t_mini *ms, int *i)
-{
-	t_pipes	*pipes;
-	int		pipelen;
-	int		j;
-
-	pipelen = ft_pipelen(ms->cmds, *i);
-	pipes = init_pipe(pipelen);
-	j = -1;
-	while (++j < pipelen + 1)
-	{
-		pipes->pid[pipes->pid_index] = fork();
-		if (pipes->pid[pipes->pid_index] == -1)
-			return (printf("Error during fork\n"), FAIL);
-		else if (pipes->pid[pipes->pid_index] == 0)
 		{
-			exec_child(ms, *i, pipes->pipes, pipes->pid_index);
-			return (SUCCESS);
+			if (ms->pipes->nb_pipes --)
+				exec_simple_cmd(ms->cmds[i], ms, 0);
+			else
+			{
+				exec_simple_cmd(ms->cmds[i], ms, 1);
+				ft_waitpid(ms);
+			}
 		}
-		else
-			(*i)++;
-		pipes->pid_index ++;
-		wait(NULL);
 	}
 	return (SUCCESS);
 }
 
 static t_bool	exec_prio_cmd(t_mini *ms, int *i)
 {
-	t_bool	res;
-
-	res = exec_simple_cmd(ms->cmds[(*i)], ms->env);
+	exec_simple_cmd(ms->cmds[(*i)], ms, 1);
 	while (((*i) + 1) < ms->elem_pars->nb_cmd)
 	{
 		if (ms->cmds[(*i)]->first->and_op)
-			handle_and_op(ms, i, &res);
+			handle_and_op(ms, i);
 		else if (ms->cmds[(*i)]->first->or_op)
-			handle_or_op(ms, i, &res);
+			handle_or_op(ms, i);
 		else
 			return (SUCCESS);
 	}
 	return (FAIL);
 }
 
-static void	handle_and_op(t_mini *ms, int *i, t_bool *res)
+static void	handle_and_op(t_mini *ms, int *i)
 {
-	if (*res == FAIL)
+	if (ms->res == 0)
 		while (ms->cmds[(*i)]->first->and_op && (*i) < ms->elem_pars->nb_cmd)
 			(*i)++;
 	else
-		*res = exec_simple_cmd(ms->cmds[++(*i)], ms->env);
+		exec_simple_cmd(ms->cmds[++(*i)], ms, 1);
 }
 
-static void	handle_or_op(t_mini *ms, int *i, t_bool *res)
+static void	handle_or_op(t_mini *ms, int *i)
 {
-	if (*res == SUCCESS)
+	if (ms->res != 0)
 		while (ms->cmds[(*i)]->first->or_op && (*i) < ms->elem_pars->nb_cmd)
 			(*i)++;
 	else
-		*res = exec_simple_cmd(ms->cmds[++(*i)], ms->env);
+		exec_simple_cmd(ms->cmds[++(*i)], ms, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 09:31:50 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:37:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_in{
 typedef struct s_elem_pars{
 	int					nb_cmd;
 	int					nb_pipe;
+	int					tmp_pipes;
 	int					nb_or_op;
 	int					nb_and_op;
 	int					nb_and_char;
@@ -40,7 +41,14 @@ typedef struct s_elem_pars{
 	int					nb_dredir_out;
 	t_bool				error;
 }	t_elem_pars;
-
+typedef struct s_pipes{
+	int					*pipes;
+	int					*pid;
+	int					nb_pipes;
+	int					saved_fd_out;
+	int					saved_fd_in;
+	int					status;
+}	t_pipes;
 typedef struct s_pars{
 	char				*str;
 	int					group;
@@ -53,7 +61,6 @@ typedef struct s_pars{
 	struct s_pars		*prev;
 	struct s_pars		*first;
 }	t_pars;
-
 typedef struct s_env_elems{
 	char				*key;
 	char				*value;
@@ -63,22 +70,16 @@ typedef struct s_env_elems{
 	struct s_env_elems	*prev;
 	struct s_env_elems	*first;
 }	t_env_elems;
-
 typedef struct s_env{
 	char				**env_cpy;
 	t_env_elems			*env_elems;
 }	t_env;
-
-typedef struct s_pipes{
-	int					*pid;
-	int					pid_index;
-	int					**pipes;
-	int					saved_fd;
-}	t_pipes;
 typedef struct s_mini{
-	t_env				*env;
+	int					res;
+	t_pipes				*pipes;
 	t_pars				**cmds;
 	t_elem_pars			*elem_pars;
+	t_env				*env;
 }	t_mini;
 
 #endif
