@@ -6,28 +6,11 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/28 17:27:58 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/28 17:40:00 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_envlen(t_env *env)
-{
-	int i;
-
-	i = 0;
-	while (env->env_elems)
-	{
-		i++;
-		if (env->env_elems->next)
-			env->env_elems = env->env_elems->next;
-		else
-			break ;
-	}
-	env->env_elems = env->env_elems->first;
-	return (i);
-}
 
 void	ft_tri(t_env *env)
 {

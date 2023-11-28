@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 13:54:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:43:04 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env)
 		ft_env(env);
 	else if (ft_strcmp(cmd->str, "cd"))
 		ft_cd(cmd, env);
+	else if (ft_strcmp(cmd->str, "export"))
+		ft_export(cmd, env);
 	else
 		select_syst_cmd(cmd, env);
 	return ;
