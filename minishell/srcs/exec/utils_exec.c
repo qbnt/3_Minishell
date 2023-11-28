@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 11:33:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 11:49:32 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ t_bool	exec_simple_cmd(t_pars *cmd, t_env *env)
 	else if (ft_strcmp(cmd->str, "env"))
 		ft_env(env);
 	else if (ft_strcmp(cmd->str, "cd"))
-		ft_env(env);
+		ft_cd(cmd, env);
+	else if (ft_strcmp(cmd->str, "export"))
+		ft_export(cmd, env);
 	else
 		res = select_syst_cmd(cmd, env);
 	return (res);
