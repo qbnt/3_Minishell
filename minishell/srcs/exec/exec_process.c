@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 17:06:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:00:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*============================================================================*/
 
-void exec_child(t_pars *cmd, t_bool end, t_mini *ms)
+void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 
 	if (!end)
@@ -36,9 +36,29 @@ void exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 	_exit(SUCCESS);
 }
 
-void ft_waitpid(t_mini *ms)
+void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
 {
-	int i;
+	if (!end)
+	{
+		dup2(ms->pipes->pipes[0], STDIN_FILENO);
+	}
+	else
+	{
+		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
+		if (cmd->first->and_op || cmd->first->or_op)
+		{
+			waitpid(ms->pipes->pid[i], &(ms->pipes->status), 0);
+			if (WIFEXITED(ms->pipes->status))
+				ms->res = WEXITSTATUS(ms->pipes->status);
+		}
+		else
+			ft_waitpid(ms);
+	}
+}
+
+void	ft_waitpid(t_mini *ms)
+{
+	int	i;
 
 	i = -1;
 	while (ms->pipes->pid[++i] != 0)

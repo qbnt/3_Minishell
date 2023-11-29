@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 17:26:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:00:53 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 /*============================================================================*/
 
-char **get_dtab_cmd(t_pars *cmd)
+char	**get_dtab_cmd(t_pars *cmd)
 {
-	char **res;
-	size_t parslen;
-	size_t i;
+	char	**res;
+	size_t	parslen;
+	size_t	i;
 
 	parslen = t_parslen(cmd);
 	res = ft_calloc(parslen + 1, sizeof(char *));
@@ -32,9 +32,9 @@ char **get_dtab_cmd(t_pars *cmd)
 	return (res);
 }
 
-void exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
+void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strcmp(cmd->str, "exit"))
@@ -42,40 +42,24 @@ void exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
 	while (ms->pipes->pid[i])
 		i++;
 	ms->res = 42;
+	pipe(ms->pipes->pipes);
 	ms->pipes->pid[i] = fork();
-	printf("i = %d\n", i);
 	if (ms->pipes->pid[i] < 0)
 		return (printf("fork error\n"), (void)0);
-	pipe(ms->pipes->pipes);
 	if (ms->pipes->pid[i] == 0)
 	{
 		exec_child(cmd, end, ms);
-		return;
+		return ;
 	}
-	if (!end)
-	{
-		dup2(ms->pipes->pipes[0], STDIN_FILENO);
-	}
-	else
-	{
-		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
-		if (cmd->first->and_op || cmd->first->or_op)
-		{
-			waitpid(ms->pipes->pid[i], &(ms->pipes->status), 0);
-			if (WIFEXITED(ms->pipes->status))
-				ms->res = WEXITSTATUS(ms->pipes->status);
-		}
-		else
-			ft_waitpid(ms);
-	}
+	exec_parent(cmd, end, ms, i);
 	close(ms->pipes->pipes[1]);
 	close(ms->pipes->pipes[0]);
 }
 
-t_bool select_syst_cmd(t_pars *cmd, t_env *env)
+t_bool	select_syst_cmd(t_pars *cmd, t_env *env)
 {
-	char *path;
-	char **tab_cmd;
+	char	*path;
+	char	**tab_cmd;
 
 	tab_cmd = NULL;
 	path = get_cmd_path(cmd->str, env->env_elems);
@@ -86,10 +70,10 @@ t_bool select_syst_cmd(t_pars *cmd, t_env *env)
 	return (free(tab_cmd), SUCCESS);
 }
 
-t_pipes *init_pipes(t_mini *ms)
+t_pipes	*init_pipes(t_mini *ms)
 {
-	t_pipes *oui;
-	int i;
+	t_pipes	*oui;
+	int		i;
 
 	oui = ft_calloc(1, sizeof(t_pipes));
 	oui->nb_pipes = ms->elem_pars->tmp_pipes;

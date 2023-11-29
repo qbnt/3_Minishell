@@ -6,13 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 16:59:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:03:56 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	exec_prio_cmd(t_mini *ms, int *i);
+static t_bool		exec_prio_cmd(t_mini *ms, int *i);
 static t_bool		handle_and_op(t_mini *ms, int *i);
 static t_bool		handle_or_op(t_mini *ms, int *i);
 
@@ -28,7 +28,6 @@ int	exec_cmds(t_mini *ms)
 	i = 0;
 	while (i < ms->elem_pars->nb_cmd)
 	{
-		printf("cmd = %s\n", ms->cmds[i]->str);
 		if (ms->cmds[i]->first->and_op || ms->cmds[i]->first->or_op)
 			exec_prio_cmd(ms, &i);
 		else if (ms->cmds[i]->first->pipe_op)
@@ -49,7 +48,7 @@ static t_bool	exec_prio_cmd(t_mini *ms, int *i)
 	exec_simple_cmd(ms->cmds[(*i)++], ms, 1);
 	while ((*i) < ms->elem_pars->nb_cmd)
 	{
-		printf("res = %d\n", ms->res);
+		printf("prio res = %d\n", ms->res);
 		if (ms->cmds[(*i) - 1]->first->and_op)
 			handle_and_op(ms, i);
 		else if (ms->cmds[(*i) - 1]->first->or_op)

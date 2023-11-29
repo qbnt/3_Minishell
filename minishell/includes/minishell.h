@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 15:35:26 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:01:05 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
 /*exec_proces.c*/
 void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
+void		exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i);
 void		ft_waitpid(t_mini *ms);
 
 /*get_cmd_path.c*/
