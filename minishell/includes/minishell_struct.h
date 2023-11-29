@@ -6,12 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 13:37:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:17:52 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_H
 # define MINISHELL_STRUCT_H
+
+# include <signal.h>
 
 typedef int	t_token;
 typedef int	t_bool;
@@ -42,8 +44,8 @@ typedef struct s_elem_pars{
 	t_bool				error;
 }	t_elem_pars;
 typedef struct s_pipes{
-	int					*pipes;
-	int					*pid;
+	int					pipes[2];
+	pid_t				*pid;
 	int					nb_pipes;
 	int					saved_fd_out;
 	int					saved_fd_in;

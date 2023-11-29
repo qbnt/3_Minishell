@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 16:15:17 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:06:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 /*============================================================================*/
 
-void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
+void exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
+
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
@@ -32,18 +33,19 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		ms->res = ft_cd(cmd, ms->env);
 	else
 		select_syst_cmd(cmd, ms->env);
-	return ;
+	_exit(SUCCESS);
 }
 
-void	ft_waitpid(t_mini *ms)
+void ft_waitpid(t_mini *ms)
 {
-	int	i;
+	int i;
 
 	i = -1;
-	while (++i < ms->elem_pars->nb_cmd && ms->pipes->pid[i])
+	while (ms->pipes->pid[++i] != 0)
 	{
 		waitpid(ms->pipes->pid[i], &(ms->pipes->status), 0);
 		if (WIFEXITED(ms->pipes->status))
 			ms->res = WEXITSTATUS(ms->pipes->status);
 	}
+	ft_bzero((void *)ms->pipes->pid, i * sizeof(int *));
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:47:13 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/13 14:01:12 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:38:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*ptr;
+	size_t	i;
 
-	ptr = s;
-	while (n--)
-		*ptr++ = '\0';
+	i = 0;
+	while (i < n)
+	{
+		*(unsigned char *)(s + i) = 0;
+		i ++;
+	}
 }
