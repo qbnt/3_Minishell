@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 19:03:56 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:14:38 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static t_bool	exec_prio_cmd(t_mini *ms, int *i)
 	exec_simple_cmd(ms->cmds[(*i)++], ms, 1);
 	while ((*i) < ms->elem_pars->nb_cmd)
 	{
-		printf("prio res = %d\n", ms->res);
 		if (ms->cmds[(*i) - 1]->first->and_op)
 			handle_and_op(ms, i);
 		else if (ms->cmds[(*i) - 1]->first->or_op)

@@ -6,18 +6,16 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 13:22:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:25:37 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//static void		clear_prev(t_pars *res);
 static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env);
 static char		*clean_cote(char *str, t_token token);
 static int		clean_cote_loop(char *str, t_token token, char *res);
 static void		clear_cmd(char **str, char *res, int *i);
-
 
 /*----------------------------------------------------------------------------*/
 

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 19:00:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:23:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
-
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
@@ -32,8 +31,8 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 	else if (ft_strcmp(cmd->str, "cd"))
 		ms->res = ft_cd(cmd, ms->env);
 	else
-		select_syst_cmd(cmd, ms->env);
-	_exit(SUCCESS);
+		ms->res = select_syst_cmd(cmd, ms->env);
+	_exit(ms->res);
 }
 
 void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
@@ -67,5 +66,4 @@ void	ft_waitpid(t_mini *ms)
 		if (WIFEXITED(ms->pipes->status))
 			ms->res = WEXITSTATUS(ms->pipes->status);
 	}
-	ft_bzero((void *)ms->pipes->pid, i * sizeof(int *));
 }

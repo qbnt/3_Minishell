@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 16:32:41 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:28:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ char	*clean_dol(char *str, t_env_elems *env, t_token token)
 	{
 		if (token != LIT_STR && *str == '$')
 		{
-			str ++;
-			tmp = ft_cpy_dol(str);
+			tmp = ft_cpy_dol(++str);
 			ft_strlcat(res_str, t_env_elems_find_value_of(env, tmp),
 				total_len + 1);
 			str += ft_strlen(tmp);
