@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 17:30:08 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:50:44 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char		*get_cmd_path(char *cmd, t_env_elems *env);
 char		**get_dtab_cmd(t_pars *cmd);
 int			select_syst_cmd(t_pars *cmd, t_env *env);
 t_pipes		*init_pipes(t_mini *ms);
+void		free_pipes(t_pipes *pipes);
 
 /*________________________________Redirections________________________________*/
 

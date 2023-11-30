@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 14:46:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:44:20 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	*clean_dol(char *str, t_mini *ms, t_token token)
 	{
 		if (token != LIT_STR && *str == '$')
 		{
+			if (*(str + 1) == 0)
+				return (str);
 			if (*(str + 1) == '?')
 				i += switch_res(&str, ms, total_len, res_str);
 			else
@@ -101,14 +103,16 @@ static int	switch_dol(char **str, t_env_elems *env, size_t total_len,
 	char *res_str)
 {
 	char	*tmp;
+	char	*tmp2;
 	int		i;
 
 	i = 0;
 	tmp = ft_cpy_dol(++(*str));
-	ft_strlcat(res_str, t_env_elems_find_value_of(env, tmp),
-		total_len + 1);
+	tmp2 = t_env_elems_find_value_of(env, tmp);
+	ft_strlcat(res_str, tmp2, total_len + 1);
 	(*str) += ft_strlen(tmp);
-	i += ft_strlen(t_env_elems_find_value_of(env, tmp));
+	i += ft_strlen(tmp2);
 	free (tmp);
+	free (tmp2);
 	return (i);
 }
