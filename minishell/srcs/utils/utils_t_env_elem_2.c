@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:35:21 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 16:57:55 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:38:29 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_cpy_dol(char *dol_str)
 	return (dol);
 }
 
-size_t	ft_dol_len_in_str(char *str, t_env_elems *env)
+size_t	ft_dol_len_in_str(char *str, t_mini *ms)
 {
 	size_t	res;
 	char	*key;
@@ -42,8 +42,10 @@ size_t	ft_dol_len_in_str(char *str, t_env_elems *env)
 	{
 		if (*str == '$')
 		{
+			if ((str + 1) && *(str + 1) == '?' && !*(str + 2))
+				return (ft_strlen(ft_itoa(ms->res) - 2));
 			key = ft_cpy_dol(str);
-			val = t_env_elems_find_value_of(env, (key + 1));
+			val = t_env_elems_find_value_of(ms->env->env_elems, (key + 1));
 			res += ft_strlen(val) - ft_strlen(key);
 			str += ft_strlen(key);
 			free(key);

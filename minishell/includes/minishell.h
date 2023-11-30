@@ -46,7 +46,6 @@
 
 # include <sys/ioctl.h>
 
-
 /*==================================Fonction==================================*/
 
 void		free_all(t_mini *ms);
@@ -58,8 +57,7 @@ t_pars		**parsing(char *input, t_mini *ms);
 t_elem_pars	*check_input(char *input);
 
 /*make_clear_cmds.c*/
-t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars,
-				t_env_elems *env);
+t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_mini *ms);
 
 /*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
@@ -76,7 +74,8 @@ int			exec_cmds(t_mini *ms);
 void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
 /*exec_proces.c*/
-void		exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env);
+void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
+void		exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i);
 void		ft_waitpid(t_mini *ms);
 
 /*get_cmd_path.c*/
@@ -101,7 +100,7 @@ t_bool		redir_in_cmd(t_pars *cmd);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-int	    	ft_env(t_env *env);
+int	    ft_env(t_env *env);
 int			ft_cd(t_pars *cmds, t_env *env);
 int			ft_export(t_pars *cmds, t_env *env);
 void		ft_tri(t_env *env);
@@ -109,7 +108,6 @@ int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
 
 /*__________________________________Signals___________________________________*/
-
 
 /*___________________________________Utils____________________________________*/
 
@@ -124,7 +122,7 @@ void		pars_is_redir(char **input, t_elem_pars **oui);
 t_bool		empty_parenth(char *input);
 void		select_opp(t_pars	*pars, t_pars **cmd);
 size_t		count_cote(char *str, t_token token);
-char		*clean_dol(char *str, t_env_elems *env, t_token token);
+char		*clean_dol(char *str, t_mini *ms, t_token token);
 
 /*utils_parsing_2.c*/
 
@@ -150,7 +148,7 @@ void		t_env_elems_free(t_env_elems *first);
 
 /*utils_t_env_elem_2.c*/
 char		*ft_cpy_dol(char *dol_str);
-size_t		ft_dol_len_in_str(char *str, t_env_elems *env);
+size_t		ft_dol_len_in_str(char *str, t_mini *ms);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
@@ -162,6 +160,7 @@ void		free_cmds_tab(t_pars **cmds, int nb_cmds);
 /*utils_2.c*/
 void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
+int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

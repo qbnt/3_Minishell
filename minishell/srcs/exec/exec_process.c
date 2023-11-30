@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 13:54:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:23:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,45 @@
 
 /*============================================================================*/
 
-void	exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env)
+void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 	if (!end)
-		dup2(pipes->pipes[1], STDOUT_FILENO);
+		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
-		dup2(pipes->saved_fd_out, STDOUT_FILENO);
-	close(pipes->pipes[0]);
-	close(pipes->pipes[1]);
+		dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
+	close(ms->pipes->pipes[0]);
+	close(ms->pipes->pipes[1]);
 	if (ft_strcmp(cmd->str, "echo"))
-		ft_echo(cmd);
+		ms->res = ft_echo(cmd);
 	else if (ft_strcmp(cmd->str, "pwd"))
-		ft_pwd();
+		ms->res = ft_pwd();
 	else if (ft_strcmp(cmd->str, "env"))
-		ft_env(env);
+		ms->res = ft_env(ms->env);
 	else if (ft_strcmp(cmd->str, "cd"))
-		ft_cd(cmd, env);
+		ms->res = ft_cd(cmd, ms->env);
 	else
-		select_syst_cmd(cmd, env);
-	return ;
+		ms->res = select_syst_cmd(cmd, ms->env);
+	_exit(ms->res);
+}
+
+void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
+{
+	if (!end)
+	{
+		dup2(ms->pipes->pipes[0], STDIN_FILENO);
+	}
+	else
+	{
+		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
+		if (cmd->first->and_op || cmd->first->or_op)
+		{
+			waitpid(ms->pipes->pid[i], &(ms->pipes->status), 0);
+			if (WIFEXITED(ms->pipes->status))
+				ms->res = WEXITSTATUS(ms->pipes->status);
+		}
+		else
+			ft_waitpid(ms);
+	}
 }
 
 void	ft_waitpid(t_mini *ms)
@@ -40,7 +60,7 @@ void	ft_waitpid(t_mini *ms)
 	int	i;
 
 	i = -1;
-	while (++i < ms->elem_pars->nb_cmd && ms->pipes->pid[i])
+	while (ms->pipes->pid[++i] != 0)
 	{
 		waitpid(ms->pipes->pid[i], &(ms->pipes->status), 0);
 		if (WIFEXITED(ms->pipes->status))

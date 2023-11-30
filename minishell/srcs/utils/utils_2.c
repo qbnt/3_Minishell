@@ -48,3 +48,17 @@ size_t	t_parslen(t_pars *cmd)
 	}
 	return (len);
 }
+
+int	switch_res(char **str, t_mini *ms, int total_len, char *res_str)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_itoa(ms->res);
+	ft_strlcat(res_str, tmp, total_len + 1);
+	(*str) += 2;
+	i += ft_strlen(tmp);
+	free (tmp);
+	return (i);
+}

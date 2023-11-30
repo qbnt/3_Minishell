@@ -48,7 +48,7 @@ int	ft_cd(t_pars *cmds, t_env *env)
 			free(old);
 		}
 	}
-	else 
+	else
 		ft_printf("cd: %s: No such file or directory\n", cmds->str);
 	env->env_elems = env->env_elems->first;
 	return (SUCCESS);
