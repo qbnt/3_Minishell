@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 19:00:53 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:57:01 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_bool	select_syst_cmd(t_pars *cmd, t_env *env)
 
 	tab_cmd = NULL;
 	path = get_cmd_path(cmd->str, env->env_elems);
-	tab_cmd = get_dtab_cmd(cmd);
 	if (!path)
 		return (printf("%s - command not found\n", cmd->str), FAIL);
+	tab_cmd = get_dtab_cmd(cmd);
 	execve(path, tab_cmd, env->env_cpy);
 	return (free(tab_cmd), SUCCESS);
 }

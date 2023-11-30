@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 19:26:01 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:24:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ t_pars		**parsing(char *input, t_mini *ms);
 t_elem_pars	*check_input(char *input);
 
 /*make_clear_cmds.c*/
-t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars,
-				t_env_elems *env);
+t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_mini *ms);
 
 /*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
@@ -119,7 +118,7 @@ void		pars_is_redir(char **input, t_elem_pars **oui);
 t_bool		empty_parenth(char *input);
 void		select_opp(t_pars	*pars, t_pars **cmd);
 size_t		count_cote(char *str, t_token token);
-char		*clean_dol(char *str, t_env_elems *env, t_token token);
+char		*clean_dol(char *str, t_mini *ms, t_token token);
 
 /*utils_parsing_2.c*/
 
@@ -145,7 +144,7 @@ void		t_env_elems_free(t_env_elems *first);
 
 /*utils_t_env_elem_2.c*/
 char		*ft_cpy_dol(char *dol_str);
-size_t		ft_dol_len_in_str(char *str, t_env_elems *env);
+size_t		ft_dol_len_in_str(char *str, t_mini *ms);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
@@ -157,6 +156,7 @@ void		free_cmds_tab(t_pars **cmds, int nb_cmds);
 /*utils_2.c*/
 void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
+int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

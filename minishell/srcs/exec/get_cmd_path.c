@@ -6,14 +6,15 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 21:56:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 14:33:20 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:04:13 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_path(char **dir, char *cmd);
-static char	*find_dir(char *dir, char *cmd);
+static char		*get_path(char **dir, char *cmd);
+static char		*find_dir(char *dir, char *cmd);
+static t_bool	not_path_need(char *cmd);
 
 /*============================================================================*/
 
@@ -24,6 +25,8 @@ char	*get_cmd_path(char *cmd, t_env_elems *env)
 	char	*res;
 
 	val = t_env_elems_find_value_of(env, "PATH");
+	if (not_path_need(cmd))
+		return (cmd);
 	if (!val)
 	{
 		printf("No path in env\n");
@@ -35,6 +38,25 @@ char	*get_cmd_path(char *cmd, t_env_elems *env)
 	res = get_path(dir, cmd);
 	free_dtab(dir);
 	return (res);
+}
+
+static t_bool	not_path_need(char *cmd)
+{
+	t_bool	res;
+	int		i;
+
+	i = -1;
+	res = 0;
+	while (cmd[++i])
+		if (cmd[i] == '.')
+			res += 1;
+	while (cmd[++i])
+		if (cmd[i] == '/')
+			res += 1;
+	if (res == 0)
+		return (FALSE);
+	else
+		return (TRUE);
 }
 
 static char	*get_path(char **dir, char *cmd)

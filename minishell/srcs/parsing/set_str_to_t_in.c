@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/21 13:24:38 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:45:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ t_in	*set_str_to_t_in(char *str)
 	{
 		if (*str == 34 || *str == 39)
 			is_in_cote = TRUE;
+		if (*str == '(' || *str == ')')
+			while (str && (*str == '(' || *str == ')'))
+				str ++;
 		oui = t_in_first(oui, *str, group);
 		str ++;
 		cpy_loop(str, &is_in_cote, &group, &oui);
