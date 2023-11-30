@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:02:32 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/28 15:34:52 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:28:50 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int    ft_env(t_env *env)
             break ;
     }
     env->env_elems = env->env_elems->first;
-	return (0);
+    return (SUCCESS);
 }

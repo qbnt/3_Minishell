@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:38:58 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/28 16:01:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:29:31 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ int	ft_cd(t_pars *cmds, t_env *env)
 	else
 		ft_printf("cd: %s: No such file or directory\n", cmds->str);
 	env->env_elems = env->env_elems->first;
-	return (0);
+	return (SUCCESS);
 }
