@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 21:56:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 15:04:13 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 15:46:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*get_cmd_path(char *cmd, t_env_elems *env)
 		return (NULL);
 	res = get_path(dir, cmd);
 	free_dtab(dir);
+	free (val);
 	return (res);
 }
 
@@ -50,6 +51,7 @@ static t_bool	not_path_need(char *cmd)
 	while (cmd[++i])
 		if (cmd[i] == '.')
 			res += 1;
+	i = -1;
 	while (cmd[++i])
 		if (cmd[i] == '/')
 			res += 1;

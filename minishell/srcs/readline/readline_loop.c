@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 14:10:48 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 18:43:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	readline_loop(t_mini *ms)
 		exec_cmds(ms);
 		free (input);
 		free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
+		free_pipes(ms->pipes);
+		free (ms->elem_pars);
 	}
+	free(input);
 }
 
 static t_bool	env_input(char *input)

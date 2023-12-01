@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 14:57:01 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:30:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,10 @@ t_pipes	*init_pipes(t_mini *ms)
 	oui->saved_fd_out = dup(STDOUT_FILENO);
 	oui->saved_fd_in = dup(STDIN_FILENO);
 	return (oui);
+}
+
+void	free_pipes(t_pipes *pipes)
+{
+	free(pipes->pid);
+	free(pipes);
 }

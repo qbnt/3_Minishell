@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 19:23:36 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 18:42:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
+	int	res;
+
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
@@ -23,16 +25,20 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 	close(ms->pipes->pipes[0]);
 	close(ms->pipes->pipes[1]);
 	if (ft_strcmp(cmd->str, "echo"))
-		ms->res = ft_echo(cmd);
+		res = ft_echo(cmd);
 	else if (ft_strcmp(cmd->str, "pwd"))
-		ms->res = ft_pwd();
+		res = ft_pwd();
 	else if (ft_strcmp(cmd->str, "env"))
-		ms->res = ft_env(ms->env);
+		res = ft_env(ms->env);
 	else if (ft_strcmp(cmd->str, "cd"))
-		ms->res = ft_cd(cmd, ms->env);
+		res = ft_cd(cmd, ms->env);
 	else
-		ms->res = select_syst_cmd(cmd, ms->env);
-	_exit(ms->res);
+		res = select_syst_cmd(cmd, ms->env);
+	free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
+	free_pipes(ms->pipes);
+	free(ms->elem_pars);
+	free_all(ms);
+	_exit(res);
 }
 
 void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)

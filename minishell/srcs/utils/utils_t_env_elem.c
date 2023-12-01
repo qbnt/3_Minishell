@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:49:47 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 14:37:57 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:24:05 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char	*t_env_elems_find_value_of(t_env_elems *env_elems, char *key)
 {
 	char	*value;
 
-	value = ft_calloc(sizeof(char), 1);
+	if (!key)
+		return (0);
 	while (env_elems && !ft_strcmp(env_elems->key, key))
 		env_elems = env_elems->next;
 	if (env_elems)
