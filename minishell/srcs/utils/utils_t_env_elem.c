@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:49:47 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 15:52:26 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:24:05 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ t_env_elems	*t_env_elems_first(char *key, char *value)
 	oui->prev = NULL;
 	oui->next = NULL;
 	oui->key = ft_strdup(key);
-	free(key);
 	oui->key_len = ft_strlen(oui->key);
 	oui->value = ft_strdup(value);
-	free(value);
 	oui->value_len = ft_strlen(oui->value);
 	return (oui);
 }
@@ -40,10 +38,8 @@ void	t_env_elems_next(t_env_elems *env_elems, char *key, char *value)
 	oui->prev = env_elems;
 	oui->next = NULL;
 	oui->key = ft_strdup(key);
-	free(key);
 	oui->key_len = ft_strlen(oui->key);
 	oui->value = ft_strdup(value);
-	free(value);
 	oui->value_len = ft_strlen(oui->value);
 	env_elems->next = oui;
 	env_elems = oui;
@@ -55,7 +51,6 @@ char	*t_env_elems_find_value_of(t_env_elems *env_elems, char *key)
 
 	if (!key)
 		return (0);
-	value = ft_calloc(sizeof(char), 1);
 	while (env_elems && !ft_strcmp(env_elems->key, key))
 		env_elems = env_elems->next;
 	if (env_elems)

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 15:38:01 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 18:43:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	readline_loop(t_mini *ms)
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
-//		input = readline("minishell v1.5 > ");
-		input = "echo $USER && ls | wc -l && (echo a || echo oups)";
+		input = readline("minishell v1.5 > ");
 		if (space_input(input))
 			continue ;
 		if (env_input(input))
@@ -38,10 +37,12 @@ void	readline_loop(t_mini *ms)
 		if (!ms->cmds)
 			continue ;
 		exec_cmds(ms);
-	//	free (input);
+		free (input);
 		free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
-		break ;
+		free_pipes(ms->pipes);
+		free (ms->elem_pars);
 	}
+	free(input);
 }
 
 static t_bool	env_input(char *input)

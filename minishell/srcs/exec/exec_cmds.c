@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 15:48:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:03:19 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	exec_cmds(t_mini *ms)
 		else
 			exec_simple_cmd(ms->cmds[i++], ms, 1);
 	}
-	return (free_pipes(ms->pipes), SUCCESS);
+	return (SUCCESS);
 }
 
 static t_bool	exec_prio_cmd(t_mini *ms, int *i)
