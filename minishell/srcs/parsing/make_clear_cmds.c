@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/01 18:18:05 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/02 12:22:09 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_mini *ms)
 	while (++i < elems->nb_cmd)
 	{
 		res[i] = cpy_cmd(pars, ms);
+		verif_wc(&res[i]);
 		while (pars && pars->token != OPP)
 			pars = pars->next;
 		while (pars && pars->token == OPP)
