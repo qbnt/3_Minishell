@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:45:21 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 17:07:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:59:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*find_redir_dir(t_pars **cmd)
 
 	dir = *cmd;
 	while (dir && (dir->token != REDIR && dir->token != RE_IN
-		&& dir->token != RE_OUT))
+			&& dir->token != RE_OUT))
 		dir = dir->next;
 	if (dir && dir->next)
 	{
@@ -47,7 +47,7 @@ int	all_redir_add(t_elem_pars *elem_pars)
 {
 	int	res;
 
-	res = elem_pars->nb_redir + elem_pars->nb_dredir_in +
-		elem_pars->nb_dredir_out;
+	res = elem_pars->nb_redir + elem_pars->nb_dredir_in
+		+ elem_pars->nb_dredir_out;
 	return (res);
 }
