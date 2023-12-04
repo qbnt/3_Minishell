@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:04:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/02 19:51:13 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:24:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	dir_lst_add(char *str, t_pars *dir_lst)
 	new_node->next = NULL;
 	dir_lst->next = new_node;
 }
-
 
 t_bool	star_ok(char *name, char *star)
 {
@@ -94,4 +93,16 @@ static t_bool	verif_star(char *prefix, char *suffix, char *name)
 			return (FALSE);
 	}
 	return (res);
+}
+
+void	init_change_star(t_pars **cmd, t_dir *dir)
+{
+	dir->dir = readdir(dir->d);
+	dir->dir_lst = dir_lst_create(*cmd, TRUE);
+	if (star_ok(dir->dir->d_name, (*cmd)->str) == TRUE)
+	{
+		dir_lst_add(dir->dir->d_name, dir->dir_lst);
+		dir->dir_lst = dir->dir_lst ->next;
+		dir->dir = readdir(dir->d);
+	}
 }

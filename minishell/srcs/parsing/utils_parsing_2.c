@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 15:44:20 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:02:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,10 @@ char	*clean_dol(char *str, t_mini *ms, t_token token)
 
 	i = 0;
 	tmp_str = str;
-	total_len = ft_strlen(str) + ft_dol_len_in_str(str, ms);
-	res_str = ft_calloc(sizeof(char), total_len + 1);
-	while (*str)
+	res_str = clear_dol_init(str, ms, &total_len);
+	while (*str && token != LIT_STR)
 	{
-		if (token != LIT_STR && *str == '$')
+		if (*str == '$')
 		{
 			if (*(str + 1) == 0)
 				return (str);
@@ -93,10 +92,12 @@ char	*clean_dol(char *str, t_mini *ms, t_token token)
 			else
 				i += switch_dol(&str, ms->env->env_elems, total_len, res_str);
 		}
-		if (*str && *str != '$')
+		else
 			res_str[i++] = *(str++);
 	}
-	return (free(tmp_str), res_str);
+	if (*res_str)
+		return (free(tmp_str), res_str);
+	return (free(res_str), tmp_str);
 }
 
 static int	switch_dol(char **str, t_env_elems *env, size_t total_len,

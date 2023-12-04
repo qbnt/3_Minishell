@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:08:56 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/21 19:15:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 13:58:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 /*----------------------------------------------------------------------------*/
 
-// Prend un char et renvoit un t_bool indiquant si le char est un whitespace ou
-//pas.
 t_bool	ft_is_whitespace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'

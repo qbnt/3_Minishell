@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 12:14:59 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 13:29:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 	int	res;
 
-	ft_print_t_pars(cmd);
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
