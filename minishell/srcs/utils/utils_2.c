@@ -14,6 +14,23 @@
 
 /*============================================================================*/
 
+int	ft_envlen(t_env *env)
+{
+	int i;
+
+	i = 0;
+	while (env->env_elems)
+	{
+		i++;
+		if (env->env_elems->next)
+			env->env_elems = env->env_elems->next;
+		else
+			break ;
+	}
+	env->env_elems = env->env_elems->first;
+	return (i);
+}
+
 int	ft_strcmp_ex(char const *s1, char const *s2)
 {
 	while ((unsigned char)*s1 == (unsigned char)*s2 && *s1)
