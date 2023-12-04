@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 11:45:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:24:22 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ char		*clean_dol(char *str, t_mini *ms, t_token token);
 t_in		*t_in_first(t_in *first, char c, int group);
 t_in		*t_in_add_back(t_in *in, char c, int group);
 void		free_t_in(t_in *in);
+char		*clear_dol_init(char *str, t_mini *ms, size_t *total_len);
 
 /*utils_t_pars.c*/
 t_pars		*t_pars_first(t_in **in);
@@ -145,6 +146,7 @@ void		verif_wc(t_pars **cmd);
 t_pars		*dir_lst_create(t_pars *cmd, t_bool start);
 void		dir_lst_add(char *str, t_pars *dir_lst);
 t_bool		star_ok(char *name, char *star);
+void		init_change_star(t_pars **cmd, t_dir *dir);
 
 /*utils_env.c*/
 t_env		*ft_envcpy(char **system_env);

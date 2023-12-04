@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:10:01 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 12:12:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:25:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	t_pars_remove_node(t_pars **node)
 	*node = NULL;
 }
 
-
 t_pars	*t_pars_switch_node(t_pars **old_node, t_pars **new_list)
 {
 	t_pars	*old;
@@ -68,8 +67,6 @@ t_pars	*t_pars_switch_node(t_pars **old_node, t_pars **new_list)
 	}
 	return (free(old->str), free(old), new_start);
 }
-
-
 
 void	verif_wc(t_pars **cmd)
 {
@@ -106,10 +103,7 @@ static t_pars	*change_star(t_pars **cmd)
 	dir.d = opendir(getcwd(dir.tmp, 250));
 	if (!dir.d)
 		return (closedir(dir.d), (*cmd));
-	dir.dir = readdir(dir.d);
-	dir.dir_lst = dir_lst_create(*cmd, TRUE);
-	if (star_ok(dir.dir->d_name, (*cmd)->str) == TRUE)
-		dir_lst_add(dir.dir->d_name, dir.dir_lst);
+	init_change_star(cmd, &dir);
 	while (dir.dir)
 	{
 		if (star_ok(dir.dir->d_name, (*cmd)->str) == TRUE)
@@ -125,5 +119,5 @@ static t_pars	*change_star(t_pars **cmd)
 		t_pars_remove_node(&dir.dir_lst->next);
 	if (dir.dir_lst && dir.dir_lst->first && dir.dir_lst->first->str != 0)
 		return (t_pars_switch_node(cmd, &dir.dir_lst->first));
-	return (free(dir.dir_lst), dir.dir_lst->first);
+	return (free(dir.dir_lst), *cmd);
 }
