@@ -6,22 +6,20 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/27 13:22:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 10:44:14 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//static void		clear_prev(t_pars *res);
-static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env);
+static t_pars	*cpy_cmd(t_pars *pars, t_mini *ms);
 static char		*clean_cote(char *str, t_token token);
 static int		clean_cote_loop(char *str, t_token token, char *res);
 static void		clear_cmd(char **str, char *res, int *i);
 
-
 /*----------------------------------------------------------------------------*/
 
-t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_env_elems *env)
+t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_mini *ms)
 {
 	t_pars	**res;
 	t_pars	*tmp;
@@ -32,7 +30,8 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_env_elems *env)
 	tmp = pars;
 	while (++i < elems->nb_cmd)
 	{
-		res[i] = cpy_cmd(pars, env);
+		res[i] = cpy_cmd(pars, ms);
+		verif_wc(&res[i]);
 		while (pars && pars->token != OPP)
 			pars = pars->next;
 		while (pars && pars->token == OPP)
@@ -42,7 +41,7 @@ t_pars	**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_env_elems *env)
 	return (res);
 }
 
-static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env)
+static t_pars	*cpy_cmd(t_pars *pars, t_mini *ms)
 {
 	t_pars	*cmd;
 
@@ -51,7 +50,7 @@ static t_pars	*cpy_cmd(t_pars *pars, t_env_elems *env)
 	cmd->first = cmd;
 	while (pars && pars->token != OPP)
 	{
-		cmd->str = clean_dol(clean_cote(pars->str, pars->token), env,
+		cmd->str = clean_dol(clean_cote(pars->str, pars->token), ms,
 				pars->token);
 		cmd->group = pars->group;
 		cmd->token = pars->token;

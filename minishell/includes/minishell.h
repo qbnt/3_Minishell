@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/28 17:30:08 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/04 14:24:22 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@
 
 # include <sys/ioctl.h>
 
-
 /*==================================Fonction==================================*/
 
 void		free_all(t_mini *ms);
+
+/*__________________________________Readline__________________________________*/
+
+/*readline_loop.c*/
+void		readline_loop(t_mini *ms);
 
 /*__________________________________Parsing___________________________________*/
 
@@ -58,16 +62,10 @@ t_pars		**parsing(char *input, t_mini *ms);
 t_elem_pars	*check_input(char *input);
 
 /*make_clear_cmds.c*/
-t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars,
-				t_env_elems *env);
+t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_mini *ms);
 
 /*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
-
-/*__________________________________Readline__________________________________*/
-
-/*readline_loop.c*/
-void		readline_loop(t_mini *ms);
 
 /*_________________________________Execution__________________________________*/
 
@@ -76,7 +74,8 @@ int			exec_cmds(t_mini *ms);
 void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
 /*exec_proces.c*/
-void		exec_child(t_pars *cmd, t_pipes *pipes, t_bool end, t_env *env);
+void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
+void		exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i);
 void		ft_waitpid(t_mini *ms);
 
 /*get_cmd_path.c*/
@@ -86,6 +85,7 @@ char		*get_cmd_path(char *cmd, t_env_elems *env);
 char		**get_dtab_cmd(t_pars *cmd);
 int			select_syst_cmd(t_pars *cmd, t_env *env);
 t_pipes		*init_pipes(t_mini *ms);
+void		free_pipes(t_pipes *pipes);
 
 /*________________________________Redirections________________________________*/
 
@@ -101,7 +101,7 @@ t_bool		redir_in_cmd(t_pars *cmd);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-int	    	ft_env(t_env *env);
+int			ft_env(t_env *env);
 int			ft_cd(t_pars *cmds, t_env *env);
 int			ft_export(t_pars *cmds, t_env *env);
 void		ft_tri(t_env *env);
@@ -109,7 +109,6 @@ int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
 
 /*__________________________________Signals___________________________________*/
-
 
 /*___________________________________Utils____________________________________*/
 
@@ -124,20 +123,30 @@ void		pars_is_redir(char **input, t_elem_pars **oui);
 t_bool		empty_parenth(char *input);
 void		select_opp(t_pars	*pars, t_pars **cmd);
 size_t		count_cote(char *str, t_token token);
-char		*clean_dol(char *str, t_env_elems *env, t_token token);
-
-/*utils_parsing_2.c*/
+char		*clean_dol(char *str, t_mini *ms, t_token token);
 
 /*utils_t_in.c*/
 t_in		*t_in_first(t_in *first, char c, int group);
 t_in		*t_in_add_back(t_in *in, char c, int group);
 void		free_t_in(t_in *in);
+char		*clear_dol_init(char *str, t_mini *ms, size_t *total_len);
 
 /*utils_t_pars.c*/
 t_pars		*t_pars_first(t_in **in);
 void		t_pars_add_next(t_in **in, t_pars *full_cmd);
 int			t_pars_pick_token(t_pars *arg);
 void		free_t_pars(t_pars *pars);
+
+/*utils_t_pars_2.c*/
+void		t_pars_remove_node(t_pars **node);
+t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
+void		verif_wc(t_pars **cmd);
+
+/*utils_t_pars_3.c*/
+t_pars		*dir_lst_create(t_pars *cmd, t_bool start);
+void		dir_lst_add(char *str, t_pars *dir_lst);
+t_bool		star_ok(char *name, char *star);
+void		init_change_star(t_pars **cmd, t_dir *dir);
 
 /*utils_env.c*/
 t_env		*ft_envcpy(char **system_env);
@@ -150,7 +159,7 @@ void		t_env_elems_free(t_env_elems *first);
 
 /*utils_t_env_elem_2.c*/
 char		*ft_cpy_dol(char *dol_str);
-size_t		ft_dol_len_in_str(char *str, t_env_elems *env);
+size_t		ft_dol_len_in_str(char *str, t_mini *ms);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
@@ -162,6 +171,8 @@ void		free_cmds_tab(t_pars **cmds, int nb_cmds);
 /*utils_2.c*/
 void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
+int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
+int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:04:32 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/18 13:14:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/11/29 19:22:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static int	is_cote(size_t *len, t_in **tmp, char cote)
 	}
 	return (0);
 }
-
 
 static int	is_end_cote_recursive(size_t *len, t_in **tmp, char cote)
 {

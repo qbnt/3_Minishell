@@ -6,11 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/22 16:32:41 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:02:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	switch_dol(char **str, t_env_elems *env, size_t total_len,
+				char *res_str);
 
 /*============================================================================*/
 
@@ -68,32 +71,49 @@ size_t	count_cote(char *str, t_token token)
 	return (res);
 }
 
-char	*clean_dol(char *str, t_env_elems *env, t_token token)
+char	*clean_dol(char *str, t_mini *ms, t_token token)
 {
 	int		i;
 	size_t	total_len;
 	char	*res_str;
-	char	*tmp;
 	char	*tmp_str;
 
 	i = 0;
 	tmp_str = str;
-	total_len = ft_strlen(str) + ft_dol_len_in_str(str, env);
-	res_str = ft_calloc(sizeof(char), total_len + 1);
-	while (*str)
+	res_str = clear_dol_init(str, ms, &total_len);
+	while (*str && token != LIT_STR)
 	{
-		if (token != LIT_STR && *str == '$')
+		if (*str == '$')
 		{
-			str ++;
-			tmp = ft_cpy_dol(str);
-			ft_strlcat(res_str, t_env_elems_find_value_of(env, tmp),
-				total_len + 1);
-			str += ft_strlen(tmp);
-			i += ft_strlen(t_env_elems_find_value_of(env, tmp));
-			free (tmp);
+			if (*(str + 1) == 0)
+				return (str);
+			if (*(str + 1) == '?')
+				i += switch_res(&str, ms, total_len, res_str);
+			else
+				i += switch_dol(&str, ms->env->env_elems, total_len, res_str);
 		}
-		if (*str && *str != '$')
+		else
 			res_str[i++] = *(str++);
 	}
-	return (free(tmp_str), res_str);
+	if (*res_str)
+		return (free(tmp_str), res_str);
+	return (free(res_str), tmp_str);
+}
+
+static int	switch_dol(char **str, t_env_elems *env, size_t total_len,
+	char *res_str)
+{
+	char	*tmp;
+	char	*tmp2;
+	int		i;
+
+	i = 0;
+	tmp = ft_cpy_dol(++(*str));
+	tmp2 = t_env_elems_find_value_of(env, tmp);
+	ft_strlcat(res_str, tmp2, total_len + 1);
+	(*str) += ft_strlen(tmp);
+	i += ft_strlen(tmp2);
+	free (tmp);
+	free (tmp2);
+	return (i);
 }
