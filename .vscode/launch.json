@@ -1,26 +1,45 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Program",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/minishell/minishell",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
         {
-            "name": "Launch Program",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/minishell/minishell", // Changez ceci pour le chemin de votre exécutable
-            "args": [], // Ajoutez ici les arguments de ligne de commande si nécessaire
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Activer la mise en forme pour gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build", // Assurez-vous que cette tâche existe dans tasks.json
-            "miDebuggerPath": "/usr/bin/gdb" // Assurez-vous que le chemin est correct
+          "description": "Activer la mise en forme pour gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
         }
-    ]
+      ],
+      "preLaunchTask": "build",
+      "miDebuggerPath": "/usr/bin/gdb"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/nfs/homes/qpuig/42work/3Minishell/minishell/srcs/builtin",
+      "program": "/nfs/homes/qpuig/42work/3Minishell/minishell/srcs/builtin/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
 }
