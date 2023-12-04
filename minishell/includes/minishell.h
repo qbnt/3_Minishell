@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 15:50:44 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 11:45:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@
 
 void		free_all(t_mini *ms);
 
+/*__________________________________Readline__________________________________*/
+
+/*readline_loop.c*/
+void		readline_loop(t_mini *ms);
+
 /*__________________________________Parsing___________________________________*/
 
 /*parsing.c*/
@@ -61,11 +66,6 @@ t_pars		**make_clear_cmds(t_elem_pars *elems, t_pars *pars, t_mini *ms);
 
 /*ft_nodelen.c*/
 size_t		ft_nodelen(t_in **in);
-
-/*__________________________________Readline__________________________________*/
-
-/*readline_loop.c*/
-void		readline_loop(t_mini *ms);
 
 /*_________________________________Execution__________________________________*/
 
@@ -101,7 +101,7 @@ t_bool		redir_in_cmd(t_pars *cmd);
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
 void		ft_exit(void);
-int	    ft_env(t_env *env);
+int			ft_env(t_env *env);
 int			ft_cd(t_pars *cmds, t_env *env);
 int			ft_export(t_pars *cmds, t_env *env);
 void		ft_tri(t_env *env);
@@ -125,8 +125,6 @@ void		select_opp(t_pars	*pars, t_pars **cmd);
 size_t		count_cote(char *str, t_token token);
 char		*clean_dol(char *str, t_mini *ms, t_token token);
 
-/*utils_parsing_2.c*/
-
 /*utils_t_in.c*/
 t_in		*t_in_first(t_in *first, char c, int group);
 t_in		*t_in_add_back(t_in *in, char c, int group);
@@ -137,6 +135,16 @@ t_pars		*t_pars_first(t_in **in);
 void		t_pars_add_next(t_in **in, t_pars *full_cmd);
 int			t_pars_pick_token(t_pars *arg);
 void		free_t_pars(t_pars *pars);
+
+/*utils_t_pars_2.c*/
+void		t_pars_remove_node(t_pars **node);
+t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
+void		verif_wc(t_pars **cmd);
+
+/*utils_t_pars_3.c*/
+t_pars		*dir_lst_create(t_pars *cmd, t_bool start);
+void		dir_lst_add(char *str, t_pars *dir_lst);
+t_bool		star_ok(char *name, char *star);
 
 /*utils_env.c*/
 t_env		*ft_envcpy(char **system_env);
@@ -162,6 +170,7 @@ void		free_cmds_tab(t_pars **cmds, int nb_cmds);
 void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
 int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
+int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

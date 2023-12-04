@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/29 17:17:52 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:56:37 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_STRUCT_H
 
 # include <signal.h>
+# include <dirent.h>
 
 typedef int	t_token;
 typedef int	t_bool;
@@ -26,7 +27,6 @@ typedef struct s_in{
 	struct s_in			*prev;
 	struct s_in			*first;
 }	t_in;
-
 typedef struct s_elem_pars{
 	int					nb_cmd;
 	int					nb_pipe;
@@ -63,6 +63,12 @@ typedef struct s_pars{
 	struct s_pars		*prev;
 	struct s_pars		*first;
 }	t_pars;
+typedef struct s_dir{
+	t_pars				*dir_lst;
+	DIR					*d;
+	struct dirent		*dir;
+	char				tmp[250];
+}	t_dir;
 typedef struct s_env_elems{
 	char				*key;
 	char				*value;

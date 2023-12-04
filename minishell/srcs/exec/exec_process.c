@@ -6,11 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/01 18:42:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 12:14:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_child(t_mini *ms);
 
 /*============================================================================*/
 
@@ -18,6 +20,7 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 	int	res;
 
+	ft_print_t_pars(cmd);
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
@@ -32,12 +35,11 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		res = ft_env(ms->env);
 	else if (ft_strcmp(cmd->str, "cd"))
 		res = ft_cd(cmd, ms->env);
+	else if (ft_strcmp(cmd->str, "export"))
+		res = ft_export(cmd, ms->env);
 	else
 		res = select_syst_cmd(cmd, ms->env);
-	free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
-	free_pipes(ms->pipes);
-	free(ms->elem_pars);
-	free_all(ms);
+	free_child(ms);
 	_exit(res);
 }
 
@@ -72,4 +74,12 @@ void	ft_waitpid(t_mini *ms)
 		if (WIFEXITED(ms->pipes->status))
 			ms->res = WEXITSTATUS(ms->pipes->status);
 	}
+}
+
+static void	free_child(t_mini *ms)
+{
+	free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
+	free_pipes(ms->pipes);
+	free(ms->elem_pars);
+	free_all(ms);
 }
