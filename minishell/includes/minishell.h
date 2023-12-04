@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 14:24:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:07:35 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,12 @@ void		free_pipes(t_pipes *pipes);
 /*________________________________Redirections________________________________*/
 
 /*redirections.c*/
-void		redirections(t_mini *ms);
+void		redirections(t_pars **cmd, t_mini *ms);
 
 /*utils_redir.c*/
 t_bool		redir_in_cmd(t_pars *cmd);
+char		*find_redir_dir(t_pars **cmd);
+int			all_redir_add(t_elem_pars *elem_pars);
 
 /*__________________________________Builtins__________________________________*/
 

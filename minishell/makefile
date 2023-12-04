@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
+#    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/12/04 15:47:02 by qpuig            ###   ########.fr        #
+#    Updated: 2023/12/04 16:09:33 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC_FILES = main.c \
 			parsing/set_in_to_t_pars.c \
 			parsing/utils_parsing.c \
 			parsing/utils_parsing_2.c \
+			redirections/redirections.c \
+			redirections/utils_redir.c \
 			exec/exec_cmds.c \
 			exec/exec_process.c \
 			exec/get_cmd_path.c \

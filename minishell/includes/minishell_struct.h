@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/02 17:56:37 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:56:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_dir{
 	t_pars				*dir_lst;
 	DIR					*d;
 	struct dirent		*dir;
-	char				tmp[250];
+	char				tmp[2048];
 }	t_dir;
 typedef struct s_env_elems{
 	char				*key;

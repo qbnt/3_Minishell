@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:10:01 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 14:25:06 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:57:56 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static t_pars	*change_star(t_pars **cmd)
 {
 	t_dir	dir;
 
-	dir.d = opendir(getcwd(dir.tmp, 250));
+	dir.d = opendir(getcwd(dir.tmp, 2048));
 	if (!dir.d)
 		return (closedir(dir.d), (*cmd));
 	init_change_star(cmd, &dir);
