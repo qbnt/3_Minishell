@@ -3,16 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:04:44 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/02 19:46:01 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:46:47 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*============================================================================*/
+
+int	ft_strchr_ex(const char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	if (c == 0)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == (char)c)
+			return (1);
+		i ++;
+	}
+	return (0);
+}
 
 int	ft_envlen(t_env *env)
 {

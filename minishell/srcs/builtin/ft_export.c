@@ -6,11 +6,50 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/11/28 17:40:00 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/04 15:45:33 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_egal_ex(t_env *env, t_pars *cmds)
+{
+	int	i;
+	int	len;
+	int	j;
+	char	*key;
+	char	*value;
+
+	i = 0;
+	len = 0;
+	while (cmds->str[i])
+	{
+		if (cmds->str[i] == '=')
+			{
+				key = ft_calloc((i + 1), sizeof(char));
+				while (len < i)
+				{
+					key[len] = cmds->str[len];
+					len++;
+				}
+				break ;
+			}
+		i++;
+	}
+	while (cmds->str[i])
+		i++;
+	value = ft_calloc((i - len + 1), sizeof(char));
+	j = 0;
+	while (len <= i)
+		value[j++] = cmds->str[++len];
+	while (env->env_elems->next)
+		env->env_elems = env->env_elems->next;
+	t_env_elems_next(env->env_elems, key, value);
+	env->env_elems = env->env_elems->first;
+	free(key);
+	free(value);
+}
+
 
 void	ft_tri(t_env *env)
 {
