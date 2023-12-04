@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 14:24:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:56:54 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,9 @@ void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
 int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
+
+/*utils_3.c*/
+char	*ft_getenv(t_env *env, char *str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
