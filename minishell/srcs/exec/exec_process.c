@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 12:30:35 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 16:18:50 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,7 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		redirections(&cmd, ms);
 	close(ms->pipes->pipes[0]);
 	close(ms->pipes->pipes[1]);
-	if (ft_strcmp(cmd->str, "echo"))
-		res = ft_echo(cmd);
-	else if (ft_strcmp(cmd->str, "pwd"))
-		res = ft_pwd();
-	else if (ft_strcmp(cmd->str, "env"))
-		res = ft_env(ms->env);
-	else if (ft_strcmp(cmd->str, "cd"))
-		res = ft_cd(cmd, ms->env);
-	else if (ft_strcmp(cmd->str, "export"))
-		res = ft_export(cmd, ms->env);
-	else
-		res = select_syst_cmd(cmd, ms->env);
+	res = select_syst_cmd(cmd, ms->env);
 	free_child(ms);
 	_exit(res);
 }

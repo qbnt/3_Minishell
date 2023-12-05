@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/12/05 14:39:22 by qbanet           ###   ########.fr        #
+#    Updated: 2023/12/05 16:20:47 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_FILES = main.c \
 			redirections/utils_redir.c \
 			signaux/signaux.c \
 			exec/exec_cmds.c \
+			exec/exec_builtin.c \
 			exec/exec_process.c \
 			exec/get_cmd_path.c \
 			exec/utils_exec.c \

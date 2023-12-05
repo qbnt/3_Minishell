@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 14:20:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 16:20:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ size_t		ft_nodelen(t_in **in);
 /*exec_cmds.c*/
 int			exec_cmds(t_mini *ms);
 void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
+
+/*exec_builtin.c*/
+t_bool		is_builtin(char *cmd);
+void		make_builtin(t_pars *cmd, t_mini *ms, t_bool end);
 
 /*exec_proces.c*/
 void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);

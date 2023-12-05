@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 14:48:26 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:37:09 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	readline_loop(t_mini *ms)
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
-		input = readline("minishell v1.5 > ");
+		input = readline(MS_NAME);
 		if (!input)
 			break ;
 		if (space_input(input))

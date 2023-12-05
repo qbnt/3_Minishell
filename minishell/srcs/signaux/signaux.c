@@ -6,13 +6,15 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:37:23 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 14:53:21 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:57:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	signal_handler(int signal);
+static void	sigint_handler(void);
+static void	sigquit_handler(void);
 
 /*============================================================================*/
 
@@ -30,9 +32,20 @@ void	signaux(t_signial *sig)
 
 static void	signal_handler(int signal)
 {
-	TEST1 ;
 	if (signal == SIGINT)
-		printf("SIGINT recu mais ignore\n");
+		sigint_handler();
 	else if (signal == SIGQUIT)
-		printf("SIGQUIT recu mais ignore\n");
+		sigquit_handler();
+}
+
+static void	sigint_handler(void)
+{
+	rl_on_new_line();
+	rl_replace_line("^C\n", 0);
+	rl_redisplay();
+}
+
+static void	sigquit_handler(void)
+{
+	printf("SIGQUIT recu mais ignore\n");
 }
