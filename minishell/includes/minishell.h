@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
 /*   Updated: 2023/12/05 12:02:51 by qbanet           ###   ########.fr       */
@@ -185,6 +185,7 @@ int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 /*utils_3.c*/
 char		*ft_strndup(const char *s, size_t size);
 char		*ft_strcat(char *dest, char *src);
+char	  *ft_getenv(t_env *env, char *str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
