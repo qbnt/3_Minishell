@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:12 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/20 13:16:59 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:42:01 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,7 @@
 /*ft_print_t_in*/
 # define ID				1
 # define CHAR			2
+
+# define MS_NAME		"Minishell > "
+
 #endif

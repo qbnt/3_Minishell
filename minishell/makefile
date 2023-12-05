@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/12/04 20:00:19 by qbanet           ###   ########.fr        #
+#    Updated: 2023/12/05 16:20:47 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ SRC_FILES = main.c \
 			redirections/redirections.c \
 			redirections/redir_types.c \
 			redirections/utils_redir.c \
+			signaux/signaux.c \
 			exec/exec_cmds.c \
+			exec/exec_builtin.c \
 			exec/exec_process.c \
 			exec/get_cmd_path.c \
 			exec/utils_exec.c \
@@ -72,7 +74,7 @@ BLUE = \033[34m
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline 
 	@echo "$(GREEN)Compilation successful!$(RESET)"
 	@sleep 0
 	@clear

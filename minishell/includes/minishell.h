@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 12:02:51 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 16:20:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ size_t		ft_nodelen(t_in **in);
 int			exec_cmds(t_mini *ms);
 void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
+/*exec_builtin.c*/
+t_bool		is_builtin(char *cmd);
+void		make_builtin(t_pars *cmd, t_mini *ms, t_bool end);
+
 /*exec_proces.c*/
 void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
 void		exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i);
@@ -116,7 +120,10 @@ void		ft_tri(t_env *env);
 int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
 
-/*__________________________________Signals___________________________________*/
+/*__________________________________Signaux___________________________________*/
+
+/*signaux.c*/
+void		signaux(t_signial *sig);
 
 /*___________________________________Utils____________________________________*/
 
@@ -185,7 +192,7 @@ int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 /*utils_3.c*/
 char		*ft_strndup(const char *s, size_t size);
 char		*ft_strcat(char *dest, char *src);
-char	  *ft_getenv(t_env *env, char *str);
+char		*ft_getenv(t_env *env, char *str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
