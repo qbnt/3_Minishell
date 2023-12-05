@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 16:45:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 17:45:41 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	readline_loop(t_mini *ms)
 			continue ;
 		exec_cmds(ms);
 		free_loop(input, ms);
-		break ;
 	}
 	rl_clear_history();
 }
