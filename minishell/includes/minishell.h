@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 16:20:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 16:42:06 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char		*copy_in(char *delimiter);
 /*builtins.c*/
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
-void		ft_exit(void);
+void		ft_exit(t_pars *cmd, t_mini **ms);
 int			ft_env(t_env *env);
 int			ft_cd(t_pars *cmds, t_env *env);
 int			ft_export(t_pars *cmds, t_env *env);

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:11:48 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 16:25:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 16:41:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	make_builtin(t_pars *cmd, t_mini *ms, t_bool end)
 	if (ft_strcmp(cmd->str, "echo"))
 		ms->res = ft_echo(cmd);
 	else if (ft_strcmp(cmd->str, "exit"))
-		ft_exit();
+		ft_exit(cmd, &ms);
 	else if (ft_strcmp(cmd->str, "pwd"))
 		ms->res = ft_pwd();
 	else if (ft_strcmp(cmd->str, "env"))
