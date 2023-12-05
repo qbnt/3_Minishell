@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 12:39:15 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:20:04 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int			ft_strcmp_ex(char const *s1, char const *s2);
 /*__________________________________Signaux___________________________________*/
 
 /*signaux.c*/
-void		signaux(void);
+void		signaux(t_signial *sig);
 
 /*___________________________________Utils____________________________________*/
 
@@ -188,7 +188,7 @@ int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 /*utils_3.c*/
 char		*ft_strndup(const char *s, size_t size);
 char		*ft_strcat(char *dest, char *src);
-char	  *ft_getenv(t_env *env, char *str);
+char		*ft_getenv(t_env *env, char *str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
