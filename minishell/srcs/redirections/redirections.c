@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:41:36 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 21:46:29 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 08:43:02 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**save_files_redir(t_pars *tmp, t_elem_pars *elem_pars);
 static void	make_redir(t_pars **cmd, char **files, t_mini *ms);
-static void	siple_redir(char *redirtype, char *file);
+static void	siple_redir(t_pars **cmd, char *file);
 static void	dredir_stdin(char *file);
 
 /*============================================================================*/
@@ -22,15 +22,18 @@ static void	dredir_stdin(char *file);
 void	redirections(t_pars **cmd, t_mini *ms)
 {
 	char	**file;
+	t_pars	*save;
 	t_pars	*tmp;
 	int		i;
 
 	tmp = *cmd;
+	save = (*cmd)->first;
 	i = 0;
 	i += 0;
 	file = save_files_redir(tmp, ms->elem_pars);
 	make_redir(cmd, file, ms);
 	free_dtab(file);
+	(*cmd) = save;
 }
 
 static char	**save_files_redir(t_pars *tmp, t_elem_pars *elem_pars)
@@ -59,21 +62,23 @@ static void	make_redir(t_pars **cmd, char **files, t_mini *ms)
 	while (*cmd)
 	{
 		if ((*cmd)->token == REDIR || (*cmd)->token == RE_IN)
-			siple_redir((*cmd)->str, files[i++]);
+			siple_redir((cmd), files[i++]);
 		else if ((*cmd)->token == RE_OUT)
 			dredir_stdin(files[i++]);
-		*cmd = (*cmd)->next;
+		else
+			*cmd = (*cmd)->next;
 	}
 }
 
-static void	siple_redir(char *redirtype, char *file)
+static void	siple_redir(t_pars **cmd, char *file)
 {
-	if (ft_strcmp(redirtype, ">"))
+	if (ft_strcmp((*cmd)->str, ">"))
 		sredir_out(file);
-	else if (ft_strcmp(redirtype, ">>"))
+	else if (ft_strcmp((*cmd)->str, ">>"))
 		dredir_out(file);
-	else if (ft_strcmp(redirtype, "<"))
+	else if (ft_strcmp((*cmd)->str, "<"))
 		sredir_in(file);
+	*cmd = t_pars_remove_node(cmd);
 }
 
 static void	dredir_stdin(char *delimiter)
@@ -90,7 +95,7 @@ static void	dredir_stdin(char *delimiter)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
-		if (ft_strcmp(line, delimiter) == FALSE)
+		if (ft_strcmp(line, delimiter) == TRUE)
 		{
 			free(line);
 			break ;
@@ -98,4 +103,3 @@ static void	dredir_stdin(char *delimiter)
 		free(line);
 	}
 }
-

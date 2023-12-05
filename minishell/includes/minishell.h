@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 20:22:08 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 08:40:33 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int			t_pars_pick_token(t_pars *arg);
 void		free_t_pars(t_pars *pars);
 
 /*utils_t_pars_2.c*/
-void		t_pars_remove_node(t_pars **node);
+t_pars		*t_pars_remove_node(t_pars **node);
 t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
 void		verif_wc(t_pars **cmd);
 

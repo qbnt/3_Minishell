@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:10:01 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 21:32:53 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 08:41:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ static t_pars	*change_star(t_pars **cmd);
 
 /*============================================================================*/
 
-void	t_pars_remove_node(t_pars **node)
+t_pars	*t_pars_remove_node(t_pars **node)
 {
 	t_pars	*tmp;
+	t_pars	*res;
 
 	if (!node || !*node)
-		return ;
+		return (NULL);
 	tmp = *node;
 	if (tmp->prev)
 	{
@@ -34,9 +35,11 @@ void	t_pars_remove_node(t_pars **node)
 	{
 		tmp->next->prev = NULL;
 	}
+	res = tmp->next;
 	free(tmp->str);
 	free(tmp);
 	*node = NULL;
+	return (res);
 }
 
 t_pars	*t_pars_switch_node(t_pars **old_node, t_pars **new_list)
