@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:45:21 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 19:59:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 12:00:37 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,27 @@ int	all_redir_add(t_elem_pars *elem_pars)
 
 	res = elem_pars->nb_redir + elem_pars->nb_dredir_in
 		+ elem_pars->nb_dredir_out;
+	return (res);
+}
+
+char	*copy_in(char *delimiter)
+{
+	char	*line;
+	char	*res;
+
+	res = NULL;
+	while (1)
+	{
+		write(1, "> ", 2);
+		line = get_next_line(STDIN_FILENO);
+		if (!ft_strncmp(line, delimiter, ft_strlen(delimiter))
+			&& ft_strlen(delimiter) == ft_strlen(line) - 1)
+		{
+			free(line);
+			break ;
+		}
+		res = ft_strcat(res, line);
+		free(line);
+	}
 	return (res);
 }

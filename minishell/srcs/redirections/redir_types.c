@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:59:46 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 21:38:43 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:09:11 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	dredir_out(char *file)
 void	sredir_in(char *file)
 {
 	int		fd;
-//	char	*tmp;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)

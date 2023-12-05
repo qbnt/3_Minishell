@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 08:40:33 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 12:02:51 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		sredir_in(char *file);
 t_bool		redir_in_cmd(t_pars *cmd);
 char		*find_redir_dir(t_pars **cmd);
 int			all_redir_add(t_elem_pars *elem_pars);
+char		*copy_in(char *delimiter);
 
 /*__________________________________Builtins__________________________________*/
 
@@ -180,6 +181,10 @@ void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
 int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
+
+/*utils_3.c*/
+char		*ft_strndup(const char *s, size_t size);
+char		*ft_strcat(char *dest, char *src);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

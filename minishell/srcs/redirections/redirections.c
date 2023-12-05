@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:41:36 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 08:43:02 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 12:30:14 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	**save_files_redir(t_pars *tmp, t_elem_pars *elem_pars);
 static void	make_redir(t_pars **cmd, char **files, t_mini *ms);
 static void	siple_redir(t_pars **cmd, char *file);
-static void	dredir_stdin(char *file);
+static void	dredir_stdin(char *file, t_pars **cmd);
 
 /*============================================================================*/
 
@@ -64,7 +64,7 @@ static void	make_redir(t_pars **cmd, char **files, t_mini *ms)
 		if ((*cmd)->token == REDIR || (*cmd)->token == RE_IN)
 			siple_redir((cmd), files[i++]);
 		else if ((*cmd)->token == RE_OUT)
-			dredir_stdin(files[i++]);
+			dredir_stdin(files[i++], cmd);
 		else
 			*cmd = (*cmd)->next;
 	}
@@ -81,25 +81,23 @@ static void	siple_redir(t_pars **cmd, char *file)
 	*cmd = t_pars_remove_node(cmd);
 }
 
-static void	dredir_stdin(char *delimiter)
+static void	dredir_stdin(char *delimiter, t_pars **cmd)
 {
-	char	*line;
+	char	*res;
+	int		r_pipe[2];
 
-	if (*delimiter == 0)
+	res = NULL;
+	if (delimiter && *delimiter == 0)
 	{
 		printf("syntax error near unexpected token `newline'\n");
 		_exit(FAIL);
 	}
-	printf("deli = %s\n", delimiter);
-	while (1)
-	{
-		write(1, "> ", 2);
-		line = get_next_line(STDIN_FILENO);
-		if (ft_strcmp(line, delimiter) == TRUE)
-		{
-			free(line);
-			break ;
-		}
-		free(line);
-	}
+	if (pipe(r_pipe) == -1)
+		_exit(FAIL);
+	res = copy_in(delimiter);
+	write(r_pipe[1], res, ft_strlen(res));
+	close (r_pipe[1]);
+	dup2(r_pipe[0], STDIN_FILENO);
+	close (r_pipe[0]);
+	*cmd = t_pars_remove_node(cmd);
 }
