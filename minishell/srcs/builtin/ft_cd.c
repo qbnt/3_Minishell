@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:38:58 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/04 10:51:12 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:59:53 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_cd(t_pars *cmds, t_env *env)
 {
-
 	char	*old;
 
 	if (cmds->next)

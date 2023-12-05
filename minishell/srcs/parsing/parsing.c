@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:52:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/01 17:34:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:02:33 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ t_pars	**parsing(char *input, t_mini *ms)
 t_elem_pars	*check_input(char *input)
 {
 	t_elem_pars	*oui;
+	int			i;
 
+	i = 0;
 	oui = ft_calloc(sizeof(t_elem_pars), 1);
 	oui->nb_cmd = 1;
+	while (ft_is_whitespace(input[i]))
+		i ++;
+	if (input[i] == '|' || input[i] == '&')
+		return (NULL);
 	while (*input)
 	{
 		elem_count(oui, &input);

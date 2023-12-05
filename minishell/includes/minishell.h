@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 15:56:54 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/05 12:02:51 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,18 @@ void		free_pipes(t_pipes *pipes);
 /*________________________________Redirections________________________________*/
 
 /*redirections.c*/
-void		redirections(t_mini *ms);
+void		redirections(t_pars **cmd, t_mini *ms);
+
+/*redir_types.c*/
+void		sredir_out(char *file);
+void		dredir_out(char *file);
+void		sredir_in(char *file);
 
 /*utils_redir.c*/
 t_bool		redir_in_cmd(t_pars *cmd);
+char		*find_redir_dir(t_pars **cmd);
+int			all_redir_add(t_elem_pars *elem_pars);
+char		*copy_in(char *delimiter);
 
 /*__________________________________Builtins__________________________________*/
 
@@ -138,7 +146,7 @@ int			t_pars_pick_token(t_pars *arg);
 void		free_t_pars(t_pars *pars);
 
 /*utils_t_pars_2.c*/
-void		t_pars_remove_node(t_pars **node);
+t_pars		*t_pars_remove_node(t_pars **node);
 t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
 void		verif_wc(t_pars **cmd);
 
@@ -175,7 +183,9 @@ int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 
 /*utils_3.c*/
-char	*ft_getenv(t_env *env, char *str);
+char		*ft_strndup(const char *s, size_t size);
+char		*ft_strcat(char *dest, char *src);
+char	  *ft_getenv(t_env *env, char *str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

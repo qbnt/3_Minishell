@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 13:29:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 12:30:35 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
 		dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
+	if (redir_in_cmd(cmd))
+		redirections(&cmd, ms);
 	close(ms->pipes->pipes[0]);
 	close(ms->pipes->pipes[1]);
 	if (ft_strcmp(cmd->str, "echo"))
