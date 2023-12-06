@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 14:38:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:30:34 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
 				ms->res = WEXITSTATUS(ms->pipes->status);
 		}
 		else
+		{
 			ft_waitpid(ms);
+			clear_in_out(ms);
+		}
 	}
 }
 

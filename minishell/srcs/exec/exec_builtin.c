@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:11:48 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 15:14:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:32:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	make_builtin(t_pars *cmd, t_mini *ms, t_bool end)
 		dup2(ms->pipes->pipes[0], STDIN_FILENO);
 	else
 		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
+	dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
 	close(ms->pipes->pipes[1]);
 	close(ms->pipes->pipes[0]);
 	return ;

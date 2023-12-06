@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 14:38:27 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:07:37 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,20 @@ void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
 		i++;
 	ms->res = 42;
 	pipe(ms->pipes->pipes);
-	if (is_builtin(cmd->str) == TRUE && !cmd->pipe_op)
+	if (is_builtin(cmd->str) == TRUE)
 	{
+		if (!end)
+			dup2(ms->pipes->pipes[1], STDOUT_FILENO);
+		else
+			dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
+		make_builtin(cmd, ms, end);
+		if (!end)
+			dup2(ms->pipes->pipes[0], STDIN_FILENO);
+		else
+			dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
 		close(ms->pipes->pipes[1]);
 		close(ms->pipes->pipes[0]);
-		make_builtin(cmd, ms, end);
-		return (clear_in_out(ms));
+		return ;
 	}
 	ms->pipes->pid[i] = fork();
 	if (ms->pipes->pid[i] < 0)
