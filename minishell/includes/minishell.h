@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 15:56:54 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/04 16:01:08 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
 int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
+int			ft_strchr_ex(const char *str, int c);
 
 /*utils_3.c*/
 char	*ft_getenv(t_env *env, char *str);

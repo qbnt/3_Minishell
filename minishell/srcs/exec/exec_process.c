@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 13:29:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:54:02 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	free_child(t_mini *ms);
 void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 	int	res;
+	char	*a;
 
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
@@ -38,6 +39,10 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		res = ft_export(cmd, ms->env);
 	else
 		res = select_syst_cmd(cmd, ms->env);
+	a = ft_calloc(4097, sizeof(char));
+	getcwd(a, 4096);
+	ft_printf("%s\n", a);
+	free(a);
 	free_child(ms);
 	_exit(res);
 }
