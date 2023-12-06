@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-//ECHO : cette fonction prends en parametre le t_pars correspondant a la commande echo et print les parametres
-//si le parametre -n est specifie la newline n est pas ajoutee
+static void	arg_token_case(t_pars **cmds, int *i);
+static void	str_tokens_case(t_pars **cmds);
 
 int	ft_echo(t_pars *cmds)
 {
@@ -26,18 +26,9 @@ int	ft_echo(t_pars *cmds)
 	while (cmds)
 	{
 		if (cmds->token == 11)
-		{
-			while (cmds->str[i] && cmds->str[i] == 'n')
-				i++;
-			if (cmds->str[i] && (cmds->str[i] != 'n'))
-				cmds->token = 12;
-		}
+			arg_token_case(&cmds, &i);
 		if (cmds->token == 12 || cmds->token == 18)
-		{
-			ft_printf("%s", cmds->str);
-			if (cmds->next)
-				ft_printf(" ");
-		}
+			str_tokens_case(&cmds);
 		if (cmds->token == 11)
 			flag = 1;
 		if (cmds->next)
@@ -50,5 +41,17 @@ int	ft_echo(t_pars *cmds)
 	return (SUCCESS);
 }
 
-// export
-// unset
+static void	str_tokens_case(t_pars **cmds)
+{
+	ft_printf("%s", (*cmds)->str);
+	if ((*cmds)->next)
+		ft_printf(" ");
+}
+
+static void	arg_token_case(t_pars **cmds, int *i)
+{
+	while ((*cmds)->str[*i] && (*cmds)->str[*i] == 'n')
+		(*i)++;
+	if ((*cmds)->str[*i] && ((*cmds)->str[*i] != 'n'))
+		(*cmds)->token = 12;
+}

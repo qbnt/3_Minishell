@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/04 15:54:31 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/06 12:03:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_egal_ex(t_env *env, t_pars *cmds)
 {
-	int	i;
-	int	len;
-	int	j;
+	int		i;
+	int		len;
+	int		j;
 	char	*key;
 	char	*value;
 
@@ -25,15 +25,15 @@ void	ft_egal_ex(t_env *env, t_pars *cmds)
 	while (cmds->str[i])
 	{
 		if (cmds->str[i] == '=')
+		{
+			key = ft_calloc((i + 1), sizeof(char));
+			while (len < i)
 			{
-				key = ft_calloc((i + 1), sizeof(char));
-				while (len < i)
-				{
-					key[len] = cmds->str[len];
-					len++;
-				}
-				break ;
+				key[len] = cmds->str[len];
+				len++;
 			}
+			break ;
+		}
 		i++;
 	}
 	while (cmds->str[i])
@@ -50,12 +50,11 @@ void	ft_egal_ex(t_env *env, t_pars *cmds)
 	free(value);
 }
 
-
 void	ft_tri(t_env *env)
 {
-	int	i;
-	int	envlen;
-	char	**dbtab;
+	int			i;
+	int			envlen;
+	char		**dbtab;
 	t_env_elems	*travel;
 
 	envlen = ft_envlen(env);
@@ -95,11 +94,12 @@ int	ft_export(t_pars *cmds, t_env *env)
 	cmds = cmds->next;
 	while (cmds)
 	{
-		if ((ft_isalpha(cmds->str[0]) == 1) && (ft_strchr_ex(cmds->str, '=') == 1))
+		if ((ft_isalpha(cmds->str[0]) == 1)
+			&& (ft_strcmp_ex(cmds->str, "=") == 1))
 			ft_egal_ex(env, cmds);
 		if (cmds->next)
 			cmds = cmds->next;
-		else 
+		else
 			break ;
 	}
 	return (SUCCESS);

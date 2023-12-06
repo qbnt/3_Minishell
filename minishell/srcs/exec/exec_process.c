@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 13:29:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:30:34 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,11 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
 	else
 		dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
+	if (redir_in_cmd(cmd))
+		redirections(&cmd, ms);
 	close(ms->pipes->pipes[0]);
 	close(ms->pipes->pipes[1]);
-	if (ft_strcmp(cmd->str, "echo"))
-		res = ft_echo(cmd);
-	else if (ft_strcmp(cmd->str, "pwd"))
-		res = ft_pwd();
-	else if (ft_strcmp(cmd->str, "env"))
-		res = ft_env(ms->env);
-	else if (ft_strcmp(cmd->str, "cd"))
-		res = ft_cd(cmd, ms->env);
-	else if (ft_strcmp(cmd->str, "export"))
-		res = ft_export(cmd, ms->env);
-	else
-		res = select_syst_cmd(cmd, ms->env);
+	res = select_syst_cmd(cmd, ms->env);
 	free_child(ms);
 	_exit(res);
 }
@@ -45,9 +36,7 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
 {
 	if (!end)
-	{
 		dup2(ms->pipes->pipes[0], STDIN_FILENO);
-	}
 	else
 	{
 		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
@@ -58,7 +47,10 @@ void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
 				ms->res = WEXITSTATUS(ms->pipes->status);
 		}
 		else
+		{
 			ft_waitpid(ms);
+			clear_in_out(ms);
+		}
 	}
 }
 
