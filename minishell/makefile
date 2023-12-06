@@ -6,7 +6,7 @@
 #    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/12/05 16:20:47 by qbanet           ###   ########.fr        #
+#    Updated: 2023/12/06 15:14:48 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES = main.c \
 			builtin/ft_env.c \
 			builtin/ft_export.c \
 			builtin/ft_exit.c \
+			builtin/ft_unset.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_pars_2.c \

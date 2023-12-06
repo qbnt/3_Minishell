@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:11:48 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 14:02:00 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 15:14:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool	is_builtin(char *cmd)
 	if (ft_strcmp(cmd, "echo") || ft_strcmp(cmd, "cd")
 		|| ft_strcmp(cmd, "env") || ft_strcmp(cmd, "exit")
 		|| ft_strcmp(cmd, "export") || ft_strcmp(cmd, "pwd")
-		|| ft_strcmp(cmd, "exit"))
+		|| ft_strcmp(cmd, "exit") || ft_strcmp(cmd, "unset"))
 		return (TRUE);
 	return (FALSE);
 }
@@ -58,6 +58,8 @@ static void	exec_builtin(t_pars *cmd, t_mini *ms)
 		ms->res = ft_cd(cmd, ms->env);
 	else if (ft_strcmp(cmd->str, "export"))
 		ms->res = ft_export(cmd, ms->env);
+	else if (ft_strcmp(cmd->str, "unset"))
+		ms->res = ft_unset(&(ms->env), cmd);
 }
 
 void	clear_in_out(t_mini *ms)

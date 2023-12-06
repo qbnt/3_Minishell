@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 14:02:32 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 15:12:32 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int			ft_export(t_pars *cmds, t_env *env);
 void		ft_tri(t_env *env);
 int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
+int			ft_unset(t_env **env, t_pars *cmd);
 
 /*__________________________________Signaux___________________________________*/
 
