@@ -6,46 +6,49 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:37:23 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 15:57:28 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 20:42:22 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	signal_handler(int signal);
+static void	signal_handler(int signal, siginfo_t *sf, void *oui);
 static void	sigint_handler(void);
-static void	sigquit_handler(void);
+static void	sigquit_handler(int signal, siginfo_t *sf);
 
 /*============================================================================*/
 
-void	signaux(t_signial *sig)
+void	signaux(t_mini *ms)
 {
-	sigemptyset(&(sig->set));
-	sigaddset(&(sig->set), SIGINT);
-	sigaddset(&(sig->set), SIGQUIT);
-	sig->sa.sa_handler = signal_handler;
-	sig->sa.sa_mask = sig->set;
-	sig->sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGINT, &(sig->sa), NULL);
-	sigaction(SIGQUIT, &(sig->sa), NULL);
+	struct sigaction	sa;
+
+	ms += 0;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_sigaction = signal_handler;
+	sa.sa_flags = SA_SIGINFO | SA_RESTART;
+	sigaction(SIGINT, &sa, 0);
+	sigaction(SIGQUIT, &sa, 0);
 }
 
-static void	signal_handler(int signal)
+static void	signal_handler(int signal, siginfo_t *sf, void *oui)
 {
+	oui += 0;
+	sf += 0;
 	if (signal == SIGINT)
 		sigint_handler();
-	else if (signal == SIGQUIT)
-		sigquit_handler();
+	else if (sf->si_pid == 0 && signal == SIGQUIT)
+		sigquit_handler(signal, sf);
 }
 
 static void	sigint_handler(void)
 {
+	ft_printf("^C\n");
+	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_replace_line("^C\n", 0);
 	rl_redisplay();
 }
 
-static void	sigquit_handler(void)
+static void	sigquit_handler(int signal, siginfo_t *sf)
 {
-	printf("SIGQUIT recu mais ignore\n");
+	kill(sf->si_pid, signal);
 }
