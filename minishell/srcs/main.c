@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 14:21:02 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 20:24:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	argv += 0;
 	ms = ft_calloc(sizeof(t_mini), 1);
 	ms->env = ft_envcpy(envp);
-	signaux(&(ms->sig));
+	signaux(ms);
 	readline_loop(ms);
 	return (free_all(ms), 0);
 }

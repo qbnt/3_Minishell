@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 18:27:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 20:23:05 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,11 @@ typedef struct s_env{
 	t_env_elems			*env_elems;
 }	t_env;
 
-typedef struct s_signial{
-	sigset_t			set;
-	struct sigaction	sa;
-}	t_signial;
-
 typedef struct s_mini{
 	int					res;
 	t_pipes				*pipes;
 	t_pars				**cmds;
 	t_elem_pars			*elem_pars;
-	t_signial			sig;
 	t_env				*env;
 }	t_mini;
 
