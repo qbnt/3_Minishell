@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:09 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 14:25:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:27:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_in{
 	struct s_in			*prev;
 	struct s_in			*first;
 }	t_in;
+
 typedef struct s_elem_pars{
 	int					nb_cmd;
 	int					nb_pipe;
@@ -44,6 +45,7 @@ typedef struct s_elem_pars{
 	int					nb_dredir_out;
 	t_bool				error;
 }	t_elem_pars;
+
 typedef struct s_pipes{
 	int					pipes[2];
 	pid_t				*pid;
@@ -52,6 +54,7 @@ typedef struct s_pipes{
 	int					saved_fd_in;
 	int					status;
 }	t_pipes;
+
 typedef struct s_pars{
 	char				*str;
 	int					group;
@@ -64,12 +67,14 @@ typedef struct s_pars{
 	struct s_pars		*prev;
 	struct s_pars		*first;
 }	t_pars;
+
 typedef struct s_dir{
 	t_pars				*dir_lst;
 	DIR					*d;
 	struct dirent		*dir;
 	char				tmp[2048];
 }	t_dir;
+
 typedef struct s_env_elems{
 	char				*key;
 	char				*value;
@@ -79,14 +84,17 @@ typedef struct s_env_elems{
 	struct s_env_elems	*prev;
 	struct s_env_elems	*first;
 }	t_env_elems;
+
 typedef struct s_env{
 	char				**env_cpy;
 	t_env_elems			*env_elems;
 }	t_env;
+
 typedef struct s_signial{
 	sigset_t			set;
 	struct sigaction	sa;
 }	t_signial;
+
 typedef struct s_mini{
 	int					res;
 	t_pipes				*pipes;
