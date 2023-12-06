@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 11:57:51 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/04 20:29:19 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	exec_cmds(t_mini *ms)
 {
 	int	i;
 
-	ms->pipes = init_pipes(ms);
 	if (!ms->cmds)
 		return (FAIL);
+	ms->pipes = init_pipes(ms);
 	i = 0;
 	while (i < ms->elem_pars->nb_cmd)
 	{

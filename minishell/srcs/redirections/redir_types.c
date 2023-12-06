@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   redir_types.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 15:12:59 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 14:21:02 by qbanet           ###   ########.fr       */
+/*   Created: 2023/12/04 19:59:46 by qbanet            #+#    #+#             */
+/*   Updated: 2023/12/05 10:09:11 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,34 @@
 
 /*============================================================================*/
 
-int	main(int argc, char **argv, char **envp)
+void	sredir_out(char *file)
 {
-	t_mini		*ms;
+	int	fd;
 
-	if (argc > 1)
-		return (perror("need no args\n"), 1);
-	argv += 0;
-	ms = ft_calloc(sizeof(t_mini), 1);
-	ms->env = ft_envcpy(envp);
-	signaux(&(ms->sig));
-	readline_loop(ms);
-	return (free_all(ms), 0);
+	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }
 
-void	free_all(t_mini *ms)
+void	dredir_out(char *file)
 {
-	int	i;
+	int	fd;
 
-	if (ms->env)
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+}
+
+void	sredir_in(char *file)
+{
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 	{
-		i = -1;
-		t_env_elems_free(ms->env->env_elems);
-		while (ms->env->env_cpy[++i])
-			free (ms->env->env_cpy[i]);
-		free(ms->env->env_cpy);
-		free(ms->env);
+		printf("bash: %s: No such file or directory\n", file);
+		_exit(FAIL);
 	}
-	free (ms);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 }

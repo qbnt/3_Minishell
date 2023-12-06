@@ -6,14 +6,15 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:33:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/02 18:47:20 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/05 17:45:41 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static t_bool	space_input(char *input);
-static t_bool	env_input(char *input);		//fonction provisoire
+static t_bool	env_input(char *input);
+static void		free_loop(char *input, t_mini *ms);
 
 /*============================================================================*/
 
@@ -24,7 +25,9 @@ void	readline_loop(t_mini *ms)
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
-		input = readline("minishell v1.5 > ");
+		input = readline(MS_NAME);
+		if (!input)
+			break ;
 		if (space_input(input))
 			continue ;
 		if (env_input(input))
@@ -37,12 +40,17 @@ void	readline_loop(t_mini *ms)
 		if (!ms->cmds)
 			continue ;
 		exec_cmds(ms);
-		free (input);
-		free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
-		free_pipes(ms->pipes);
-		free (ms->elem_pars);
+		free_loop(input, ms);
 	}
-	free(input);
+	rl_clear_history();
+}
+
+static void	free_loop(char *input, t_mini *ms)
+{
+	free (input);
+	free_cmds_tab(ms->cmds, ms->elem_pars->nb_cmd);
+	free_pipes(ms->pipes);
+	free (ms->elem_pars);
 }
 
 static t_bool	env_input(char *input)

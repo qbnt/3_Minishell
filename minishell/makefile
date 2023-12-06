@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
+#    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/12/04 15:47:02 by qpuig            ###   ########.fr        #
+#    Updated: 2023/12/06 15:14:48 by qbanet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,12 @@ SRC_FILES = main.c \
 			parsing/set_in_to_t_pars.c \
 			parsing/utils_parsing.c \
 			parsing/utils_parsing_2.c \
+			redirections/redirections.c \
+			redirections/redir_types.c \
+			redirections/utils_redir.c \
+			signaux/signaux.c \
 			exec/exec_cmds.c \
+			exec/exec_builtin.c \
 			exec/exec_process.c \
 			exec/get_cmd_path.c \
 			exec/utils_exec.c \
@@ -41,6 +46,7 @@ SRC_FILES = main.c \
 			builtin/ft_env.c \
 			builtin/ft_export.c \
 			builtin/ft_exit.c \
+			builtin/ft_unset.c \
 			utils/utils_t_in.c \
 			utils/utils_t_pars.c \
 			utils/utils_t_pars_2.c \
@@ -69,7 +75,7 @@ BLUE = \033[34m
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline 
 	@echo "$(GREEN)Compilation successful!$(RESET)"
 	@sleep 0
 	@clear

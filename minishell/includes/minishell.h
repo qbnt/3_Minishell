@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 16:01:08 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/06 17:10:08 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ size_t		ft_nodelen(t_in **in);
 int			exec_cmds(t_mini *ms);
 void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
 
+/*exec_builtin.c*/
+t_bool		is_builtin(char *cmd);
+void		make_builtin(t_pars *cmd, t_mini *ms, t_bool end);
+void		clear_in_out(t_mini *ms);
+
 /*exec_proces.c*/
 void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
 void		exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i);
@@ -90,25 +95,37 @@ void		free_pipes(t_pipes *pipes);
 /*________________________________Redirections________________________________*/
 
 /*redirections.c*/
-void		redirections(t_mini *ms);
+void		redirections(t_pars **cmd, t_mini *ms);
+
+/*redir_types.c*/
+void		sredir_out(char *file);
+void		dredir_out(char *file);
+void		sredir_in(char *file);
 
 /*utils_redir.c*/
 t_bool		redir_in_cmd(t_pars *cmd);
+char		*find_redir_dir(t_pars **cmd);
+int			all_redir_add(t_elem_pars *elem_pars);
+char		*copy_in(char *delimiter);
 
 /*__________________________________Builtins__________________________________*/
 
 /*builtins.c*/
 int			ft_echo(t_pars *cmds);
 int			ft_pwd(void);
-void		ft_exit(void);
+void		ft_exit(t_pars *cmd, t_mini **ms);
 int			ft_env(t_env *env);
 int			ft_cd(t_pars *cmds, t_env *env);
 int			ft_export(t_pars *cmds, t_env *env);
 void		ft_tri(t_env *env);
 int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
+int			ft_unset(t_env **env, t_pars *cmd);
 
-/*__________________________________Signals___________________________________*/
+/*__________________________________Signaux___________________________________*/
+
+/*signaux.c*/
+void		signaux(t_signial *sig);
 
 /*___________________________________Utils____________________________________*/
 
@@ -138,7 +155,7 @@ int			t_pars_pick_token(t_pars *arg);
 void		free_t_pars(t_pars *pars);
 
 /*utils_t_pars_2.c*/
-void		t_pars_remove_node(t_pars **node);
+t_pars		*t_pars_remove_node(t_pars **node);
 t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
 void		verif_wc(t_pars **cmd);
 
@@ -176,7 +193,9 @@ int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
 int			ft_strchr_ex(const char *str, int c);
 
 /*utils_3.c*/
-char	*ft_getenv(t_env *env, char *str);
+char		*ft_strndup(const char *s, size_t size);
+char		*ft_strcat(char *dest, char *src);
+char		*ft_getenv(t_env *env, char *str);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);
