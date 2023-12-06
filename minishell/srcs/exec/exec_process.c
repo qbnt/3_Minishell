@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 17:46:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 14:38:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 void	exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i)
 {
 	if (!end)
-	{
 		dup2(ms->pipes->pipes[0], STDIN_FILENO);
-	}
 	else
 	{
 		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);

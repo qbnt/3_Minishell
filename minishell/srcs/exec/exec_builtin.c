@@ -6,11 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:11:48 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 10:48:36 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 14:02:00 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	exec_builtin(t_pars *cmd, t_mini *ms);
 
 /*============================================================================*/
 
@@ -32,6 +34,18 @@ void	make_builtin(t_pars *cmd, t_mini *ms, t_bool end)
 		dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
 	if (redir_in_cmd(cmd))
 		redirections(&cmd, ms);
+	exec_builtin(cmd, ms);
+	if (!end)
+		dup2(ms->pipes->pipes[0], STDIN_FILENO);
+	else
+		dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
+	close(ms->pipes->pipes[1]);
+	close(ms->pipes->pipes[0]);
+	return ;
+}
+
+static void	exec_builtin(t_pars *cmd, t_mini *ms)
+{
 	if (ft_strcmp(cmd->str, "echo"))
 		ms->res = ft_echo(cmd);
 	else if (ft_strcmp(cmd->str, "exit"))
@@ -44,7 +58,10 @@ void	make_builtin(t_pars *cmd, t_mini *ms, t_bool end)
 		ms->res = ft_cd(cmd, ms->env);
 	else if (ft_strcmp(cmd->str, "export"))
 		ms->res = ft_export(cmd, ms->env);
-	close(ms->pipes->pipes[1]);
-	close(ms->pipes->pipes[0]);
-	return ;
+}
+
+void	clear_in_out(t_mini *ms)
+{
+	dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
+	dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
 }
