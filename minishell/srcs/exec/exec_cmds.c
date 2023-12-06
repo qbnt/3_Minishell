@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:56:27 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 20:29:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:33:20 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	exec_cmds(t_mini *ms)
 		else if (ms->cmds[i]->first->pipe_op)
 		{
 			if (ms->pipes->nb_pipes--)
-				exec_simple_cmd(ms->cmds[i++], ms, 0);
+				exec_simple_cmd(ms->cmds[i++], ms, 0, 0);
 			else
-				exec_simple_cmd(ms->cmds[i++], ms, 1);
+				exec_simple_cmd(ms->cmds[i++], ms, 1, 0);
 		}
 		else
-			exec_simple_cmd(ms->cmds[i++], ms, 1);
+			exec_simple_cmd(ms->cmds[i++], ms, 1, 0);
 	}
 	return (SUCCESS);
 }
@@ -48,7 +48,7 @@ static t_bool	exec_prio_cmd(t_mini *ms, int *i)
 	int	group1;
 
 	group1 = ms->cmds[*i]->first->group;
-	exec_simple_cmd(ms->cmds[(*i)++], ms, 1);
+	exec_simple_cmd(ms->cmds[(*i)++], ms, 1, 0);
 	while ((*i) < ms->elem_pars->nb_cmd)
 	{
 		if (ms->cmds[(*i) - 1]->first->and_op)
