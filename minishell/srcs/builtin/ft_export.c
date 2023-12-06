@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/06 12:03:49 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:10:50 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_tri(t_env *env)
 	t_env_elems	*travel;
 
 	envlen = ft_envlen(env);
+	ft_printf("sheeeeeeeeeeeeeesh %d / %d\n", envlen, ft_envlen(env));
 	dbtab = ft_calloc((ft_envlen(env) + 1), sizeof(char *));
 	while (envlen > 0)
 	{
@@ -77,9 +78,10 @@ void	ft_tri(t_env *env)
 		if (env->env_elems->next)
 			env->env_elems = env->env_elems->next;
 	}
-	while (envlen < ft_envlen(env))
+	while (envlen != ft_envlen(env))
 	{
-		ft_printf("declare -x %s=\"%s\"\n", dbtab[envlen], getenv(dbtab[envlen]));
+		ft_printf("declare -x %s=\"%s\"\n", dbtab[envlen], ft_getenv(env, dbtab[envlen]));
+		env->env_elems = env->env_elems->first;
 		free(dbtab[envlen]);
 		envlen++;
 	}
@@ -95,7 +97,7 @@ int	ft_export(t_pars *cmds, t_env *env)
 	while (cmds)
 	{
 		if ((ft_isalpha(cmds->str[0]) == 1)
-			&& (ft_strcmp_ex(cmds->str, "=") == 1))
+			&& (ft_strchr_ex(cmds->str, '=') == 1))
 			ft_egal_ex(env, cmds);
 		if (cmds->next)
 			cmds = cmds->next;

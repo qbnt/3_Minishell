@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 17:12:37 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/06 17:15:46 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	free_child(t_mini *ms);
 void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 {
 	int	res;
-	char	*a;
 
 	if (!end)
 		dup2(ms->pipes->pipes[1], STDOUT_FILENO);
