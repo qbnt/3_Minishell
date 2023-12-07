@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:46:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 13:19:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 17:15:35 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**verif_split(char **dstr)
 		res = ft_calloc(sizeof(char *), 3);
 		res[0] = ft_strdup(dstr[0]);
 		while (dstr[++i])
-			total_len += ft_strlen(dstr[i]) + 1;
+			total_len += ft_strlen(dstr[i]);
 		res[1] = ft_calloc(sizeof(char), total_len + 1);
 		i = 0;
 		while (dstr[++i])
@@ -94,6 +94,13 @@ char	**verif_split(char **dstr)
 			ft_strlcat(res[1], "=", total_len);
 		}
 		ft_strlcat(res[1], "\0", total_len);
+		return (free_dtab(dstr), res);
+	}
+	else if (!dstr[1])
+	{
+		res = ft_calloc(sizeof(char *), 2);
+		res[0] = ft_strdup(dstr[0]);
+		res[1] = NULL;
 		return (free_dtab(dstr), res);
 	}
 	return (dstr);

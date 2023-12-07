@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 13:24:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 18:10:56 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,11 @@ void		ft_tri(t_env *env);
 int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
 int			ft_unset(t_env **env, t_pars *cmd);
+char		**ft_dbtab(t_env *env);
+void		ft_no_egal(t_env *env, t_pars *cmds);
+int			ft_strchr_env(t_env	*env, char *str);
+void		change_value(t_env_elems **env, char *key, char *value);
+void		ft_key(t_pars *cmds, char **keyc, char **valuec);
 
 /*__________________________________Signaux___________________________________*/
 
@@ -193,6 +198,7 @@ void		free_dtab(char **str);
 size_t		t_parslen(t_pars *cmd);
 int			switch_res(char **str, t_mini *ms, int total_len, char *res_str);
 int			ft_strnrcmp(char const *s1, char const *s2, size_t n);
+int			ft_strchr_ex(const char *str, int c);
 
 /*utils_3.c*/
 char		*ft_strndup(const char *s, size_t size);
