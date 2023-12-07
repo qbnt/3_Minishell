@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:33:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/19 22:42:40 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 17:58:24 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_print_dtab(char **dtab)
 	i = 0;
 	while (dtab[i])
 	{
-		printf("%s\n", dtab[i]);
+		printf("%s|\n", dtab[i]);
 		i ++;
 	}
 	printf("\n\n");

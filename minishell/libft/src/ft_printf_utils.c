@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:11:53 by qbanet            #+#    #+#             */
-/*   Updated: 2023/03/27 12:06:53 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 17:11:01 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_printstr(char *str)
 	i = 0;
 	if (!str)
 	{
-		ft_putstr("(null)");
+		ft_putstr("(nill)");
 		return (6);
 	}
 	while (str[i])

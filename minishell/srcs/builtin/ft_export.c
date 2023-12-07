@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/07 14:22:42 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/07 18:11:11 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,17 @@ void	ft_tri(t_env *env)
 {
 	int			envlen;
 	char		**dbtab;
+	char		*verif;
 
 	dbtab = ft_dbtab(env);
 	envlen = 0;
 	while (envlen != ft_envlen(env))
 	{
-		if (!env->env_elems->value)
-			ft_printf("declare -x %s\n", dbtab[envlen]);
+		verif = ft_getenv(env, dbtab[envlen]);
+		if (verif)
+			ft_printf("declare -x %s=\"%s\"\n", dbtab[envlen], verif);
 		else
-			ft_printf("declare -x %s=\"%s\"\n", dbtab[envlen], ft_getenv(env, dbtab[envlen]));
+			ft_printf("declare -x %s\n", dbtab[envlen]);
 		env->env_elems = env->env_elems->first;
 		free(dbtab[envlen]);
 		envlen++;
@@ -126,21 +128,28 @@ void	ft_tri(t_env *env)
 
 int	ft_export(t_pars *cmds, t_env *env)
 {
+	char	*keyc;
+	char	*valuec;
+
 	if (!cmds->next)
 		ft_tri(env);
 	cmds = cmds->next;
 	while (cmds)
 	{
+		ft_key(cmds, &keyc, &valuec);
+		if (ft_strchr_env(env, keyc) == 1)
+		{
+			change_value(&(env->env_elems), keyc, valuec);
+			cmds = cmds->next;
+			continue ;
+		}
 		if ((ft_isalpha(cmds->str[0]) == 1)
 			&& (ft_strchr_ex(cmds->str, '=') == 1))
 			ft_egal_ex(env, cmds);
 		else if ((ft_isalpha(cmds->str[0]) == 1)
 			&& (ft_strchr_ex(cmds->str, '=') == 0))
 			ft_no_egal(env, cmds);
-		if (cmds->next)
-			cmds = cmds->next;
-		else
-			break ;
+		cmds = cmds->next;
 	}
 	return (SUCCESS);
 }

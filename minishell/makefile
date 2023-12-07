@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+         #
+#    By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 16:19:15 by qbanet            #+#    #+#              #
-#    Updated: 2023/12/07 13:03:45 by qbanet           ###   ########.fr        #
+#    Updated: 2023/12/07 15:17:13 by qpuig            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_FILES = main.c \
 			utils/utils_t_pars_3.c \
 			utils/utils_t_env_elem.c \
 			utils/utils_t_env_elem_2.c \
+			utils/utils_export.c \
 			utils/utils_env.c \
 			utils/utils_print.c \
 			utils/ft_nodelen.c \

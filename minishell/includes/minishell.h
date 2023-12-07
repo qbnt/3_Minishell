@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 14:26:52 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/07 18:10:56 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,9 @@ int			ft_strcmp_ex(char const *s1, char const *s2);
 int			ft_unset(t_env **env, t_pars *cmd);
 char		**ft_dbtab(t_env *env);
 void		ft_no_egal(t_env *env, t_pars *cmds);
+int			ft_strchr_env(t_env	*env, char *str);
+void		change_value(t_env_elems **env, char *key, char *value);
+void		ft_key(t_pars *cmds, char **keyc, char **valuec);
 
 /*__________________________________Signaux___________________________________*/
 
