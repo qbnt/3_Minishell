@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 17:10:08 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/06 21:27:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ size_t		ft_nodelen(t_in **in);
 
 /*exec_cmds.c*/
 int			exec_cmds(t_mini *ms);
-void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end);
+void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end, int i);
 
 /*exec_builtin.c*/
 t_bool		is_builtin(char *cmd);
@@ -125,7 +125,7 @@ int			ft_unset(t_env **env, t_pars *cmd);
 /*__________________________________Signaux___________________________________*/
 
 /*signaux.c*/
-void		signaux(t_signial *sig);
+void		signaux(t_mini *ms);
 
 /*___________________________________Utils____________________________________*/
 
@@ -158,6 +158,7 @@ void		free_t_pars(t_pars *pars);
 t_pars		*t_pars_remove_node(t_pars **node);
 t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
 void		verif_wc(t_pars **cmd);
+int			ft_strchr_ex(const char *str, int c);
 
 /*utils_t_pars_3.c*/
 t_pars		*dir_lst_create(t_pars *cmd, t_bool start);

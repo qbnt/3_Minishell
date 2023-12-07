@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:03:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 10:44:14 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:28:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static void	clear_cmd(char **str, char *res, int *i)
 
 	j = *i;
 	if ((*(*str)) != 34 && (*(*str)) != 39)
-				res[j++] = (*(*str)++);
+		res[j++] = (*(*str)++);
 	else
 		(*str)++;
 	*i += (j - (*i));

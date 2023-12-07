@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 16:07:37 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:35:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ char	**get_dtab_cmd(t_pars *cmd)
 	return (res);
 }
 
-void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
+void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end, int i)
 {
-	int	i;
-
-	i = 0;
 	while (ms->pipes->pid[i])
 		i++;
 	ms->res = 42;
@@ -52,21 +49,16 @@ void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end)
 			dup2(ms->pipes->pipes[0], STDIN_FILENO);
 		else
 			dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
-		close(ms->pipes->pipes[1]);
-		close(ms->pipes->pipes[0]);
-		return ;
+		return (close(ms->pipes->pipes[1]), close(ms->pipes->pipes[0])
+			, (void)0);
 	}
 	ms->pipes->pid[i] = fork();
 	if (ms->pipes->pid[i] < 0)
 		return (printf("fork error\n"), (void)0);
 	if (ms->pipes->pid[i] == 0)
-	{
-		exec_child(cmd, end, ms);
-		return ;
-	}
+		return (exec_child(cmd, end, ms), (void) 0);
 	exec_parent(cmd, end, ms, i);
-	close(ms->pipes->pipes[1]);
-	close(ms->pipes->pipes[0]);
+	return (close(ms->pipes->pipes[1]), close(ms->pipes->pipes[0]), (void)0);
 }
 
 t_bool	select_syst_cmd(t_pars *cmd, t_env *env)
