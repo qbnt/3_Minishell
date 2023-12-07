@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:37:23 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 11:05:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 11:19:18 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	signal_handler(int signal, siginfo_t *sf, void *oui)
 {
 	oui += 0;
 	sf += 0;
-	printf("sig = %d\n", signal);
 	if (signal == SIGINT)
 		sigint_handler();
 	else if (signal == SIGQUIT)
@@ -51,8 +50,7 @@ static void	sigint_handler(void)
 
 static void	sigquit_handler(int signal, siginfo_t *sf)
 {
-	ft_printf("\n\n");
 	(void)signal;
 	(void)sf;
-	// ft_printf("\b\b  \b\b");
+	ft_printf("\b\b  \b\b");
 }
