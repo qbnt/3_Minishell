@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 20:24:41 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/06 21:27:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void		free_t_pars(t_pars *pars);
 t_pars		*t_pars_remove_node(t_pars **node);
 t_pars		*t_pars_switch_node(t_pars **old_node, t_pars **new_list);
 void		verif_wc(t_pars **cmd);
+int			ft_strchr_ex(const char *str, int c);
 
 /*utils_t_pars_3.c*/
 t_pars		*dir_lst_create(t_pars *cmd, t_bool start);

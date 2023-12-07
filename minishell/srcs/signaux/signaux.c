@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:37:23 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 20:42:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 10:31:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	signal_handler(int signal, siginfo_t *sf, void *oui)
 
 static void	sigint_handler(void)
 {
-	ft_printf("^C\n");
+	ft_printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
