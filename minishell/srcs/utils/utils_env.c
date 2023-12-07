@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:46:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 10:50:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:19:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void			cpy_system_env(char **system_env, char **dest);
 static t_env_elems	*set_env_elems(t_env *env);
-static char			**verif_split(char **dstr);
 
 /*============================================================================*/
 
@@ -73,7 +72,7 @@ static t_env_elems	*set_env_elems(t_env *env)
 	return (oui->first);
 }
 
-static char	**verif_split(char **dstr)
+char	**verif_split(char **dstr)
 {
 	int		i;
 	char	**res;
@@ -81,7 +80,7 @@ static char	**verif_split(char **dstr)
 
 	i = 0;
 	total_len = 0;
-	if (dstr[2] != 0)
+	if (dstr[1] != 0 && dstr[2] != 0)
 	{
 		res = ft_calloc(sizeof(char *), 3);
 		res[0] = ft_strdup(dstr[0]);

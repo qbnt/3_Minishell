@@ -6,7 +6,7 @@
 /*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 21:27:39 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:24:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void		ft_exit(t_pars *cmd, t_mini **ms);
 int			ft_env(t_env *env);
 int			ft_cd(t_pars *cmds, t_env *env);
 int			ft_export(t_pars *cmds, t_env *env);
+int			ft_export_2(t_mini **ms, t_pars *cmd);
 void		ft_tri(t_env *env);
 int			ft_envlen(t_env *env);
 int			ft_strcmp_ex(char const *s1, char const *s2);
@@ -168,6 +169,7 @@ void		init_change_star(t_pars **cmd, t_dir *dir);
 
 /*utils_env.c*/
 t_env		*ft_envcpy(char **system_env);
+char		**verif_split(char **dstr);
 
 /*utils_t_env_elem.c*/
 t_env_elems	*t_env_elems_first(char *key, char *value);

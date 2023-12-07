@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:49:47 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 13:54:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:21:19 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ t_env_elems	*t_env_elems_first(char *key, char *value)
 	oui->next = NULL;
 	oui->key = ft_strdup(key);
 	oui->key_len = ft_strlen(oui->key);
-	oui->value = ft_strdup(value);
+	if (value)
+		oui->value = ft_strdup(value);
+	else
+		oui->value = NULL;
 	oui->value_len = ft_strlen(oui->value);
 	return (oui);
 }
@@ -39,7 +42,10 @@ void	t_env_elems_next(t_env_elems *env_elems, char *key, char *value)
 	oui->next = NULL;
 	oui->key = ft_strdup(key);
 	oui->key_len = ft_strlen(oui->key);
-	oui->value = ft_strdup(value);
+	if (value)
+		oui->value = ft_strdup(value);
+	else
+		oui->value = NULL;
 	oui->value_len = ft_strlen(oui->value);
 	env_elems->next = oui;
 	env_elems = oui;
