@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:56:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 15:26:12 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:43:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ static int	remove_env(t_env_elems **node);
 int	ft_unset(t_env **env, t_pars *cmd)
 {
 	t_env_elems	*tmp;
+	t_env_elems	*save;
 
 	tmp = (*env)->env_elems;
-	while (tmp && !ft_strcmp(tmp->key, cmd->next->str))
-		tmp = tmp->next;
-	if (tmp && ft_strcmp(tmp->key, cmd->next->str))
-		remove_env(&tmp);
-	else
-		return (3);
+	save = tmp->first;
+	cmd = cmd->next;
+	while (cmd)
+	{
+		while (tmp && !ft_strcmp(tmp->key, cmd->str))
+			tmp = tmp->next;
+		if (tmp && ft_strcmp(tmp->key, cmd->str))
+			remove_env(&(tmp));
+		tmp = save;
+		cmd = cmd->next;
+	}
 	return (SUCCESS);
 }
 
