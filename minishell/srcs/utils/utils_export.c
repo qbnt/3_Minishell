@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:01:38 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/07 18:11:27 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/07 19:11:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	change_value(t_env_elems **env, char *key, char *value)
 
 int	ft_strchr_env(t_env	*env, char *str)
 {
-	t_env_elems *tmp;
-	
+	t_env_elems	*tmp;
+
 	tmp = env->env_elems->first;
 	while (env->env_elems)
 	{
@@ -49,32 +49,38 @@ int	ft_strchr_env(t_env	*env, char *str)
 	return (0);
 }
 
-void	ft_key(t_pars *cmds, char **keyc, char **valuec)
+static void	allocate_key(char **key, char *str, int len)
+{
+	int	i;
+
+	*key = (char *)malloc(len + 1);
+	if (*key == NULL)
+		return ;
+	i = -1;
+	while (++i < len)
+		(*key)[i] = str[i];
+	(*key)[len] = '\0';
+}
+
+static void	allocate_value(char **value, char *str, int len)
+{
+	*value = strdup(str + len + 1);
+	if (*value == NULL)
+		return ;
+}
+
+void	ft_key(t_pars *cmds, char **key, char **value)
 {
 	int	len;
-	int	i;
-	int	j;
 
+	*key = NULL;
+	*value = NULL;
 	len = 0;
-	i = 0;
-	while (cmds->str[i])
-	{
-		if (cmds->str[i] == '=')
-		{
-			*keyc = ft_calloc((i + 1), sizeof(char));
-			while (len < i)
-			{
-				(*keyc)[len] = cmds->str[len];
-				len++;
-			}
-			break ;
-		}
-		i++;
-	}
-	while (cmds->str[i])
-		i++;
-	*valuec = ft_calloc((i - len + 1), sizeof(char));
-	j = 0;
-	while (len <= i)
-		(*valuec)[j++] = cmds->str[++len];
+	while (cmds->str[len] && cmds->str[len] != '=')
+		len++;
+	allocate_key(key, cmds->str, len);
+	if (cmds->str[len] == '=')
+		allocate_value(value, cmds->str, len);
+	else
+		*value = NULL;
 }

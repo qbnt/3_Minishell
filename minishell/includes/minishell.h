@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 18:10:56 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/07 19:16:19 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end, int i);
 t_bool		is_builtin(char *cmd);
 void		make_builtin(t_pars *cmd, t_mini *ms, t_bool end);
 void		clear_in_out(t_mini *ms);
+void		multi_free_str(char *s1, char *s2, char *s3, char *s4);
 
 /*exec_proces.c*/
 void		exec_child(t_pars *cmd, t_bool end, t_mini *ms);
