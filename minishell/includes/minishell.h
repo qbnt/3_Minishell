@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 14:02:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 15:54:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void		ft_no_egal(t_env *env, t_pars *cmds);
 int			ft_strchr_env(t_env	*env, char *str);
 void		change_value(t_env_elems **env, char *key, char *value);
 void		ft_key(t_pars *cmds, char **keyc, char **valuec);
+void		tilde_case(t_pars **cmds);
 
 /*__________________________________Signaux___________________________________*/
 
@@ -205,6 +206,7 @@ int			ft_strchr_ex(const char *str, int c);
 char		*ft_strndup(const char *s, size_t size);
 char		*ft_strcat(char *dest, char *src);
 char		*ft_getenv(t_env *env, char *str);
+t_bool		verif_dol(char *str, t_env_elems *env);
 
 /*utils_print.c*/
 void		ft_print_t_in(t_in **oui, int arg);

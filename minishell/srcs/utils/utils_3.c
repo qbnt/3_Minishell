@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 15:47:20 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/06 18:35:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:40:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_getenv(t_env *env, char *str)
 {
 	while ((ft_strcmp(env->env_elems->key, str) == FALSE)
 		&& env->env_elems->next)
-			env->env_elems = env->env_elems->next;
+		env->env_elems = env->env_elems->next;
 	if (env->env_elems && (ft_strcmp(env->env_elems->key, str) == TRUE))
 		return (env->env_elems->value);
 	return (NULL);

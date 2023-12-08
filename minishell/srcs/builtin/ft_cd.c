@@ -3,90 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:38:58 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/06 18:26:13 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 15:36:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	tilde_case(t_pars **cmds);
+static void	update_pwd(t_env *env, char **old, t_env_elems *save);
 static void	key_pwd_case(char **old, t_env *env);
-static void	key_oldpwd_case(t_env *env, char *old);
+static void	update_oldpwd(t_env *env, char **old);
+static void	key_oldpwd_case(t_env *env, char **old);
 
 int	ft_cd(t_pars *cmds, t_env *env)
 {
-	char	*old;
+	char		*old;
+	t_env_elems	*save;
 
+	save = env->env_elems->first;
 	tilde_case(&cmds);
 	if (chdir(cmds->str) == 0)
 	{
-		while ((ft_strcmp(env->env_elems->key, "PWD") == FALSE)
-			&& env->env_elems->next)
-			env->env_elems = env->env_elems->next;
-		if (env->env_elems && ft_strcmp(env->env_elems->key, "PWD") == TRUE)
-		{
-			old = ft_calloc((env->env_elems->value_len + 1), sizeof(char));
-			key_pwd_case(&old, env);
-			while ((ft_strcmp(env->env_elems->key, "OLDPWD") == FALSE)
-				&& env->env_elems->next)
-				env->env_elems = env->env_elems->next;
-			key_oldpwd_case(env, old);
-			free(old);
-		}
+		update_pwd(env, &old, save);
 	}
 	else
 		ft_printf("cd: %s: No such file or directory\n", cmds->str);
-	return (env->env_elems = env->env_elems->first, SUCCESS);
+	env->env_elems = save;
+	return (SUCCESS);
+}
+
+static void	update_pwd(t_env *env, char **old, t_env_elems *save)
+{
+	while (env->env_elems && ft_strcmp(env->env_elems->key, "PWD") != TRUE)
+		env->env_elems = env->env_elems->next;
+	if (env->env_elems)
+	{
+		*old = ft_calloc((ft_strlen(env->env_elems->value) + 1), sizeof(char));
+		key_pwd_case(old, env);
+		env->env_elems = save;
+		update_oldpwd(env, old);
+		free(*old);
+	}
 }
 
 static void	key_pwd_case(char **old, t_env *env)
 {
+	size_t	new_size;
+
+	new_size = 4097;
 	ft_strcpy(*old, env->env_elems->value);
 	free(env->env_elems->value);
-	env->env_elems->value = ft_calloc(4097, sizeof(char));
-	getcwd(env->env_elems->value, 4096);
+	env->env_elems->value = ft_calloc(new_size, sizeof(char));
+	if (env->env_elems->value == NULL)
+		return ;
+	getcwd(env->env_elems->value, new_size - 1);
+	env->env_elems->value[new_size - 1] = '\0';
 	env->env_elems = env->env_elems->first;
 }
 
-static void	key_oldpwd_case(t_env *env, char *old)
+static void	key_oldpwd_case(t_env *env, char **old)
 {
-	if (ft_strcmp(env->env_elems->key, "OLDPWD") == TRUE)
-	{
-		free(env->env_elems->value);
-		env->env_elems->value
-			= ft_calloc((ft_strlen(old) + 1), sizeof(char));
-		ft_strcpy(env->env_elems->value, old);
-	}
+	size_t	old_len;
+
+	old_len = ft_strlen(*old) + 1;
+	free(env->env_elems->value);
+	env->env_elems->value = ft_calloc(old_len, sizeof(char));
+	if (env->env_elems->value == NULL)
+		return ;
+	ft_strcpy(env->env_elems->value, *old);
 }
 
-static void	tilde_case(t_pars **cmds)
+static void	update_oldpwd(t_env *env, char **old)
 {
-	t_pars	*tmp;
-
-	if ((*cmds)->next)
-		*cmds = (*cmds)->next;
-	else
-	{
-		tmp = ft_calloc(1, sizeof(t_pars));
-		tmp->str = ft_strdup("~");
-		tmp->prev = *cmds;
-		tmp->next = NULL;
-		tmp->first = *cmds;
-		tmp->and_op = (*cmds)->and_op;
-		tmp->and_op = (*cmds)->or_op;
-		tmp->and_op = (*cmds)->pipe_op;
-		tmp->group = (*cmds)->group;
-		tmp->token = STR;
-		(*cmds)->next = tmp;
-		(*cmds) = (*cmds)->next;
-	}
-	if (ft_strcmp((*cmds)->str, "~") == TRUE)
-	{
-		free((*cmds)->str);
-		(*cmds)->str = ft_calloc((ft_strlen(getenv("HOME")) + 1), sizeof(char));
-		ft_strcpy((*cmds)->str, getenv("HOME"));
-	}
+	while (env->env_elems && ft_strcmp(env->env_elems->key, "OLDPWD") != TRUE)
+		env->env_elems = env->env_elems->next;
+	if (env->env_elems)
+		key_oldpwd_case(env, old);
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:56:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 11:17:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:31:14 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ static int	remove_env(t_env_elems **node)
 	if (tmp->prev)
 	{
 		if (tmp->next)
-		{
 			tmp->next->prev = tmp->prev;
-			tmp->prev->next = tmp->next;
-		}
-		tmp->prev->next = NULL;
+		tmp->prev->next = tmp->next;
 	}
 	else if (tmp->next)
 	{
