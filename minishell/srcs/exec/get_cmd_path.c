@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 21:56:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 13:13:42 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:10:27 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ char	*get_cmd_path(char *cmd, t_env_elems *env, t_mini **ms)
 
 	val = t_env_elems_find_value_of(env, "PATH");
 	if (not_path_need(cmd))
-	{
-		return (verif_cmd_np(cmd, ms));
-	}
+		return (free(val), verif_cmd_np(cmd, ms));
 	if (!val)
 	{
 		printf("No path in env\n");
-		return (NULL);
+		return (free(val), NULL);
 	}
 	dir = ft_split(val, ':');
 	if (!dir)
@@ -49,7 +47,6 @@ static char	*verif_cmd_np(char *cmd, t_mini **ms)
 	int	fd;
 
 	fd = open(cmd, O_RDONLY);
-	printf("cmd = %s et fd = %d", cmd, fd);
 	if (fd == -1)
 	{
 		ft_printf("%s: No such file or directory\n", cmd);

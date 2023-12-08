@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 13:38:57 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:05:17 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,28 @@ char	*clean_dol(char *str, t_mini *ms, t_token token)
 	res_str = clear_dol_init(str, ms, &total_len);
 	while (*str && token != LIT_STR)
 	{
-		if (*str == '$')
-		{
-			if (*(str + 1) == 0)
-				return (tmp_str);
-			if (*(str + 1) == '?')
+		if (*str == '$' && *(str + 1) == '?')
 				i += switch_res(&str, ms, total_len, res_str);
-			else
-				i += switch_dol(&str, ms->env->env_elems, total_len, res_str);
-		}
+		else if (*str == '$' && verif_dol(str, ms->env->env_elems) == TRUE)
+			i += switch_dol(&str, ms->env->env_elems, total_len, res_str);
 		else
 			res_str[i++] = *(str++);
 	}
 	if (*res_str)
 		return (free(tmp_str), res_str);
 	return (free(res_str), tmp_str);
+}
+
+t_bool	verif_dol(char *str, t_env_elems *env)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_cpy_dol(++str);
+	tmp2 = t_env_elems_find_value_of(env, tmp);
+	if (!tmp2)
+		return (free(tmp), FALSE);
+	return (free(tmp), free(tmp2), TRUE);
 }
 
 static int	switch_dol(char **str, t_env_elems *env, size_t total_len,
@@ -110,6 +117,8 @@ static int	switch_dol(char **str, t_env_elems *env, size_t total_len,
 	i = 0;
 	tmp = ft_cpy_dol(++(*str));
 	tmp2 = t_env_elems_find_value_of(env, tmp);
+	if (!tmp2)
+		return (free(tmp), 1);
 	ft_strlcat(res_str, tmp2, total_len + 1);
 	(*str) += ft_strlen(tmp);
 	i += ft_strlen(tmp2);
