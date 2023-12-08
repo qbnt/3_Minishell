@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:46:45 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 17:15:35 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/08 14:08:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void			cpy_system_env(char **system_env, char **dest);
 static t_env_elems	*set_env_elems(t_env *env);
+static void			fif_case(char ***res, char ***dstr, int *total_len);
 
 /*============================================================================*/
 
@@ -74,26 +75,13 @@ static t_env_elems	*set_env_elems(t_env *env)
 
 char	**verif_split(char **dstr)
 {
-	int		i;
 	char	**res;
 	int		total_len;
 
-	i = 0;
 	total_len = 0;
 	if (dstr[1] != 0 && dstr[2] != 0)
 	{
-		res = ft_calloc(sizeof(char *), 3);
-		res[0] = ft_strdup(dstr[0]);
-		while (dstr[++i])
-			total_len += ft_strlen(dstr[i]);
-		res[1] = ft_calloc(sizeof(char), total_len + 1);
-		i = 0;
-		while (dstr[++i])
-		{
-			ft_strlcat(res[1], dstr[i], total_len);
-			ft_strlcat(res[1], "=", total_len);
-		}
-		ft_strlcat(res[1], "\0", total_len);
+		fif_case(&res, &dstr, &total_len);
 		return (free_dtab(dstr), res);
 	}
 	else if (!dstr[1])
@@ -104,4 +92,23 @@ char	**verif_split(char **dstr)
 		return (free_dtab(dstr), res);
 	}
 	return (dstr);
+}
+
+static void	fif_case(char ***res, char ***dstr, int *total_len)
+{
+	int	i;
+
+	i = 0;
+	*res = ft_calloc(sizeof(char *), 3);
+	(*res)[0] = ft_strdup((*dstr)[0]);
+	while ((*dstr)[++i])
+		*total_len += ft_strlen((*dstr)[i]);
+	(*res)[1] = ft_calloc(sizeof(char), *total_len + 1);
+	i = 0;
+	while ((*dstr)[++i])
+	{
+		ft_strlcat((*res)[1], (*dstr)[i], *total_len);
+		ft_strlcat((*res)[1], "=", *total_len);
+	}
+	ft_strlcat((*res)[1], "\0", *total_len);
 }

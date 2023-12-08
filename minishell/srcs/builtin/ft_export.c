@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/08 13:53:09 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/08 14:00:13 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	ft_export(t_pars *cmds, t_env *env)
 		}
 		if (ft_isalpha(cmds->str[0]) && ft_strchr_ex(cmds->str, '='))
 			ft_egal_ex(env, cmds, -1, -1);
-		else if ((ft_isalpha(cmds->str[0]) == 1) 
+		else if ((ft_isalpha(cmds->str[0]) == 1)
 			&& (ft_strchr_ex(cmds->str, '=') == 0))
 			ft_no_egal(env, cmds);
 		cmds = cmds->next;

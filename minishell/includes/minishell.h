@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 13:44:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 14:02:16 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void		t_env_elems_free(t_env_elems *first);
 
 /*utils_t_env_elem_2.c*/
 char		*ft_cpy_dol(char *dol_str);
-size_t		ft_dol_len_in_str(char *str, t_mini *ms);
+size_t		ft_dol_len_in_str(char *str, t_mini *ms, size_t res);
 
 /*utils_1.c*/
 t_bool		ft_is_whitespace(char c);
