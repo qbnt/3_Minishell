@@ -29,8 +29,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/nfs/homes/qpuig/42work/3Minishell/minishell/srcs/builtin",
-      "program": "/nfs/homes/qpuig/42work/3Minishell/minishell/srcs/builtin/build/Debug/outDebug",
+      "cwd": "/nfs/homes/qpuig/42work/3Minishell/minishell/srcs/utils",
+      "program": "/nfs/homes/qpuig/42work/3Minishell/minishell/srcs/utils/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
