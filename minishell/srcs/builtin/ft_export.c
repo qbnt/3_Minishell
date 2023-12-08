@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/07 18:11:11 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/07 19:18:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,13 @@ void	ft_egal_ex(t_env *env, t_pars *cmds)
 		i++;
 	value = ft_calloc((i - len + 1), sizeof(char));
 	j = 0;
-	while (len <= i)
+	while (len < i)
 		value[j++] = cmds->str[++len];
 	while (env->env_elems->next)
 		env->env_elems = env->env_elems->next;
 	t_env_elems_next(env->env_elems, key, value);
 	env->env_elems = env->env_elems->first;
-	free(key);
-	free(value);
+	multi_free_str(key, value, NULL, NULL);
 }
 
 void	ft_no_egal(t_env *env, t_pars *cmds)
@@ -88,7 +87,7 @@ void	ft_no_egal(t_env *env, t_pars *cmds)
 
 	i = 0;
 	len = 0;
-	while (cmds->str[i])	
+	while (cmds->str[i])
 		i++;
 	key = ft_calloc((i + 1), sizeof(char));
 	while (len < i)
@@ -140,6 +139,7 @@ int	ft_export(t_pars *cmds, t_env *env)
 		if (ft_strchr_env(env, keyc) == 1)
 		{
 			change_value(&(env->env_elems), keyc, valuec);
+			multi_free_str(keyc, valuec, NULL, NULL);
 			cmds = cmds->next;
 			continue ;
 		}
@@ -150,6 +150,7 @@ int	ft_export(t_pars *cmds, t_env *env)
 			&& (ft_strchr_ex(cmds->str, '=') == 0))
 			ft_no_egal(env, cmds);
 		cmds = cmds->next;
+		multi_free_str(keyc, valuec, NULL, NULL);
 	}
 	return (SUCCESS);
 }

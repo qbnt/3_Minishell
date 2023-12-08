@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:11:48 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 14:17:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/07 19:15:59 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ static void	exec_builtin(t_pars *cmd, t_mini *ms)
 		ms->res = ft_cd(cmd, ms->env);
 	else if (ft_strcmp(cmd->str, "export"))
 		ms->res = ft_export(cmd, ms->env);
-	// else if (ft_strcmp(cmd->str, "export"))
-	// 	ms->res = ft_export_2(&ms, cmd);
 	else if (ft_strcmp(cmd->str, "unset"))
 		ms->res = ft_unset(&(ms->env), cmd);
 }
@@ -69,4 +67,16 @@ void	clear_in_out(t_mini *ms)
 {
 	dup2(ms->pipes->saved_fd_in, STDIN_FILENO);
 	dup2(ms->pipes->saved_fd_out, STDOUT_FILENO);
+}
+
+void	multi_free_str(char *s1, char *s2, char *s3, char *s4)
+{
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
+	if (s3)
+		free(s3);
+	if (s4)
+		free(s4);
 }
