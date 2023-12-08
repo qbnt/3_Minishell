@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:25:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/11/30 13:45:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:39:45 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,16 @@ static void	in_cote(t_bool *in_cote, char c)
 		*in_cote = TRUE;
 	else if (*in_cote == TRUE && (c == 34 || c == 39))
 		*in_cote = FALSE;
+}
+
+t_bool	verif_dol(char *str, t_env_elems *env)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_cpy_dol(++str);
+	tmp2 = t_env_elems_find_value_of(env, tmp);
+	if (!tmp2)
+		return (free(tmp), FALSE);
+	return (free(tmp), free(tmp2), TRUE);
 }

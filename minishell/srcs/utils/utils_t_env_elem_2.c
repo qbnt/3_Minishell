@@ -6,11 +6,13 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:35:21 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 16:04:22 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:37:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	dol_len_else(char **key, char **val, t_mini *ms, char *str);
 
 /*============================================================================*/
 
@@ -71,19 +73,26 @@ size_t	ft_dol_len_in_str(char *str, t_mini *ms, size_t res)
 			if ((str + 1) && *(str + 1) == '?')
 				res += (res_dolint(res, ms->res));
 			else
-			{
-				key = ft_cpy_dol(str);
-				val = t_env_elems_find_value_of(ms->env->env_elems, (key + 1));
-				if (!val)
-					res += ft_strlen(key);
-				else
-					res += ft_strlen(val) - ft_strlen(key);
-				multi_free_str(key, val, NULL, NULL);
-			}
+				res += dol_len_else(&key, &val, ms, str);
 			str += ft_nbrlen(ms->res);
 		}
 		if (*str && *str != '$')
 			++ str;
 	}
+	return (res);
+}
+
+static int	dol_len_else(char **key, char **val, t_mini *ms, char *str)
+{
+	int	res;
+
+	res = 0;
+	*key = ft_cpy_dol(str);
+	*val = t_env_elems_find_value_of(ms->env->env_elems, ((*key) + 1));
+	if (!*val)
+		res += ft_strlen(*key);
+	else
+		res += ft_strlen(*val) - ft_strlen(*key);
+	multi_free_str(*key, *val, NULL, NULL);
 	return (res);
 }
