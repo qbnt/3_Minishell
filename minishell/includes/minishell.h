@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:07:07 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/07 19:16:19 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:44:04 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		readline_loop(t_mini *ms);
 /*__________________________________Parsing___________________________________*/
 
 /*parsing.c*/
-t_pars		**parsing(char *input, t_mini *ms);
+t_pars		**parsing(char **input, t_mini *ms);
 t_elem_pars	*check_input(char *input);
 
 /*make_clear_cmds.c*/
@@ -85,11 +85,11 @@ void		exec_parent(t_pars *cmd, t_bool end, t_mini *ms, int i);
 void		ft_waitpid(t_mini *ms);
 
 /*get_cmd_path.c*/
-char		*get_cmd_path(char *cmd, t_env_elems *env);
+char		*get_cmd_path(char *cmd, t_env_elems *env, t_mini **ms);
 
 /*utils_exec.c*/
 char		**get_dtab_cmd(t_pars *cmd);
-int			select_syst_cmd(t_pars *cmd, t_env *env);
+int			select_syst_cmd(t_pars *cmd, t_env *env, t_mini **ms);
 t_pipes		*init_pipes(t_mini *ms);
 void		free_pipes(t_pipes *pipes);
 
@@ -101,7 +101,7 @@ void		redirections(t_pars **cmd, t_mini *ms);
 /*redir_types.c*/
 void		sredir_out(char *file);
 void		dredir_out(char *file);
-void		sredir_in(char *file);
+void		sredir_in(char *file, t_mini *ms, char *save);
 
 /*utils_redir.c*/
 t_bool		redir_in_cmd(t_pars *cmd);

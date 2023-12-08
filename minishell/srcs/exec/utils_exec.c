@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 22:41:10 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 18:35:16 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 11:08:10 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	exec_simple_cmd(t_pars *cmd, t_mini *ms, t_bool end, int i)
 	return (close(ms->pipes->pipes[1]), close(ms->pipes->pipes[0]), (void)0);
 }
 
-t_bool	select_syst_cmd(t_pars *cmd, t_env *env)
+t_bool	select_syst_cmd(t_pars *cmd, t_env *env, t_mini **ms)
 {
 	char	*path;
 	char	**tab_cmd;
 
 	tab_cmd = NULL;
-	path = get_cmd_path(cmd->str, env->env_elems);
+	path = get_cmd_path(cmd->str, env->env_elems, ms);
 	if (!path)
 		return (printf("%s - command not found\n", cmd->str), FAIL);
 	tab_cmd = get_dtab_cmd(cmd);
