@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:35:21 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/08 13:36:43 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 14:02:23 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ static int	ft_nbrlen(int n)
 	return (len);
 }
 
-size_t	ft_dol_len_in_str(char *str, t_mini *ms)
+size_t	ft_dol_len_in_str(char *str, t_mini *ms, size_t res)
 {
-	size_t	res;
 	char	*key;
 	char	*val;
 
