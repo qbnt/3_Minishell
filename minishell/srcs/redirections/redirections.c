@@ -6,15 +6,15 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:41:36 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 12:30:14 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 11:37:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	**save_files_redir(t_pars *tmp, t_elem_pars *elem_pars);
-static void	make_redir(t_pars **cmd, char **files, t_mini *ms);
-static void	siple_redir(t_pars **cmd, char *file);
+static void	make_redir(t_pars **cmd, char **files, t_mini *ms, char *save);
+static void	siple_redir(t_pars **cmd, char *file, t_mini *ms, char *save);
 static void	dredir_stdin(char *file, t_pars **cmd);
 
 /*============================================================================*/
@@ -31,7 +31,7 @@ void	redirections(t_pars **cmd, t_mini *ms)
 	i = 0;
 	i += 0;
 	file = save_files_redir(tmp, ms->elem_pars);
-	make_redir(cmd, file, ms);
+	make_redir(cmd, file, ms, save->str);
 	free_dtab(file);
 	(*cmd) = save;
 }
@@ -53,16 +53,15 @@ static char	**save_files_redir(t_pars *tmp, t_elem_pars *elem_pars)
 	return (files);
 }
 
-static void	make_redir(t_pars **cmd, char **files, t_mini *ms)
+static void	make_redir(t_pars **cmd, char **files, t_mini *ms, char *save)
 {
 	int	i;
 
 	i = 0;
-	ms += 0;
 	while (*cmd)
 	{
 		if ((*cmd)->token == REDIR || (*cmd)->token == RE_IN)
-			siple_redir((cmd), files[i++]);
+			siple_redir((cmd), files[i++], ms, save);
 		else if ((*cmd)->token == RE_OUT)
 			dredir_stdin(files[i++], cmd);
 		else
@@ -70,14 +69,14 @@ static void	make_redir(t_pars **cmd, char **files, t_mini *ms)
 	}
 }
 
-static void	siple_redir(t_pars **cmd, char *file)
+static void	siple_redir(t_pars **cmd, char *file, t_mini *ms, char *save)
 {
 	if (ft_strcmp((*cmd)->str, ">"))
 		sredir_out(file);
 	else if (ft_strcmp((*cmd)->str, ">>"))
 		dredir_out(file);
 	else if (ft_strcmp((*cmd)->str, "<"))
-		sredir_in(file);
+		sredir_in(file, ms, save);
 	*cmd = t_pars_remove_node(cmd);
 }
 

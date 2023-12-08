@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 21:56:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/01 15:46:49 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:13:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static char		*get_path(char **dir, char *cmd);
 static char		*find_dir(char *dir, char *cmd);
 static t_bool	not_path_need(char *cmd);
+static char		*verif_cmd_np(char *cmd, t_mini **ms);
 
 /*============================================================================*/
 
-char	*get_cmd_path(char *cmd, t_env_elems *env)
+char	*get_cmd_path(char *cmd, t_env_elems *env, t_mini **ms)
 {
 	char	*val;
 	char	**dir;
@@ -26,7 +27,9 @@ char	*get_cmd_path(char *cmd, t_env_elems *env)
 
 	val = t_env_elems_find_value_of(env, "PATH");
 	if (not_path_need(cmd))
-		return (cmd);
+	{
+		return (verif_cmd_np(cmd, ms));
+	}
 	if (!val)
 	{
 		printf("No path in env\n");
@@ -39,6 +42,26 @@ char	*get_cmd_path(char *cmd, t_env_elems *env)
 	free_dtab(dir);
 	free (val);
 	return (res);
+}
+
+static char	*verif_cmd_np(char *cmd, t_mini **ms)
+{
+	int	fd;
+
+	fd = open(cmd, O_RDONLY);
+	printf("cmd = %s et fd = %d", cmd, fd);
+	if (fd == -1)
+	{
+		ft_printf("%s: No such file or directory\n", cmd);
+		return ((*ms)->res = 127, close(fd), NULL);
+	}
+	if (access(cmd, X_OK))
+	{
+		ft_printf("%s: Permission denied\n", cmd);
+		return ((*ms)->res = 127, close(fd), NULL);
+	}
+	close(fd);
+	return (cmd);
 }
 
 static t_bool	not_path_need(char *cmd)
