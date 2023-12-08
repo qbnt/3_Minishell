@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:10:52 by qpuig             #+#    #+#             */
-/*   Updated: 2023/12/07 19:18:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:53:09 by qpuig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	**ft_dbtab(t_env *env)
 	char		**dbtab;
 	t_env_elems	*travel;
 
-	envlen = ft_envlen(env);
-	dbtab = ft_calloc((ft_envlen(env) + 1), sizeof(char *));
-	while (envlen > 0)
+	envlen = (ft_envlen(env) + 1);
+	dbtab = ft_calloc(ft_envlen(env), sizeof(char *));
+	while (--envlen > 0)
 	{
 		i = 0;
 		travel = env->env_elems->first;
@@ -35,36 +35,27 @@ char	**ft_dbtab(t_env *env)
 				break ;
 		}
 		dbtab[i] = ft_strdup(env->env_elems->key);
-		envlen--;
 		if (env->env_elems->next)
 			env->env_elems = env->env_elems->next;
 	}
 	return (env->env_elems = env->env_elems->first, dbtab);
 }
 
-void	ft_egal_ex(t_env *env, t_pars *cmds)
+void	ft_egal_ex(t_env *env, t_pars *cmds, int len, int i)
 {
-	int		i;
-	int		len;
 	int		j;
 	char	*key;
 	char	*value;
 
-	i = 0;
-	len = 0;
-	while (cmds->str[i])
+	while (cmds->str[++i])
 	{
 		if (cmds->str[i] == '=')
 		{
 			key = ft_calloc((i + 1), sizeof(char));
-			while (len < i)
-			{
+			while (++len < i)
 				key[len] = cmds->str[len];
-				len++;
-			}
 			break ;
 		}
-		i++;
 	}
 	while (cmds->str[i])
 		i++;
@@ -143,10 +134,9 @@ int	ft_export(t_pars *cmds, t_env *env)
 			cmds = cmds->next;
 			continue ;
 		}
-		if ((ft_isalpha(cmds->str[0]) == 1)
-			&& (ft_strchr_ex(cmds->str, '=') == 1))
-			ft_egal_ex(env, cmds);
-		else if ((ft_isalpha(cmds->str[0]) == 1)
+		if (ft_isalpha(cmds->str[0]) && ft_strchr_ex(cmds->str, '='))
+			ft_egal_ex(env, cmds, -1, -1);
+		else if ((ft_isalpha(cmds->str[0]) == 1) 
 			&& (ft_strchr_ex(cmds->str, '=') == 0))
 			ft_no_egal(env, cmds);
 		cmds = cmds->next;
