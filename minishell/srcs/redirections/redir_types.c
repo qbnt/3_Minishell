@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:59:46 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/05 10:09:11 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 11:39:32 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ void	dredir_out(char *file)
 	close(fd);
 }
 
-void	sredir_in(char *file)
+void	sredir_in(char *file, t_mini *ms, char *save)
 {
 	int		fd;
 
+	ms += 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("bash: %s: No such file or directory\n", file);
+		if (is_builtin(save))
+			return ;
 		_exit(FAIL);
 	}
 	dup2(fd, STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:18:19 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/04 14:02:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:38:57 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*clean_dol(char *str, t_mini *ms, t_token token)
 		if (*str == '$')
 		{
 			if (*(str + 1) == 0)
-				return (str);
+				return (tmp_str);
 			if (*(str + 1) == '?')
 				i += switch_res(&str, ms, total_len, res_str);
 			else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qpuig <qpuig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:17:57 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 17:15:46 by qpuig            ###   ########.fr       */
+/*   Updated: 2023/12/08 12:56:26 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_child(t_pars *cmd, t_bool end, t_mini *ms)
 		redirections(&cmd, ms);
 	close(ms->pipes->pipes[0]);
 	close(ms->pipes->pipes[1]);
-	res = select_syst_cmd(cmd, ms->env);
+	res = select_syst_cmd(cmd, ms->env, &ms);
 	free_child(ms);
 	_exit(res);
 }

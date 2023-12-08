@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:35:21 by qbanet            #+#    #+#             */
-/*   Updated: 2023/12/06 18:36:15 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:36:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,12 @@ size_t	ft_dol_len_in_str(char *str, t_mini *ms)
 				key = ft_cpy_dol(str);
 				val = t_env_elems_find_value_of(ms->env->env_elems, (key + 1));
 				res += ft_strlen(val) - ft_strlen(key);
+				multi_free_str(key, val, NULL, NULL);
 			}
 			str += ft_nbrlen(ms->res);
 		}
 		if (*str && *str != '$')
 			++ str;
 	}
-	return (free(key), free(val), res);
+	return (res);
 }
