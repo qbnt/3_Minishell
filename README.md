@@ -1,86 +1,88 @@
 # Minishell
 
-## Description
+`Minishell` is a group project at 42 focused on building a simplified UNIX shell. It helps students strengthen their understanding of system programming while learning to work effectively in a team.
 
-Le projet Minishell consiste à développer un interpréteur de commandes simplifié, similaire à Bash ou Zsh, permettant de mieux comprendre le fonctionnement interne d'un shell, notamment la gestion des processus et des descripteurs de fichiers.
+## 🛠️ Project Overview
 
-## Fonctionnalités
+The goal is to implement a minimal shell that can parse and execute basic shell commands, including pipes, redirections, and built-in functions — closely mimicking Bash behavior.
 
-- Affichage d'un prompt interactif
-- Historique des commandes exécutées
-- Exécution des commandes externes via le `PATH` ou un chemin absolu
-- Gestion des quotes simples `'` et doubles `"`
-- Redirections :
-  - `<` entrée
-  - `>` sortie
+## 🚀 Features
+
+- Interactive prompt display
+- Command history support
+- Execution of external commands via `PATH` or absolute path
+- Handling of single `'` and double `"` quotes
+- Redirections:
+  - `<` input
+  - `>` output
   - `<<` heredoc
-  - `>>` sortie en ajout
-- Pipes `|` pour connecter plusieurs commandes
-- Gestion des variables d'environnement
-- Gestion du statut `$?` de la dernière commande exécutée
-- Signaux :
-  - `Ctrl-C` interrompt la commande en cours
-  - `Ctrl-D` ferme le shell si aucune commande n'est en cours
-  - `Ctrl-\` ignoré
-- Built-ins :
-  - `echo` avec option `-n`
-  - `cd` changement de répertoire
-  - `pwd` affiche le répertoire courant
-  - `export` gestion des variables d'environnement
-  - `unset` supprime des variables
-  - `env` affiche les variables d'environnement
-  - `exit` quitte le shell
+  - `>>` append output
+- Pipes `|` to chain multiple commands
+- Environment variables handling
+- Support for `$?` to get the last command’s exit status
+- Signal management:
+  - `Ctrl-C` interrupts the current command
+  - `Ctrl-D` exits the shell if no command is running
+  - `Ctrl-\` is ignored
+- Built-in commands:
+  - `echo` with `-n` option
+  - `cd` change directory
+  - `pwd` display current directory
+  - `export` manage environment variables
+  - `unset` remove environment variables
+  - `env` print environment
+  - `exit` exit the shell
 
-## Prérequis
+## 📦 Requirements
 
-- Linux ou macOS
-- Compilateur C (norme C99)
-- Bibliothèque readline installée
+- Linux or macOS
+- C compiler (C99 standard)
+- Readline library installed
 
-## Installation
+## ⚙️ Installation
 
-1. Cloner le dépôt :
+1. Clone the repository:
 
 ```
 git clone https://github.com/qbnt/3_Minishell.git
 cd 3_Minishell
 ```
 
-2. Compiler :
+2. Compile the project:
 
 ```
 make
 ```
 
-## Utilisation
+## 💡 Usage
 
-- Lancer Minishell :
+- Run Minishell:
 
 ```
 ./minishell
 ```
 
-- Commandes basiques :
+- Basic commands:
 
 ```
 ls -la
 echo "Hello, World!"
 ```
 
-- Historique : touches fléchées haut/bas
-- Redirections et pipes :
+- Navigate command history with ↑ ↓ arrows
+- Redirections and pipes:
 
 ```
-echo "Hello" > fichier.txt
-cat < fichier.txt
-ls | grep fichier
+echo "Hello" > file.txt
+cat < file.txt
+ls | grep file
 ```
 
-## Ressources utiles
+## 📚 Useful Resources
 
 - [Readline documentation](https://tiswww.case.edu/php/chet/readline/rltop.html)
 - [Bash Beginners Guide](https://tldp.org/LDP/Bash-Beginners-Guide/html/)
 
-## Licence
+## 📄 License
 
-Projet sous licence MIT. Voir [LICENSE](LICENSE).
+Project licensed under the MIT License. See [LICENSE](LICENSE).
